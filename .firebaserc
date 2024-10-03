@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "amitgavali-5d369"
+  },
+  "targets": {
+    "amitgavali-5d369": {
+      "hosting": {
+        "amit-gavali": [
+          "amit-gavali"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

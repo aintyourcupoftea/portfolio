@@ -236,7 +236,7 @@ export default function Portfolio() {
     const onSubmit = async (data) => {
         try {
             const response = await fetch(
-                'https://script.google.com/macros/s/AKfycbyC0JmxHVf7WnuSVpMLX8_sKi5dysyo3VqioGNnr0ov2yzalboX899kSxzONshb7r4fsA/exec',
+                'https://script.google.com/macros/s/AKfycbwr7q7tGJ-apcNbfqVyOxG__EfFGF6gcv8ftTZOk173FgB-uDxqja3S6NoFRki1RKn0/exec',
                 {
                     method: 'POST',
                     mode: 'no-cors',
