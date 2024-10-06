@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download, CheckCircle, Code, Brain, Rocket, Users, ChevronRight, ChevronDown } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,7 +15,7 @@ import { Switch } from "@/components/ui/switch";
 
 const AnimatedSectionHeader = ({ children }) => (
     <motion.h2
-        className="text-3xl font-bold mb-8 text-center"
+        className="font-primary text-3xl font-bold mb-8 text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -32,7 +32,7 @@ const ProjectCard = ({ project }) => (
     >
         <Card className="h-full bg-card hover:shadow-lg transition-all duration-300">
             <CardHeader>
-                <CardTitle className="flex items-center justify-between text-xl">
+                <CardTitle className="font-primary flex items-center justify-between text-xl">
                     {project.title}
                     <Button variant="ghost" size="icon" asChild>
                         <a href={project.link} target="_blank" rel="noopener noreferrer">
@@ -59,7 +59,7 @@ const ProjectCard = ({ project }) => (
 const MemeSection = ({ meme, isLoading, error }) => (
     <Card className="bg-card hover:shadow-lg transition-shadow duration-300 h-full">
         <CardHeader>
-            <CardTitle>Meme of the Day</CardTitle>
+            <CardTitle className="font-primary">Meme of the Day</CardTitle>
         </CardHeader>
         <CardContent className="p-4">
             {isLoading ? (
@@ -97,7 +97,7 @@ const ContactForm = ({ onSubmit, errors, register }) => {
     return (
         <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
             <CardHeader>
-                <CardTitle>Contact Me</CardTitle>
+                <CardTitle className="font-primary">Contact Me</CardTitle>
                 <CardDescription>Get in touch for opportunities or collaborations.</CardDescription>
             </CardHeader>
             <CardContent>
@@ -158,6 +158,181 @@ function downloadResume() {
     const resumeUrl = 'https://firebasestorage.googleapis.com/v0/b/amitgavali-5d369.appspot.com/o/Amit_Gavali_CV.pdf?alt=media&token=2fbc4322-c59f-4c82-b912-107d51091c63';
     window.open(resumeUrl, '_blank', 'noopener,noreferrer');
 }
+
+const AboutMeSection = () => {
+    const [activeTab, setActiveTab] = useState('story');
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkIsMobile();
+        window.addEventListener('resize', checkIsMobile);
+        return () => window.removeEventListener('resize', checkIsMobile);
+    }, []);
+
+    const tabs = [
+        { id: 'story', label: 'My Story', icon: <Brain className="w-5 h-5" /> },
+        { id: 'skills', label: 'Skills', icon: <Code className="w-5 h-5" /> },
+        { id: 'philosophy', label: 'Philosophy', icon: <Rocket className="w-5 h-5" /> },
+        { id: 'collaboration', label: 'Collaboration', icon: <Users className="w-5 h-5" /> },
+    ];
+
+    const tabContent = {
+        story: (
+            <div className="space-y-4">
+                <h3 className="text-xl font-bold text-primary">From Curiosity to Code</h3>
+                <p>
+                    My journey began with a simple question: "How does this work?" That curiosity led me from dismantling old computers to writing code. Today, I'm a full-stack developer passionate about creating impactful digital solutions.
+                </p>
+                <p>
+                    Every project is a new adventure to learn and innovate. I bring enthusiasm and excellence to everything I do, whether it's optimizing algorithms or crafting responsive UIs.
+                </p>
+            </div>
+        ),
+        skills: (
+            <div className="space-y-4">
+                <h3 className="text-xl font-bold text-primary">Tech Arsenal</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <SkillCard title="Programming Languages" skills={['Python', 'C++', 'Dart']} />
+                    <SkillCard title="SDKs" skills={['Flutter']} />
+                    <SkillCard title="Web Development" skills={['HTML', 'CSS', 'React.js', 'Django', 'Flask']} />
+                    <SkillCard title="Database Management" skills={['PostgreSQL']} />
+                    <SkillCard title="Tools" skills={['Git', 'VS Code', 'Postman']} />
+                    <SkillCard title="Cloud Services" skills={['Firebase', 'Render']} />
+                </div>
+            </div>
+        ),
+        philosophy: (
+            <div className="space-y-4">
+                <h3 className="text-xl font-bold text-primary">Code with Purpose</h3>
+                <p>
+                    I believe technology should serve humanity. My development approach is guided by:
+                </p>
+                <ul className="list-disc list-inside space-y-2">
+                    <li><span className="font-semibold">User-Centric Design:</span> Creating intuitive, empowering interfaces.</li>
+                    <li><span className="font-semibold">Scalable Architecture:</span> Building adaptable systems.</li>
+                    <li><span className="font-semibold">Continuous Learning:</span> Embracing new technologies and methodologies.</li>
+                </ul>
+            </div>
+        ),
+        collaboration: (
+            <div className="space-y-4">
+                <h3 className="text-xl font-bold text-primary">Better Together</h3>
+                <p>
+                    Great software is built by great teams. I thrive in collaborative environments where ideas and diverse perspectives are valued. My approach includes:
+                </p>
+                <ul className="list-disc list-inside space-y-2">
+                    <li><span className="font-semibold">Open Communication:</span> Clear idea sharing and active listening.</li>
+                    <li><span className="font-semibold">Mentorship:</span> Learning from seniors and guiding juniors.</li>
+                    <li><span className="font-semibold">Code Reviews:</span> Constructive feedback for quality improvement.</li>
+                    <li><span className="font-semibold">Pair Programming:</span> Real-time collaboration on complex problems.</li>
+                </ul>
+            </div>
+        ),
+    };
+
+    const MobileAccordion = ({ tab }) => {
+        const [isOpen, setIsOpen] = useState(false);
+
+        return (
+            <div className="border-b last:border-b-0">
+                <button
+                    className="flex items-center justify-between w-full py-4 px-2 text-left"
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    <span className="flex items-center">
+                        {tab.icon}
+                        <span className="ml-2 font-semibold">{tab.label}</span>
+                    </span>
+                    <ChevronDown className={`w-5 h-5 transition-transform ${isOpen ? 'transform rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                        >
+                            <div className="p-4">
+                                {tabContent[tab.id]}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        );
+    };
+
+    return (
+        <section className="py-8">
+            <AnimatedSectionHeader>About Me</AnimatedSectionHeader>
+            <Card className="bg-card overflow-hidden">
+                <CardContent className="p-0">
+                    {isMobile ? (
+                        <div className="divide-y">
+                            {tabs.map((tab) => (
+                                <MobileAccordion key={tab.id} tab={tab} />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="flex flex-col md:flex-row">
+                            <div className="md:w-1/3 bg-primary/10 p-6">
+                                <nav className="space-y-2">
+                                    {tabs.map((tab) => (
+                                        <Button
+                                            key={tab.id}
+                                            variant={activeTab === tab.id ? "default" : "ghost"}
+                                            className="w-full justify-start text-left"
+                                            onClick={() => setActiveTab(tab.id)}
+                                        >
+                                            <span className="flex items-center">
+                                                {tab.icon}
+                                                <span className="ml-2">{tab.label}</span>
+                                            </span>
+                                            {activeTab === tab.id && <ChevronRight className="ml-auto" />}
+                                        </Button>
+                                    ))}
+                                </nav>
+                            </div>
+                            <div className="md:w-2/3 p-6">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={activeTab}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        {tabContent[activeTab]}
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+                        </div>
+                    )}
+                </CardContent>
+            </Card>
+        </section>
+    );
+};
+
+const SkillCard = ({ title, skills }) => (
+    <Card className="bg-primary/5">
+        <CardHeader className="pb-2">
+            <CardTitle className="text-lg">{title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+            <ul className="list-disc list-inside text-sm">
+                {skills.map((skill) => (
+                    <li key={skill}>{skill}</li>
+                ))}
+            </ul>
+        </CardContent>
+    </Card>
+);
 
 export default function Portfolio() {
     const [mounted, setMounted] = useState(false);
@@ -286,19 +461,19 @@ export default function Portfolio() {
     return (
         <>
             <ToastContainer />
-            <div className={`min-h-screen font-sans ${darkMode ? 'dark' : ''}`}>
+            <div className={`min-h-screen font-mono ${darkMode ? 'dark' : ''}`}>
                 <div className="transition-colors duration-300 bg-background text-foreground">
                     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                         <div className="container mx-auto flex h-14 items-center justify-between px-4">
                             <motion.span
-                                className="font-bold text-xl"
+                                className="font-primary font-bold text-xl"
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
                             >
                                 Portfolio
                             </motion.span>
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-2 font-primary">
                                 <span className="text-sm font-medium">
                                     {darkMode ? 'Dark' : 'Light'} Mode
                                 </span>
@@ -325,7 +500,7 @@ export default function Portfolio() {
                                 </Avatar>
                             </motion.div>
                             <motion.h1
-                                className="text-4xl md:text-5xl font-bold tracking-tight mb-4"
+                                className="font-primary text-4xl md:text-5xl font-bold tracking-tight mb-4"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -373,44 +548,7 @@ export default function Portfolio() {
                             </motion.div>
                         </section>
 
-                        <AnimatedSectionHeader>About Me</AnimatedSectionHeader>
-                        <motion.section
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
-                                <CardContent className="pt-6 space-y-6">
-                                    <div className="space-y-4">
-                                        <h3 className="text-xl font-semibold">Who I Am</h3>
-                                        <p className="text-base md:text-lg">
-                                            Hey there! I'm Amit, a passionate web enthusiast with an insatiable appetite for coding and a dream of becoming a full-stack maestro. I thrive on tackling complex challenges and bringing ambitious projects to life.
-                                        </p>
-                                    </div>
-
-                                    <div className="space-y-4">
-                                        <h3 className="text-xl font-semibold">What I Do</h3>
-                                        <p className="text-base md:text-lg">
-                                            With my sleeves rolled up and my mind buzzing with innovative ideas, I'm always ready to dive in and create something extraordinary. I believe in pushing the boundaries of what's possible with code, turning concepts into reality one line at a time.
-                                        </p>
-                                    </div>
-
-                                    <div className="space-y-4">
-                                        <h3 className="text-xl font-semibold">My Approach</h3>
-                                        <p className="text-base md:text-lg">
-                                            I approach each project with enthusiasm, creativity, and a commitment to excellence. Whether it's front-end finesse or back-end wizardry, I'm dedicated to crafting clean, efficient, and scalable solutions that make a real impact.
-                                        </p>
-                                    </div>
-
-                                    <div className="space-y-4">
-                                        <h3 className="text-xl font-semibold">Let's Connect</h3>
-                                        <p className="text-base md:text-lg">
-                                            I'm always excited to collaborate, learn, and grow. If you're looking to bring your digital ideas to life or just want to geek out about the latest tech trends, let's connect! Together, we can push the limits of what we can achieve with the magic of code.
-                                        </p>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </motion.section>
+                        <AboutMeSection />
 
                         <AnimatedSectionHeader>Education</AnimatedSectionHeader>
                         <motion.section
@@ -421,7 +559,7 @@ export default function Portfolio() {
                             <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
                                 <CardContent className="pt-6 space-y-6">
                                     <div className="space-y-4">
-                                        <h3 className="text-xl font-semibold">Bachelor of Engineering in Computer Engineering</h3>
+                                        <h3 className="font-primary text-xl font-semibold">Bachelor of Engineering in Computer Engineering</h3>
                                         <p className="text-base md:text-lg">
                                             Progressive Education Society's Modern College of Engineering, Pune<br />
                                             CGPA: 8.47 | Batch of 2024
@@ -440,7 +578,7 @@ export default function Portfolio() {
                             <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
                                 <CardContent className="pt-6 space-y-6">
                                     <div className="space-y-4">
-                                        <h3 className="text-xl font-semibold">Community Volunteer</h3>
+                                        <h3 className="font-primary text-xl font-semibold">Community Volunteer</h3>
                                         <p className="text-base md:text-lg">
                                             Taksh<br />
                                             Apr 2024 - Present · {Math.floor((new Date() - new Date('2024-04-01')) / (1000 * 60 * 60 * 24 * 30))} mos<br />
@@ -528,7 +666,7 @@ export default function Portfolio() {
                         </motion.div>
                     </footer>
                 </div>
-            </div >
+            </div>
         </>
     )
 }
