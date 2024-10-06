@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ExternalLink, Loader2 } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
 
 const AnimatedSectionHeader = ({ children }) => (
     <motion.h2
@@ -29,9 +30,9 @@ const ProjectCard = ({ project }) => (
         transition={{ duration: 0.2 }}
         className="h-full"
     >
-        <Card className="h-full bg-background-light hover:shadow-lg transition-all duration-300">
+        <Card className="h-full bg-card hover:shadow-lg transition-all duration-300">
             <CardHeader>
-                <CardTitle className="flex items-center justify-between text-xl text-foreground-light">
+                <CardTitle className="flex items-center justify-between text-xl">
                     {project.title}
                     <Button variant="ghost" size="icon" asChild>
                         <a href={project.link} target="_blank" rel="noopener noreferrer">
@@ -42,12 +43,12 @@ const ProjectCard = ({ project }) => (
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <p className="text-base text-muted-foreground-light">{project.description}</p>
+                <p className="text-base text-muted-foreground">{project.description}</p>
             </CardContent>
             <CardFooter>
                 <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, index) => (
-                        <Badge key={index} variant="secondary" className="text-foreground-light bg-muted-light">{tech}</Badge>
+                        <Badge key={index} variant="secondary">{tech}</Badge>
                     ))}
                 </div>
             </CardFooter>
@@ -56,13 +57,13 @@ const ProjectCard = ({ project }) => (
 );
 
 const MemeSection = ({ meme, isLoading, error }) => (
-    <Card className="bg-card-light hover:shadow-lg transition-shadow duration-300 h-full">
+    <Card className="bg-card hover:shadow-lg transition-shadow duration-300 h-full">
         <CardHeader>
             <CardTitle>Meme of the Day</CardTitle>
         </CardHeader>
         <CardContent className="p-4">
             {isLoading ? (
-                <div className="w-full h-40 bg-muted-light rounded-lg flex items-center justify-center">
+                <div className="w-full h-40 bg-muted rounded-lg flex items-center justify-center">
                     <Loader2 className="h-8 w-8 animate-spin" />
                 </div>
             ) : error ? (
@@ -94,7 +95,7 @@ const ContactForm = ({ onSubmit, errors, register }) => {
     };
 
     return (
-        <Card className="bg-card-light hover:shadow-lg transition-shadow duration-300">
+        <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
             <CardHeader>
                 <CardTitle>Contact Me</CardTitle>
                 <CardDescription>Get in touch for opportunities or collaborations.</CardDescription>
@@ -148,17 +149,22 @@ const ContactForm = ({ onSubmit, errors, register }) => {
     );
 };
 
-// Add this function outside of your component
 const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 };
+
+function downloadResume() {
+    const resumeUrl = 'https://firebasestorage.googleapis.com/v0/b/amitgavali-5d369.appspot.com/o/Amit_Gavali_CV.pdf?alt=media&token=2fbc4322-c59f-4c82-b912-107d51091c63';
+    window.open(resumeUrl, '_blank', 'noopener,noreferrer');
+}
 
 export default function Portfolio() {
     const [mounted, setMounted] = useState(false);
     const [meme, setMeme] = useState(null);
     const [memeLoading, setMemeLoading] = useState(true);
     const [memeError, setMemeError] = useState(null);
+    const [darkMode, setDarkMode] = useState(true);
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
             name: '',
@@ -208,11 +214,26 @@ export default function Portfolio() {
 
     useEffect(() => {
         setMounted(true);
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setDarkMode(savedTheme === 'dark');
+        } else {
+            setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+        }
     }, []);
 
     useEffect(() => {
         fetchMeme();
     }, []);
+
+    useEffect(() => {
+        if (darkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    }, [darkMode]);
 
     const fetchMeme = async () => {
         setMemeLoading(true);
@@ -256,14 +277,18 @@ export default function Portfolio() {
         }
     };
 
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
+
     if (!mounted) return null;
 
     return (
         <>
             <ToastContainer />
-            <div className="min-h-screen font-sans bg-background-light text-foreground-light">
-                <div className="transition-colors duration-300">
-                    <header className="sticky top-0 z-50 w-full border-b bg-background-light/95 backdrop-blur supports-[backdrop-filter]:bg-background-light/60">
+            <div className={`min-h-screen font-sans ${darkMode ? 'dark' : ''}`}>
+                <div className="transition-colors duration-300 bg-background text-foreground">
+                    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                         <div className="container mx-auto flex h-14 items-center justify-between px-4">
                             <motion.span
                                 className="font-bold text-xl"
@@ -273,6 +298,17 @@ export default function Portfolio() {
                             >
                                 Portfolio
                             </motion.span>
+                            <div className="flex items-center space-x-2">
+                                <span className="text-sm font-medium">
+                                    {darkMode ? 'Dark' : 'Light'} Mode
+                                </span>
+                                <Switch
+                                    checked={darkMode}
+                                    onCheckedChange={toggleDarkMode}
+                                    className="data-[state=checked]:bg-primary"
+                                />
+                                {darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                            </div>
                         </div>
                     </header>
 
@@ -297,7 +333,7 @@ export default function Portfolio() {
                                 Amit Gavali
                             </motion.h1>
                             <motion.p
-                                className="text-xl md:text-2xl text-muted-foreground-light mb-6"
+                                className="text-xl md:text-2xl text-muted-foreground mb-6"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.4 }}
@@ -329,6 +365,10 @@ export default function Portfolio() {
                                             <span className="text-xs sm:text-sm">Email</span>
                                         </a>
                                     </Button>
+                                    <Button variant="outline" size="sm" className="flex-1 sm:flex-none sm:size-lg" onClick={downloadResume}>
+                                        <Download className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
+                                        <span className="text-xs sm:text-sm">Resume</span>
+                                    </Button>
                                 </div>
                             </motion.div>
                         </section>
@@ -339,7 +379,7 @@ export default function Portfolio() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <Card className="bg-card-light hover:shadow-lg transition-shadow duration-300">
+                            <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
                                 <CardContent className="pt-6 space-y-6">
                                     <div className="space-y-4">
                                         <h3 className="text-xl font-semibold">Who I Am</h3>
@@ -378,7 +418,7 @@ export default function Portfolio() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <Card className="bg-card-light hover:shadow-lg transition-shadow duration-300">
+                            <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
                                 <CardContent className="pt-6 space-y-6">
                                     <div className="space-y-4">
                                         <h3 className="text-xl font-semibold">Bachelor of Engineering in Computer Engineering</h3>
@@ -397,7 +437,7 @@ export default function Portfolio() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <Card className="bg-card-light hover:shadow-lg transition-shadow duration-300">
+                            <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
                                 <CardContent className="pt-6 space-y-6">
                                     <div className="space-y-4">
                                         <h3 className="text-xl font-semibold">Community Volunteer</h3>
@@ -420,7 +460,7 @@ export default function Portfolio() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <Card className="bg-card-light hover:shadow-lg transition-shadow duration-300">
+                            <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
                                 <CardContent className="pt-6">
                                     <div className="flex flex-wrap justify-center gap-2 md:gap-3">
                                         {skills.map((skill, index) => (
@@ -482,13 +522,13 @@ export default function Portfolio() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <p className="text-center text-base md:text-lg font-semibold tracking-wide text-muted-foreground-light">
+                            <p className="text-center text-base md:text-lg font-semibold tracking-wide text-muted-foreground">
                                 Made with ❤️ by <span className="text-primary font-bold">Amit Gavali</span>
                             </p>
                         </motion.div>
                     </footer>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
