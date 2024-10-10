@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download, CheckCircle, Code, Brain, Rocket, Users, ChevronRight, ChevronDown } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as THREE from 'three';
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -334,6 +335,25 @@ const SkillCard = ({ title, skills }) => (
     </Card>
 );
 
+const AnimatedProjectCard = ({ project }) => (
+    <motion.div
+        whileHover={{ scale: 1.05, rotateY: 15 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    >
+        <ProjectCard project={project} />
+    </motion.div>
+);
+
+const AnimatedSkillBadge = ({ skill, index }) => (
+    <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3, delay: index * 0.05 }}
+    >
+        <Badge variant="secondary" className="text-sm md:text-lg py-1 px-2 md:py-2 md:px-4">{skill}</Badge>
+    </motion.div>
+);
+
 export default function Portfolio() {
     const [mounted, setMounted] = useState(false);
     const [meme, setMeme] = useState(null);
@@ -387,6 +407,87 @@ export default function Portfolio() {
         },
     ];
 
+    const canvasRef = useRef(null);
+    const sceneRef = useRef(null);
+
+    useEffect(() => {
+        let animationFrameId;
+
+        const initScene = () => {
+            if (!canvasRef.current) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const geometry = new THREE.BufferGeometry();
+            const particlesCount = 5000;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 5;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.005,
+                color: darkMode ? 0xffffff : 0x000000,
+            });
+
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            camera.position.z = 2;
+
+            sceneRef.current = { scene, camera, renderer, particles };
+        };
+
+        const animate = () => {
+            if (!sceneRef.current) return;
+            const { scene, camera, renderer, particles } = sceneRef.current;
+
+            particles.rotation.x += 0.001;
+            particles.rotation.y += 0.001;
+            renderer.render(scene, camera);
+
+            animationFrameId = requestAnimationFrame(animate);
+        };
+
+        const handleResize = () => {
+            if (!sceneRef.current) return;
+            const { camera, renderer } = sceneRef.current;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        };
+
+        // Initialize scene after a short delay to ensure canvas is in the DOM
+        const timeoutId = setTimeout(() => {
+            initScene();
+            animate();
+            window.addEventListener('resize', handleResize);
+        }, 100);
+
+        return () => {
+            clearTimeout(timeoutId);
+            window.removeEventListener('resize', handleResize);
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            if (sceneRef.current && sceneRef.current.renderer) {
+                sceneRef.current.renderer.dispose();
+            }
+        };
+    }, [darkMode]);
+
+    useEffect(() => {
+        if (sceneRef.current && sceneRef.current.particles) {
+            sceneRef.current.particles.material.color.setHex(darkMode ? 0xffffff : 0x000000);
+        }
+    }, [darkMode]);
+
     useEffect(() => {
         setMounted(true);
         const savedTheme = localStorage.getItem('theme');
@@ -398,10 +499,6 @@ export default function Portfolio() {
     }, []);
 
     useEffect(() => {
-        fetchMeme();
-    }, []);
-
-    useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark');
         } else {
@@ -409,6 +506,10 @@ export default function Portfolio() {
         }
         localStorage.setItem('theme', darkMode ? 'dark' : 'light');
     }, [darkMode]);
+
+    useEffect(() => {
+        fetchMeme();
+    }, []);
 
     const fetchMeme = async () => {
         setMemeLoading(true);
@@ -462,7 +563,12 @@ export default function Portfolio() {
         <>
             <ToastContainer />
             <div className={`min-h-screen font-mono ${darkMode ? 'dark' : ''}`}>
-                <div className="transition-colors duration-300 bg-background text-foreground">
+                <canvas
+                    ref={canvasRef}
+                    className="fixed top-0 left-0 w-full h-full pointer-events-none"
+                    style={{ zIndex: -1 }}
+                />
+                <div className="relative z-10 transition-colors duration-300 bg-background/80 text-foreground">
                     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                         <div className="container mx-auto flex h-14 items-center justify-between px-4">
                             <motion.span
@@ -602,14 +708,7 @@ export default function Portfolio() {
                                 <CardContent className="pt-6">
                                     <div className="flex flex-wrap justify-center gap-2 md:gap-3">
                                         {skills.map((skill, index) => (
-                                            <motion.div
-                                                key={skill}
-                                                initial={{ opacity: 0, scale: 0.8 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ duration: 0.3, delay: index * 0.05 }}
-                                            >
-                                                <Badge variant="secondary" className="text-sm md:text-lg py-1 px-2 md:py-2 md:px-4">{skill}</Badge>
-                                            </motion.div>
+                                            <AnimatedSkillBadge key={skill} skill={skill} index={index} />
                                         ))}
                                     </div>
                                 </CardContent>
@@ -620,14 +719,7 @@ export default function Portfolio() {
                         <section>
                             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
                                 {projects.map((project, index) => (
-                                    <motion.div
-                                        key={project.title}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    >
-                                        <ProjectCard project={project} />
-                                    </motion.div>
+                                    <AnimatedProjectCard key={project.title} project={project} />
                                 ))}
                             </div>
                         </section>
