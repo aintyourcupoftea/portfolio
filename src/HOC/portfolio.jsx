@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { motion, AnimatePresence } from "framer-motion";
-import { Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download, CheckCircle, Code, Brain, Rocket, Users, ChevronRight, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { useInView } from 'react-intersection-observer';
+import { Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download, CheckCircle, Code, Brain, Rocket, Users, ChevronRight, Database, Globe, Cpu, Server, Terminal, Smartphone } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as THREE from 'three';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Progress } from "@/components/ui/progress";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const AnimatedSectionHeader = ({ children }) => (
     <motion.h2
@@ -108,6 +114,7 @@ const ContactForm = ({ onSubmit, errors, register }) => {
                         <Input
                             id="name"
                             placeholder="Your name"
+                            autoComplete="name"
                             {...register("name", { required: "Name is required" })}
                         />
                         {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
@@ -118,6 +125,7 @@ const ContactForm = ({ onSubmit, errors, register }) => {
                             id="email"
                             placeholder="Your email"
                             type="email"
+                            autoComplete="email"
                             {...register("email", {
                                 required: "Email is required",
                                 validate: (value) => isValidEmail(value) || "Invalid email address"
@@ -161,176 +169,92 @@ function downloadResume() {
 }
 
 const AboutMeSection = () => {
-    const [activeTab, setActiveTab] = useState('story');
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkIsMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-        checkIsMobile();
-        window.addEventListener('resize', checkIsMobile);
-        return () => window.removeEventListener('resize', checkIsMobile);
-    }, []);
-
-    const tabs = [
-        { id: 'story', label: 'My Story', icon: <Brain className="w-5 h-5" /> },
-        { id: 'skills', label: 'Skills', icon: <Code className="w-5 h-5" /> },
-        { id: 'philosophy', label: 'Philosophy', icon: <Rocket className="w-5 h-5" /> },
-        { id: 'collaboration', label: 'Collaboration', icon: <Users className="w-5 h-5" /> },
-    ];
-
-    const tabContent = {
-        story: (
-            <div className="space-y-4">
-                <h3 className="text-xl font-bold text-primary">From Curiosity to Code</h3>
-                <p>
-                    My journey began with a simple question: "How does this work?" That curiosity led me from dismantling old computers to writing code. Today, I'm a full-stack developer passionate about creating impactful digital solutions.
-                </p>
-                <p>
-                    Every project is a new adventure to learn and innovate. I bring enthusiasm and excellence to everything I do, whether it's optimizing algorithms or crafting responsive UIs.
-                </p>
-            </div>
-        ),
-        skills: (
-            <div className="space-y-4">
-                <h3 className="text-xl font-bold text-primary">Tech Arsenal</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <SkillCard title="Programming Languages" skills={['Python', 'C++', 'Dart']} />
-                    <SkillCard title="SDKs" skills={['Flutter']} />
-                    <SkillCard title="Web Development" skills={['HTML', 'CSS', 'React.js', 'Django', 'Flask']} />
-                    <SkillCard title="Database Management" skills={['PostgreSQL']} />
-                    <SkillCard title="Tools" skills={['Git', 'VS Code', 'Postman']} />
-                    <SkillCard title="Cloud Services" skills={['Firebase', 'Render']} />
-                </div>
-            </div>
-        ),
-        philosophy: (
-            <div className="space-y-4">
-                <h3 className="text-xl font-bold text-primary">Code with Purpose</h3>
-                <p>
-                    I believe technology should serve humanity. My development approach is guided by:
-                </p>
-                <ul className="list-disc list-inside space-y-2">
-                    <li><span className="font-semibold">User-Centric Design:</span> Creating intuitive, empowering interfaces.</li>
-                    <li><span className="font-semibold">Scalable Architecture:</span> Building adaptable systems.</li>
-                    <li><span className="font-semibold">Continuous Learning:</span> Embracing new technologies and methodologies.</li>
-                </ul>
-            </div>
-        ),
-        collaboration: (
-            <div className="space-y-4">
-                <h3 className="text-xl font-bold text-primary">Better Together</h3>
-                <p>
-                    Great software is built by great teams. I thrive in collaborative environments where ideas and diverse perspectives are valued. My approach includes:
-                </p>
-                <ul className="list-disc list-inside space-y-2">
-                    <li><span className="font-semibold">Open Communication:</span> Clear idea sharing and active listening.</li>
-                    <li><span className="font-semibold">Mentorship:</span> Learning from seniors and guiding juniors.</li>
-                    <li><span className="font-semibold">Code Reviews:</span> Constructive feedback for quality improvement.</li>
-                    <li><span className="font-semibold">Pair Programming:</span> Real-time collaboration on complex problems.</li>
-                </ul>
-            </div>
-        ),
-    };
-
-    const MobileAccordion = ({ tab }) => {
-        const [isOpen, setIsOpen] = useState(false);
-
-        return (
-            <div className="border-b last:border-b-0">
-                <button
-                    className="flex items-center justify-between w-full py-4 px-2 text-left"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    <span className="flex items-center">
-                        {tab.icon}
-                        <span className="ml-2 font-semibold">{tab.label}</span>
-                    </span>
-                    <ChevronDown className={`w-5 h-5 transition-transform ${isOpen ? 'transform rotate-180' : ''}`} />
-                </button>
-                <AnimatePresence>
-                    {isOpen && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden"
-                        >
-                            <div className="p-4">
-                                {tabContent[tab.id]}
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        );
-    };
-
     return (
         <section className="py-8">
             <AnimatedSectionHeader>About Me</AnimatedSectionHeader>
             <Card className="bg-card overflow-hidden">
-                <CardContent className="p-0">
-                    {isMobile ? (
-                        <div className="divide-y">
-                            {tabs.map((tab) => (
-                                <MobileAccordion key={tab.id} tab={tab} />
-                            ))}
+                <CardContent className="p-6">
+                    <div className="space-y-8">
+                        <div>
+                            <h3 className="text-2xl font-bold text-primary mb-4">My Journey</h3>
+                            <Timeline>
+                                <TimelineItem year="2010" title="First Computer">
+                                    Dismantled my first computer out of curiosity.
+                                </TimelineItem>
+                                <TimelineItem year="2015" title="Hello, World!">
+                                    Wrote my first "Hello, World!" program in C++.
+                                </TimelineItem>
+                                <TimelineItem year="2020" title="College Journey">
+                                    Started Computer Engineering at Modern College, Pune.
+                                </TimelineItem>
+                                <TimelineItem year="2022" title="Internship">
+                                    Completed first internship as a Flutter developer.
+                                </TimelineItem>
+                                <TimelineItem year="2024" title="Graduation">
+                                    Graduating with a degree in Computer Engineering.
+                                </TimelineItem>
+                            </Timeline>
                         </div>
-                    ) : (
-                        <div className="flex flex-col md:flex-row">
-                            <div className="md:w-1/3 bg-primary/10 p-6">
-                                <nav className="space-y-2">
-                                    {tabs.map((tab) => (
-                                        <Button
-                                            key={tab.id}
-                                            variant={activeTab === tab.id ? "default" : "ghost"}
-                                            className="w-full justify-start text-left"
-                                            onClick={() => setActiveTab(tab.id)}
-                                        >
-                                            <span className="flex items-center">
-                                                {tab.icon}
-                                                <span className="ml-2">{tab.label}</span>
-                                            </span>
-                                            {activeTab === tab.id && <ChevronRight className="ml-auto" />}
-                                        </Button>
-                                    ))}
-                                </nav>
-                            </div>
-                            <div className="md:w-2/3 p-6">
-                                <AnimatePresence mode="wait">
-                                    <motion.div
-                                        key={activeTab}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -20 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        {tabContent[activeTab]}
-                                    </motion.div>
-                                </AnimatePresence>
+                        <div>
+                            <h3 className="text-2xl font-bold text-primary mb-4">Signature Strengths</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <SkillCard
+                                    icon={<Globe className="h-6 w-6" />}
+                                    title="Web Development"
+                                    description="Crafting responsive and dynamic web applications using modern frameworks and technologies."
+                                />
+                                <SkillCard
+                                    icon={<Smartphone className="h-6 w-6" />}
+                                    title="Mobile App Development"
+                                    description="Building cross-platform mobile applications with Flutter, ensuring seamless user experiences."
+                                />
+                                <SkillCard
+                                    icon={<Brain className="h-6 w-6" />}
+                                    title="Machine Learning"
+                                    description="Implementing ML models using transfer learning techniques for innovative solutions."
+                                />
+                                <SkillCard
+                                    icon={<Users className="h-6 w-6" />}
+                                    title="Team Collaboration"
+                                    description="Effectively working in diverse teams to deliver high-quality projects on time."
+                                />
+                                <SkillCard
+                                    icon={<Rocket className="h-6 w-6" />}
+                                    title="Project Management"
+                                    description="Coordinating and executing projects from conception to deployment across various domains."
+                                />
                             </div>
                         </div>
-                    )}
+                    </div>
                 </CardContent>
             </Card>
         </section>
     );
 };
 
-const SkillCard = ({ title, skills }) => (
-    <Card className="bg-primary/5">
-        <CardHeader className="pb-2">
-            <CardTitle className="text-lg">{title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-            <ul className="list-disc list-inside text-sm">
-                {skills.map((skill) => (
-                    <li key={skill}>{skill}</li>
-                ))}
-            </ul>
+const Timeline = ({ children }) => (
+    <ol className="relative border-l border-gray-200 dark:border-gray-700">
+        {children}
+    </ol>
+);
+
+const TimelineItem = ({ year, title, children }) => (
+    <li className="mb-10 ml-6">
+        <span className="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-3 ring-8 ring-background">
+            <ChevronRight className="w-3 h-3 text-white" />
+        </span>
+        <h3 className="flex items-center mb-1 text-lg font-semibold text-primary">{title}</h3>
+        <time className="block mb-2 text-sm font-normal leading-none text-muted-foreground">{year}</time>
+        <p className="mb-4 text-base font-normal text-muted-foreground">{children}</p>
+    </li>
+);
+
+const SkillCard = ({ icon, title, description }) => (
+    <Card className="bg-muted hover:bg-muted/80 transition-colors duration-200">
+        <CardContent className="p-4 flex flex-col items-center text-center">
+            <div className="mb-2 text-primary">{icon}</div>
+            <h4 className="font-semibold mb-1">{title}</h4>
+            <p className="text-sm text-muted-foreground">{description}</p>
         </CardContent>
     </Card>
 );
@@ -354,12 +278,160 @@ const AnimatedSkillBadge = ({ skill, index }) => (
     </motion.div>
 );
 
+const skillCategories = [
+    {
+        name: 'Frontend',
+        icon: <Globe className="w-full h-full" />,
+        skills: ['React', 'HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS'],
+    },
+    {
+        name: 'Backend',
+        icon: <Server className="h-6 w-6" />,
+        skills: ['Node.js', 'Django', 'Flask'],
+    },
+    {
+        name: 'Databases',
+        icon: <Database className="h-6 w-6" />,
+        skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Firebase'],
+    },
+    {
+        name: 'Mobile',
+        icon: <Cpu className="h-6 w-6" />,
+        skills: ['Flutter'],
+    },
+    {
+        name: 'DevOps',
+        icon: <Terminal className="h-6 w-6" />,
+        skills: ['AWS', 'Azure', 'Google Cloud'],
+    },
+    {
+        name: 'Languages',
+        icon: <Code className="h-6 w-6" />,
+        skills: ['Python', 'JavaScript', 'C++', 'Dart'],
+    },
+];
+
+const SkillsSection = () => {
+    const controls = useAnimation();
+    const [ref, inView] = useInView();
+    const [activeCategory, setActiveCategory] = useState(skillCategories[0].name);
+
+    useEffect(() => {
+        if (inView) {
+            controls.start('visible');
+        }
+    }, [controls, inView]);
+
+    return (
+        <section ref={ref} className="py-16">
+            <AnimatedSectionHeader>Technical Arsenal</AnimatedSectionHeader>
+            <motion.div
+                animate={controls}
+                initial="hidden"
+                variants={{
+                    visible: { opacity: 1, y: 0 },
+                    hidden: { opacity: 0, y: 50 },
+                }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+            >
+                <Card className="bg-card overflow-hidden">
+                    <CardContent className="p-6 text-center">
+                        <div className="overflow-x-auto pb-4 mb-4">
+                            <div className="flex justify-start md:justify-center gap-4 min-w-max px-4">
+                                {skillCategories.map((category) => (
+                                    <TooltipProvider key={category.name}>
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <motion.button
+                                                    whileHover={{ scale: 1.05 }}
+                                                    whileTap={{ scale: 0.95 }}
+                                                    onClick={() => setActiveCategory(category.name)}
+                                                    className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex-shrink-0 flex items-center justify-center ${activeCategory === category.name ? 'bg-primary text-primary-foreground' : 'bg-muted'
+                                                        }`}
+                                                >
+                                                    <div className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center">
+                                                        {category.icon}
+                                                    </div>
+                                                </motion.button>
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <p>{category.name}</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                ))}
+                            </div>
+                        </div>
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeCategory}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                                className="text-center"
+                            >
+                                <h3 className="text-2xl font-bold text-primary mb-4">{activeCategory}</h3>
+                                <div className="flex flex-wrap justify-center gap-2">
+                                    {skillCategories.find((cat) => cat.name === activeCategory).skills.map((skill) => (
+                                        <SkillBadge key={skill} skill={skill} />
+                                    ))}
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
+                    </CardContent>
+                </Card>
+            </motion.div>
+        </section>
+    );
+};
+
+const SkillBadge = ({ skill }) => {
+    const badgeRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            },
+            { threshold: 0.5 }
+        );
+
+        if (badgeRef.current) {
+            observer.observe(badgeRef.current);
+        }
+
+        return () => {
+            if (badgeRef.current) {
+                observer.unobserve(badgeRef.current);
+            }
+        };
+    }, []);
+
+    return (
+        <motion.div
+            ref={badgeRef}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.3, delay: Math.random() * 0.3 }}
+        >
+            <Badge variant="secondary" className="text-sm py-1 px-2">
+                {skill}
+            </Badge>
+        </motion.div>
+    );
+};
+
 export default function Portfolio() {
     const [mounted, setMounted] = useState(false);
     const [meme, setMeme] = useState(null);
     const [memeLoading, setMemeLoading] = useState(true);
     const [memeError, setMemeError] = useState(null);
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(false);  // Initialize to false
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
             name: '',
@@ -368,11 +440,6 @@ export default function Portfolio() {
         },
         mode: 'onBlur',
     });
-
-    const skills = [
-        'C++', 'Python', 'Dart', 'Flutter', 'HTML', 'CSS', 'React.js', 'Django', 'Flask',
-        'Tensorflow', 'PyTorch', 'Scikit-Learn', 'SQL', 'PostgreSQL', 'SQLite', 'Firebase', 'Git', 'GitHub'
-    ];
 
     const projects = [
         {
@@ -489,23 +556,29 @@ export default function Portfolio() {
     }, [darkMode]);
 
     useEffect(() => {
-        setMounted(true);
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             setDarkMode(savedTheme === 'dark');
         } else {
-            setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setDarkMode(prefersDark);
+            localStorage.setItem('theme', prefersDark ? 'dark' : 'light');
         }
+        setMounted(true);
     }, []);
 
     useEffect(() => {
-        if (darkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
+        if (mounted) {
+            if (darkMode) {
+                document.documentElement.classList.add('dark');
+                document.documentElement.classList.remove('light');
+            } else {
+                document.documentElement.classList.add('light');
+                document.documentElement.classList.remove('dark');
+            }
+            localStorage.setItem('theme', darkMode ? 'dark' : 'light');
         }
-        localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-    }, [darkMode]);
+    }, [darkMode, mounted]);
 
     useEffect(() => {
         fetchMeme();
@@ -554,7 +627,7 @@ export default function Portfolio() {
     };
 
     const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
+        setDarkMode(prevMode => !prevMode);
     };
 
     if (!mounted) return null;
@@ -698,22 +771,7 @@ export default function Portfolio() {
                             </Card>
                         </motion.section>
 
-                        <AnimatedSectionHeader>Skills</AnimatedSectionHeader>
-                        <motion.section
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
-                                <CardContent className="pt-6">
-                                    <div className="flex flex-wrap justify-center gap-2 md:gap-3">
-                                        {skills.map((skill, index) => (
-                                            <AnimatedSkillBadge key={skill} skill={skill} index={index} />
-                                        ))}
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </motion.section>
+                        <SkillsSection />
 
                         <AnimatedSectionHeader>Projects</AnimatedSectionHeader>
                         <section>
