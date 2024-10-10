@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
-import { Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download, CheckCircle, Code, Brain, Rocket, Users, ChevronRight, Database, Globe, Cpu, Server, Terminal, Smartphone } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download, Code, Brain, Rocket, Users, ChevronRight, Database, Globe, Cpu, Server, Terminal, Smartphone, ChevronUp } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as THREE from 'three';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Progress } from "@/components/ui/progress";
-import { ScrollArea } from "@/components/ui/scroll-area";
-
+import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -426,12 +422,111 @@ const SkillBadge = ({ skill }) => {
     );
 };
 
+const SocialButton = ({ icon, href, label }) => (
+    <Button
+        variant="outline"
+        size="lg"
+        asChild
+        className="group"
+    >
+        <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center">
+            {React.cloneElement(icon, { className: "mr-2 h-4 w-4 group-hover:animate-pulse" })}
+            {label}
+        </a>
+    </Button>
+);
+
+const IntroductionSection = () => {
+    const controls = useAnimation();
+
+    const [text] = useTypewriter({
+        words: ['Programmer', 'Problem Solver', 'Avid Learner', 'Innovation Enthusiast'],
+        loop: 0,
+        typeSpeed: 70,
+        deleteSpeed: 50,
+        delaySpeed: 1000,
+    });
+
+    useEffect(() => {
+        controls.start({
+            y: 0,
+            opacity: 1,
+            transition: { type: 'spring', stiffness: 100, damping: 15 }
+        });
+    }, [controls]);
+
+    return (
+        <motion.section
+            className="min-h-screen flex flex-col items-center justify-center text-center p-4 relative overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+        >
+            <div className="z-10">
+                <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                    className="mb-8"
+                >
+                    <Avatar className="h-32 w-32 md:h-40 md:w-40 mx-auto border-4 border-primary">
+                        <AvatarImage src="https://img.playbook.com/-PDu_bRrRfxAxJ7gxiYZ2Y8RvY5dUdgoKk1KWi8PUes/Z3M6Ly9wbGF5Ym9v/ay1hc3NldHMtcHVi/bGljL2VjYzkzMjEw/LTk0MTctNDQ4ZC04/NzA0LTAxNWFlOTU2/ZGE0MA" alt="Amit Gavali" />
+                        <AvatarFallback>AG</AvatarFallback>
+                    </Avatar>
+                </motion.div>
+
+                <motion.h1
+                    className="text-4xl md:text-6xl font-bold mb-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                >
+                    Amit Gavali
+                </motion.h1>
+
+                <motion.div
+                    className="text-xl md:text-2xl text-muted-foreground mb-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                >
+                    <span>{text}</span>
+                    <Cursor cursorColor='primary' />
+                </motion.div>
+
+                <motion.div
+                    className="flex flex-wrap justify-center gap-4 mb-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1 }}
+                >
+                    <SocialButton icon={<Github className="mr-2 h-4 w-4" />} href="https://github.com/aintyourcupoftea" label="GitHub" />
+                    <SocialButton icon={<Linkedin className="mr-2 h-4 w-4" />} href="https://www.linkedin.com/in/aintyourcupoftea" label="LinkedIn" />
+                    <SocialButton icon={<Mail className="mr-2 h-4 w-4" />} href="mailto:amitbabangavali@gmail.com" label="Email" />
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        className="group"
+                        onClick={downloadResume}
+                    >
+                        <Download className="mr-2 h-4 w-4 group-hover:animate-pulse" />
+                        Resume
+                    </Button>
+                </motion.div>
+            </div>
+        </motion.section>
+    );
+};
+
 export default function Portfolio() {
     const [mounted, setMounted] = useState(false);
     const [meme, setMeme] = useState(null);
     const [memeLoading, setMemeLoading] = useState(true);
     const [memeError, setMemeError] = useState(null);
     const [darkMode, setDarkMode] = useState(false);  // Initialize to false
+    const [showScrollToTop, setShowScrollToTop] = useState(false);
+    const [togglePosition, setTogglePosition] = useState(0);
+    const lastScrollY = useRef(0);
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
             name: '',
@@ -584,6 +679,24 @@ export default function Portfolio() {
         fetchMeme();
     }, []);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > 1000) {
+                setShowScrollToTop(true);
+            } else {
+                setShowScrollToTop(false);
+            }
+
+            // Move toggle based on scroll position
+            setTogglePosition(Math.max(-currentScrollY, -64)); // -64 to fully hide the toggle
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const fetchMeme = async () => {
         setMemeLoading(true);
         setMemeError(null);
@@ -630,6 +743,10 @@ export default function Portfolio() {
         setDarkMode(prevMode => !prevMode);
     };
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     if (!mounted) return null;
 
     return (
@@ -642,90 +759,33 @@ export default function Portfolio() {
                     style={{ zIndex: -1 }}
                 />
                 <div className="relative z-10 transition-colors duration-300 bg-background/80 text-foreground">
-                    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                        <div className="container mx-auto flex h-14 items-center justify-between px-4">
-                            <motion.span
-                                className="font-primary font-bold text-xl"
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5 }}
-                            >
-                                Portfolio
-                            </motion.span>
-                            <div className="flex items-center space-x-2 font-primary">
-                                <span className="text-sm font-medium">
-                                    {darkMode ? 'Dark' : 'Light'} Mode
-                                </span>
-                                <Switch
-                                    checked={darkMode}
-                                    onCheckedChange={toggleDarkMode}
-                                    className="data-[state=checked]:bg-primary"
-                                />
-                                {darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-                            </div>
+                    {/* Dark Mode Toggle */}
+                    <div
+                        className="fixed right-8 z-50 transition-transform duration-300"
+                        style={{ transform: `translateY(${togglePosition + 24}px)` }}
+                    >
+                        <div className="flex items-center space-x-2 bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/40 p-2 rounded-full shadow-md">
+                            <Switch
+                                checked={darkMode}
+                                onCheckedChange={toggleDarkMode}
+                                className="data-[state=checked]:bg-primary"
+                            />
+                            {darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
                         </div>
-                    </header>
+                    </div>
+
+                    {/* Scroll to Top Button */}
+                    {showScrollToTop && (
+                        <Button
+                            onClick={scrollToTop}
+                            className="fixed bottom-6 right-6 z-50 rounded-full p-2 bg-background/40 hover:bg-background/60 text-foreground/80 hover:text-foreground shadow-md backdrop-blur supports-[backdrop-filter]:bg-background/30"
+                        >
+                            <ChevronUp className="h-5 w-5" />
+                        </Button>
+                    )}
 
                     <main className="container mx-auto py-8 px-4 space-y-12 md:space-y-16 max-w-4xl">
-                        <section className="text-center">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.5 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.5 }}
-                            >
-                                <Avatar className="h-32 w-32 md:h-40 md:w-40 mx-auto mb-6 border-4 border-primary">
-                                    <AvatarImage src="https://img.playbook.com/-PDu_bRrRfxAxJ7gxiYZ2Y8RvY5dUdgoKk1KWi8PUes/Z3M6Ly9wbGF5Ym9v/ay1hc3NldHMtcHVi/bGljL2VjYzkzMjEw/LTk0MTctNDQ4ZC04/NzA0LTAxNWFlOTU2/ZGE0MA" alt="Amit Gavali" />
-                                    <AvatarFallback>AG</AvatarFallback>
-                                </Avatar>
-                            </motion.div>
-                            <motion.h1
-                                className="font-primary text-4xl md:text-5xl font-bold tracking-tight mb-4"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 0.2 }}
-                            >
-                                Amit Gavali
-                            </motion.h1>
-                            <motion.p
-                                className="text-xl md:text-2xl text-muted-foreground mb-6"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 0.4 }}
-                            >
-                                Programmer | Problem Solver | Avid Learner
-                            </motion.p>
-                            <motion.div
-                                className="flex flex-wrap justify-center gap-4"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 0.6 }}
-                            >
-                                <div className="flex flex-nowrap justify-center gap-2 sm:gap-4">
-                                    <Button variant="outline" size="sm" className="flex-1 sm:flex-none sm:size-lg" asChild>
-                                        <a href="https://github.com/aintyourcupoftea" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                                            <Github className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
-                                            <span className="text-xs sm:text-sm">GitHub</span>
-                                        </a>
-                                    </Button>
-                                    <Button variant="outline" size="sm" className="flex-1 sm:flex-none sm:size-lg" asChild>
-                                        <a href="https://www.linkedin.com/in/aintyourcupoftea" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                                            <Linkedin className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
-                                            <span className="text-xs sm:text-sm">LinkedIn</span>
-                                        </a>
-                                    </Button>
-                                    <Button variant="outline" size="sm" className="flex-1 sm:flex-none sm:size-lg" asChild>
-                                        <a href="mailto:amitbabangavali@gmail.com" className="flex items-center justify-center">
-                                            <Mail className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
-                                            <span className="text-xs sm:text-sm">Email</span>
-                                        </a>
-                                    </Button>
-                                    <Button variant="outline" size="sm" className="flex-1 sm:flex-none sm:size-lg" onClick={downloadResume}>
-                                        <Download className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
-                                        <span className="text-xs sm:text-sm">Resume</span>
-                                    </Button>
-                                </div>
-                            </motion.div>
-                        </section>
+                        <IntroductionSection />
 
                         <AboutMeSection />
 
