@@ -701,7 +701,7 @@ export default function Portfolio() {
         setMemeLoading(true);
         setMemeError(null);
         try {
-            const response = await fetch('https://memefetchingredditapi.onrender.com');
+            const response = await fetch('http://80.225.218.218:7860');
             if (!response.ok) {
                 throw new Error('Failed to fetch meme');
             }
