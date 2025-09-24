@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { motion, AnimatePresence, useAnimation } from 'framer-motion'
+import { motion, AnimatePresence, useAnimation, useAnimationControls } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { 
   Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download, 
   Code, Brain, Rocket, Users, ChevronRight, Database, Globe, Cpu, 
   Server, Terminal, Smartphone, ChevronUp, Coffee, Zap, Target,
-  AlertTriangle, Award, Calendar, MapPin, Heart, Laugh
+  AlertTriangle, Award, Calendar, MapPin, Heart, Laugh, ArrowUpRight, Sparkles
 } from 'lucide-react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -18,7 +18,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Switch } from '@/components/ui/switch'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-
 // Witty taglines that rotate
 const taglines = [
   "Trying Not to Break Production (No Promises 😉)",
@@ -449,103 +448,221 @@ const SkillsSection = () => {
 }
 
 // Projects Section - My digital offspring
+
 const ProjectsSection = () => {
-  const [ref, inView] = useInView({ triggerOnce: true })
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
   
   const projects = [
     {
-      title: "Bharat Leaf Lens 🌿",
-      description: "Because who needs a botanist when you have AI? Flutter app that identifies medicinal plants using TensorFlow Lite. Now you can impress your friends AND avoid poisoning yourself!",
+      title: "Bharat Leaf Lens",
+      description: "AI-powered plant identification app built with Flutter and TensorFlow Lite. Helping users discover medicinal plants with cutting-edge computer vision.",
       link: "https://github.com/aintyourcupoftea/BharatLeafLens",
-      technologies: ["Flutter", "TensorFlow Lite", "PyTorch", "Plant Whispering"],
-      emoji: "🔬"
+      technologies: ["Flutter", "TensorFlow Lite", "PyTorch", "Computer Vision"],
+      emoji: "🌿",
+      gradient: "from-green-500/20 via-emerald-500/20 to-teal-500/20",
+      category: "Mobile AI"
     },
     {
-      title: "ESP32 Home Automation 🏠",
-      description: "Smart home project that makes your switches smarter than most people. Control everything remotely because walking is overrated.",
+      title: "ESP32 Smart Home",
+      description: "IoT home automation system with remote control capabilities. Modern smart home solution for seamless device management.",
       link: "https://github.com/aintyourcupoftea/ESP32-Home-Automation",
-      technologies: ["ESP32", "IoT", "Web Development", "Lazy Engineering"],
-      emoji: "🤖"
+      technologies: ["ESP32", "IoT", "Web Development", "Hardware"],
+      emoji: "🏠",
+      gradient: "from-blue-500/20 via-indigo-500/20 to-purple-500/20",
+      category: "IoT"
     },
     {
-      title: "Meme Fetcher API 😂",
-      description: "Fetching memes from r/ProgrammerHumor because therapy is expensive but laughter is free. Essential for maintaining sanity.",
+      title: "Meme Fetcher API",
+      description: "Python API that fetches programming memes from Reddit. Because good humor is essential for developer productivity.",
       link: "https://github.com/aintyourcupoftea/MemeFetchingRedditAPI",
-      technologies: ["Python", "Reddit API", "Serotonin Generation"],
-      emoji: "🎭"
+      technologies: ["Python", "Reddit API", "REST API"],
+      emoji: "😂",
+      gradient: "from-yellow-500/20 via-orange-500/20 to-red-500/20",
+      category: "API"
     },
     {
-      title: "PDF Signer API ✍️",
-      description: "Sign PDFs digitally because analog signatures are so last century. Now you can procrastinate paperwork efficiently!",
+      title: "PDF Digital Signer",
+      description: "Streamlined PDF signing solution for digital document workflows. Modern approach to paperless document processing.",
       link: "https://github.com/aintyourcupoftea/PDF-Signer",
-      technologies: ["Python", "PDF Processing", "Digital Bureaucracy"],
-      emoji: "📝"
+      technologies: ["Python", "PDF Processing", "Digital Signatures"],
+      emoji: "✍️",
+      gradient: "from-purple-500/20 via-pink-500/20 to-rose-500/20",
+      category: "Utility"
     },
     {
-      title: "Student DBMS 🎓",
-      description: "Full-stack student database system. It's like Facebook for academics but with more SQL and less drama.",
+      title: "Student DBMS",
+      description: "Full-stack student database management system with comprehensive CRUD operations and intuitive interface.",
       link: "https://github.com/aintyourcupoftea/student-dbms",
-      technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Academic Wizardry"],
-      emoji: "📚"
+      technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+      emoji: "🎓",
+      gradient: "from-cyan-500/20 via-blue-500/20 to-indigo-500/20",
+      category: "Full-Stack"
     }
   ]
 
-    return (
-    <section ref={ref} className="py-16 px-4">
-        <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        className="max-w-6xl mx-auto"
-      >
-        <h2 className="text-4xl font-bold text-center mb-4">
-          Projects & Digital Offspring 💻
-        </h2>
-        <p className="text-center text-muted-foreground mb-12">
-          Things I built when I should have been sleeping
-        </p>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  }
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    }
+  }
+
+  return (
+    <section ref={ref} className="py-24 px-4 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5"></div>
+      <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 left-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+        className="max-w-7xl mx-auto relative z-10"
+      >
+        {/* Header */}
+        <motion.div variants={itemVariants} className="text-center mb-16">
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-primary">Featured Work</span>
+          </motion.div>
+          
+          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent mb-6">
+            Projects & Creations
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            A collection of passionate projects built with modern technologies and creative problem-solving
+          </p>
+        </motion.div>
+
+        {/* Projects Grid */}
+        <motion.div 
+          variants={itemVariants}
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.03 }}
-              className="h-full"
+              variants={itemVariants}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="group relative"
             >
-              <Card className="h-full bg-gradient-to-br from-card to-primary/5 hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    <span className="flex items-center gap-2">
-                      <span className="text-2xl">{project.emoji}</span>
-                      {project.title}
-                    </span>
-                    <Button variant="ghost" size="icon" asChild>
-                      <a href={project.link} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4" />
-        </a>
-    </Button>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
+              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 scale-105`}></div>
+              
+              <div className="relative bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-300">
+                {/* Card Header */}
+                <div className="p-6 pb-0">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="text-3xl">{project.emoji}</div>
+                      <div>
+                        <div className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded-full inline-block mb-2">
+                          {project.category}
+                        </div>
+                        <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                          {project.title}
+                        </h3>
+                      </div>
+                    </div>
+                    
+                    <motion.a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-full bg-primary/10 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary/20"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ArrowUpRight className="w-4 h-4 text-primary" />
+                    </motion.a>
+                  </div>
+                </div>
+
+                {/* Card Content */}
+                <div className="px-6 pb-6">
+                  <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
                     {project.description}
                   </p>
-                </CardContent>
-                <CardFooter>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-xs">
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech, techIndex) => (
+                      <motion.span
+                        key={tech}
+                        className="px-3 py-1 text-xs font-medium bg-secondary/50 text-secondary-foreground rounded-full border border-border/50"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.1 + techIndex * 0.05 }}
+                        whileHover={{ scale: 1.05 }}
+                      >
                         {tech}
-                      </Badge>
+                      </motion.span>
                     ))}
                   </div>
-                </CardFooter>
-              </Card>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-3 pt-2">
+                    <motion.a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                      whileHover={{ x: 4 }}
+                    >
+                      <Github className="w-4 h-4" />
+                      View Code
+                    </motion.a>
+                    <div className="w-px h-4 bg-border"></div>
+                    <motion.a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                      whileHover={{ x: 4 }}
+                    >
+                    </motion.a>
+                  </div>
+                </div>
+
+                {/* Hover Gradient Overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`}></div>
+              </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div 
+          variants={itemVariants}
+          className="text-center mt-16"
+        >
+          <motion.div
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+          >
+            <span className="text-sm">Want to see more?</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </motion.div>
+        </motion.div>
       </motion.div>
     </section>
   )
