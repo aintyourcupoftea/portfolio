@@ -1,775 +1,966 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { useInView } from 'react-intersection-observer';
-import { Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download, Code, Brain, Rocket, Users, ChevronRight, Database, Globe, Cpu, Server, Terminal, Smartphone, ChevronUp } from "lucide-react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import * as THREE from 'three';
-import { useTypewriter, Cursor } from 'react-simple-typewriter';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import React, { useState, useEffect, useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { motion, AnimatePresence, useAnimation } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import { 
+  Github, Linkedin, Mail, ExternalLink, Loader2, Sun, Moon, Download, 
+  Code, Brain, Rocket, Users, ChevronRight, Database, Globe, Cpu, 
+  Server, Terminal, Smartphone, ChevronUp, Coffee, Zap, Target,
+  AlertTriangle, Award, Calendar, MapPin, Heart, Laugh
+} from 'lucide-react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { Switch } from '@/components/ui/switch'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
-const AnimatedSectionHeader = ({ children }) => (
-    <motion.h2
-        className="font-primary text-3xl font-bold mb-8 text-center"
-        initial={{ opacity: 0, y: -20 }}
+// Witty taglines that rotate
+const taglines = [
+  "Trying Not to Break Production (No Promises 😉)",
+  "DevOps Engineer by Day, Bug Creator by Night",
+  "Turning Coffee into Code Since 2015",
+  "If it ain't broke, I didn't deploy yet",
+  "Making computers cry tears of joy"
+]
+
+// Hero Section - Because first impressions matter (unlike my commit messages)
+const HeroSection = () => {
+  const [currentTagline, setCurrentTagline] = useState(0)
+  const [isTyping, setIsTyping] = useState(true)
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTagline((prev) => (prev + 1) % taglines.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <motion.section 
+      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      {/* Floating code snippets background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-muted-foreground/10 font-mono text-xs"
+            initial={{ 
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+              rotate: Math.random() * 360 
+            }}
+            animate={{ 
+              y: [null, -100],
+              rotate: [null, Math.random() * 360 + 180]
+            }}
+            transition={{ 
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              delay: Math.random() * 2 
+            }}
+          >
+            {['git push --force', 'sudo rm -rf /', 'npm install --save everything', 'while(true) { coffee(); }'][Math.floor(Math.random() * 4)]}
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="z-10 text-center max-w-4xl mx-auto px-4">
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          className="mb-8"
+        >
+          <Avatar className="h-40 w-40 mx-auto border-4 border-primary shadow-2xl">
+            <AvatarImage 
+              src="https://img.playbook.com/cbh7qVVWT2_ge8VGrg36O9NXC5srNM_gXkdwRwrXHfE/s:1000:1001/Z3M6Ly9wbGF5Ym9v/ay1hc3NldHMtcHVi/bGljLzdkODEwZjRh/LTFkNjgtNDdiMy1h/YjlhLTFlMTRiNGU2/YWM0Yw" 
+              alt="Amit Gavali - The Legend Himself" 
+            />
+            <AvatarFallback className="text-2xl font-bold">AG</AvatarFallback>
+          </Avatar>
+        </motion.div>
+
+        <motion.h1 
+          className="text-5xl md:text-7xl font-black mb-4 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          Amit Gavali
+        </motion.h1>
+
+        <motion.div 
+          className="text-xl md:text-2xl text-muted-foreground mb-8 h-16 flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentTagline}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
-    >
-        {children}
-    </motion.h2>
-);
+              className="font-medium"
+            >
+              {taglines[currentTagline]}
+            </motion.span>
+          </AnimatePresence>
+        </motion.div>
 
-const ProjectCard = ({ project }) => (
     <motion.div
-        whileHover={{ scale: 1.03 }}
-        transition={{ duration: 0.2 }}
-        className="h-full"
-    >
-        <Card className="h-full bg-card hover:shadow-lg transition-all duration-300">
-            <CardHeader>
-                <CardTitle className="font-primary flex items-center justify-between text-xl">
-                    {project.title}
-                    <Button variant="ghost" size="icon" asChild>
-                        <a href={project.link} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="h-5 w-5" />
-                            <span className="sr-only">View project</span>
-                        </a>
+          className="flex flex-wrap justify-center gap-4 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1 }}
+        >
+          <SocialButton icon={<Github />} href="https://github.com/aintyourcupoftea" label="GitHub" />
+          <SocialButton icon={<Linkedin />} href="https://www.linkedin.com/in/aintyourcupoftea" label="LinkedIn" />
+          <SocialButton icon={<Mail />} href="mailto:amitbabangavali@gmail.com" label="Email" />
+          <Button variant="outline" size="lg" className="group" onClick={downloadResume}>
+            <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
+            Resume (Warning: May Cause Hiring)
                     </Button>
-                </CardTitle>
-            </CardHeader>
-            <CardContent>
-                <p className="text-base text-muted-foreground">{project.description}</p>
-            </CardContent>
-            <CardFooter>
-                <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, index) => (
-                        <Badge key={index} variant="secondary">{tech}</Badge>
-                    ))}
-                </div>
-            </CardFooter>
-        </Card>
     </motion.div>
-);
 
-const MemeSection = ({ meme, isLoading, error }) => (
-    <Card className="bg-card hover:shadow-lg transition-shadow duration-300 h-full">
-        <CardHeader>
-            <CardTitle className="font-primary">Meme of the Day</CardTitle>
-        </CardHeader>
-        <CardContent className="p-4">
-            {isLoading ? (
-                <div className="w-full h-40 bg-muted rounded-lg flex items-center justify-center">
-                    <Loader2 className="h-8 w-8 animate-spin" />
+        <motion.div
+          className="text-sm text-muted-foreground flex items-center justify-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          <MapPin className="h-4 w-4" />
+          <span>Pune, India</span>
+          <span className="mx-2">•</span>
+          <Coffee className="h-4 w-4" />
+          <span>Coffee Level: Critical</span>
+        </motion.div>
                 </div>
-            ) : error ? (
-                <p className="text-red-500">Error loading meme: {error}</p>
-            ) : meme ? (
-                <img
-                    src={meme}
-                    alt="Random Meme"
-                    className="w-full h-auto rounded-lg"
-                />
-            ) : (
-                <p>No meme available</p>
-            )}
-        </CardContent>
-    </Card>
-);
-
-const ContactForm = ({ onSubmit, errors, register }) => {
-    const [isSending, setIsSending] = useState(false);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSending(true);
-        try {
-            await onSubmit(e);
-        } finally {
-            setIsSending(false);
-        }
-    };
-
-    return (
-        <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
-            <CardHeader>
-                <CardTitle className="font-primary">Contact Me</CardTitle>
-                <CardDescription>Get in touch for opportunities or collaborations.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                        <label htmlFor="name" className="text-sm font-medium">Name</label>
-                        <Input
-                            id="name"
-                            placeholder="Your name"
-                            autoComplete="name"
-                            {...register("name", { required: "Name is required" })}
-                        />
-                        {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
-                    </div>
-                    <div className="space-y-2">
-                        <label htmlFor="email" className="text-sm font-medium">Email</label>
-                        <Input
-                            id="email"
-                            placeholder="Your email"
-                            type="email"
-                            autoComplete="email"
-                            {...register("email", {
-                                required: "Email is required",
-                                validate: (value) => isValidEmail(value) || "Invalid email address"
-                            })}
-                        />
-                        {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-                    </div>
-                    <div className="space-y-2">
-                        <label htmlFor="message" className="text-sm font-medium">Message</label>
-                        <Textarea
-                            id="message"
-                            placeholder="Your message"
-                            {...register("message", { required: "Message is required" })}
-                        />
-                        {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
-                    </div>
-                    <Button type="submit" className="w-full" disabled={isSending}>
-                        {isSending ? (
-                            <>
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                Sending...
-                            </>
-                        ) : (
-                            'Send Message'
-                        )}
-                    </Button>
-                </form>
-            </CardContent>
-        </Card>
-    );
-};
-
-const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-};
-
-function downloadResume() {
-    const resumeUrl = 'https://firebasestorage.googleapis.com/v0/b/amitgavali-5d369.appspot.com/o/Amit_Gavali_CV.pdf?alt=media&token=2fbc4322-c59f-4c82-b912-107d51091c63';
-    window.open(resumeUrl, '_blank', 'noopener,noreferrer');
+    </motion.section>
+  )
 }
 
-const AboutMeSection = () => {
+// About Section - The origin story nobody asked for but everyone gets
+const AboutSection = () => {
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
+
     return (
-        <section className="py-8">
-            <AnimatedSectionHeader>About Me</AnimatedSectionHeader>
-            <Card className="bg-card overflow-hidden">
-                <CardContent className="p-6">
-                    <div className="space-y-8">
-                        <div>
-                            <h3 className="text-2xl font-bold text-primary mb-4">My Journey</h3>
-                            <Timeline>
-                                <TimelineItem year="2010" title="First Computer">
-                                    Dismantled my first computer out of curiosity.
-                                </TimelineItem>
-                                <TimelineItem year="2015" title="Hello, World!">
-                                    Wrote my first "Hello, World!" program in C++.
-                                </TimelineItem>
-                                <TimelineItem year="2020" title="College Journey">
-                                    Started Computer Engineering at Modern College, Pune.
-                                </TimelineItem>
-                                <TimelineItem year="2022" title="Internship">
-                                    Completed first internship as a Flutter developer.
-                                </TimelineItem>
-                                <TimelineItem year="2024" title="Graduation">
-                                    Graduating with a degree in Computer Engineering.
-                                </TimelineItem>
-                            </Timeline>
-                        </div>
-                        <div>
-                            <h3 className="text-2xl font-bold text-primary mb-4">Signature Strengths</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <SkillCard
-                                    icon={<Globe className="h-6 w-6" />}
-                                    title="Web Development"
-                                    description="Crafting responsive and dynamic web applications using modern frameworks and technologies."
-                                />
-                                <SkillCard
-                                    icon={<Smartphone className="h-6 w-6" />}
-                                    title="Mobile App Development"
-                                    description="Building cross-platform mobile applications with Flutter, ensuring seamless user experiences."
-                                />
-                                <SkillCard
-                                    icon={<Brain className="h-6 w-6" />}
-                                    title="Machine Learning"
-                                    description="Implementing ML models using transfer learning techniques for innovative solutions."
-                                />
-                                <SkillCard
-                                    icon={<Users className="h-6 w-6" />}
-                                    title="Team Collaboration"
-                                    description="Effectively working in diverse teams to deliver high-quality projects on time."
-                                />
-                                <SkillCard
-                                    icon={<Rocket className="h-6 w-6" />}
-                                    title="Project Management"
-                                    description="Coordinating and executing projects from conception to deployment across various domains."
-                                />
-                            </div>
-                        </div>
-                    </div>
+    <section ref={ref} className="py-16 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        className="max-w-4xl mx-auto"
+      >
+        <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+          The Story So Far 📚
+        </h2>
+        
+        <div className="grid gap-8 md:grid-cols-2">
+          <Card className="bg-gradient-to-br from-card via-card to-primary/5 hover:shadow-2xl transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Zap className="h-5 w-5 text-yellow-500" />
+                Plot Twist Alert
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground leading-relaxed">
+                Started as a curious kid who dismantled computers (sorry, dad's laptop). 
+                Now I'm a DevOps Engineer at <strong>TCS for Deutsche Börse AG</strong> since 
+                January 16, 2025, where I turn caffeine into infrastructure and occasionally 
+                make servers happy.
+              </p>
+            </CardContent>
+        </Card>
+
+          <Card className="bg-gradient-to-br from-card via-card to-secondary/5 hover:shadow-2xl transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Target className="h-5 w-5 text-green-500" />
+                Current Mission
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground leading-relaxed">
+                Building robust pipelines, orchestrating containers, and making sure 
+                environments stay up while I sleep. Also building a community at 
+                <strong> Taksh</strong> to help fellow developers escape tutorial hell.
+              </p>
                 </CardContent>
             </Card>
-        </section>
-    );
-};
+        </div>
 
-const Timeline = ({ children }) => (
-    <ol className="relative border-l border-gray-200 dark:border-gray-700">
-        {children}
-    </ol>
-);
-
-const TimelineItem = ({ year, title, children }) => (
-    <li className="mb-10 ml-6">
-        <span className="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-3 ring-8 ring-background">
-            <ChevronRight className="w-3 h-3 text-white" />
-        </span>
-        <h3 className="flex items-center mb-1 text-lg font-semibold text-primary">{title}</h3>
-        <time className="block mb-2 text-sm font-normal leading-none text-muted-foreground">{year}</time>
-        <p className="mb-4 text-base font-normal text-muted-foreground">{children}</p>
-    </li>
-);
-
-const SkillCard = ({ icon, title, description }) => (
-    <Card className="bg-muted hover:bg-muted/80 transition-colors duration-200">
-        <CardContent className="p-4 flex flex-col items-center text-center">
-            <div className="mb-2 text-primary">{icon}</div>
-            <h4 className="font-semibold mb-1">{title}</h4>
-            <p className="text-sm text-muted-foreground">{description}</p>
-        </CardContent>
-    </Card>
-);
-
-const AnimatedProjectCard = ({ project }) => (
+        {/* Fun Timeline */}
     <motion.div
-        whileHover={{ scale: 1.05, rotateY: 15 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    >
-        <ProjectCard project={project} />
-    </motion.div>
-);
-
-const AnimatedSkillBadge = ({ skill, index }) => (
+          className="mt-12"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.3 }}
+        >
+          <h3 className="text-2xl font-bold text-center mb-8">The Journey (AKA "How I Got Here") 🛤️</h3>
+          <div className="relative">
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-primary/30"></div>
+            {[
+              { year: "2010", title: "The Beginning of Chaos", desc: "Dismantled first computer. Parents were thrilled." },
+              { year: "2015", title: "Hello, World!", desc: "Wrote my first program. Computer said hello back!" },
+              { year: "2020", title: "College Adventures", desc: "Started Computer Engineering at Modern College, Pune" },
+              { year: "2024", title: "Graduation Glory", desc: "Graduated with 8.47 CGPA (not bad for a serial procrastinator)" },
+              { year: "2025", title: "Corporate Life", desc: "DevOps Engineer at TCS for Deutsche Börse AG" }
+            ].map((item, index) => (
     <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: index * 0.05 }}
-    >
-        <Badge variant="secondary" className="text-sm md:text-lg py-1 px-2 md:py-2 md:px-4">{skill}</Badge>
+                key={item.year}
+                className="relative pl-12 pb-8"
+                initial={{ opacity: 0, x: -20 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.1 * index }}
+              >
+                <div className="absolute left-2 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
+                <div>
+                  <span className="text-primary font-bold text-sm">{item.year}</span>
+                  <h4 className="font-semibold text-lg">{item.title}</h4>
+                  <p className="text-muted-foreground">{item.desc}</p>
+                </div>
     </motion.div>
-);
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
+    </section>
+  )
+}
 
-const skillCategories = [
+// Skills Section - Where I flex (responsibly)
+const SkillsSection = () => {
+  const [ref, inView] = useInView({ triggerOnce: true })
+  const [activeCategory, setActiveCategory] = useState('DevOps')
+  const [hoveredSkill, setHoveredSkill] = useState(null)
+
+  const skillCategoriesWithColors = [
+    {
+      name: 'DevOps',
+      icon: <Terminal className="h-4 w-4 align-middle" />,
+      skills: ['Ansible', 'Terraform', 'Docker', 'Podman', 'OpenShift', 'Google Cloud', 'Jenkins'],
+      gradient: 'from-blue-600 via-cyan-500 to-teal-400',
+      bgGradient: 'from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20',
+      accent: 'text-blue-600 dark:text-blue-400',
+      description: "Infrastructure as Poetry • Automating the Future"
+    },
     {
         name: 'Frontend',
-        icon: <Globe className="w-full h-full" />,
+      icon: <Globe className="h-4 w-4 align-middle" />,
         skills: ['React', 'HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS'],
+      gradient: 'from-purple-600 via-pink-500 to-rose-400',
+      bgGradient: 'from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20',
+      accent: 'text-purple-600 dark:text-purple-400',
+      description: "Pixel Perfect • Where Design Meets Code"
     },
     {
         name: 'Backend',
-        icon: <Server className="h-6 w-6" />,
+        icon: <Server className="h-4 w-4 align-middle" />,
         skills: ['Node.js', 'Django', 'Flask'],
+      gradient: 'from-orange-600 via-red-500 to-pink-400',
+      bgGradient: 'from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20',
+      accent: 'text-orange-600 dark:text-orange-400',
+      description: "Digital Architecture • Building the Foundation"
     },
     {
         name: 'Databases',
-        icon: <Database className="h-6 w-6" />,
+        icon: <Database className="h-4 w-4 align-middle" />,
         skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Firebase'],
+      gradient: 'from-green-600 via-emerald-500 to-teal-400',
+      bgGradient: 'from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20',
+      accent: 'text-green-600 dark:text-green-400',
+      description: "Data Symphony • Orchestrating Information"
     },
     {
         name: 'Mobile',
-        icon: <Cpu className="h-6 w-6" />,
+        icon: <Cpu className="h-4 w-4 align-middle" />,
         skills: ['Flutter'],
-    },
-    {
-        name: 'DevOps',
-        icon: <Terminal className="h-6 w-6" />,
-        skills: ['AWS', 'Azure', 'Google Cloud'],
+      gradient: 'from-indigo-600 via-blue-500 to-cyan-400',
+      bgGradient: 'from-indigo-50 to-blue-50 dark:from-indigo-950/20 dark:to-blue-950/20',
+      accent: 'text-indigo-600 dark:text-indigo-400',
+      description: "Touch & Go • Mobile Experiences"
     },
     {
         name: 'Languages',
-        icon: <Code className="h-6 w-6" />,
+        icon: <Code className="h-4 w-4 align-middle" />,
         skills: ['Python', 'JavaScript', 'C++', 'Dart'],
+      gradient: 'from-violet-600 via-purple-500 to-fuchsia-400',
+      bgGradient: 'from-violet-50 to-fuchsia-50 dark:from-violet-950/20 dark:to-fuchsia-950/20',
+      accent: 'text-violet-600 dark:text-violet-400',
+      description: "Linguistic Mastery • Speaking in Code"
     },
-];
-
-const SkillsSection = () => {
-    const controls = useAnimation();
-    const [ref, inView] = useInView();
-    const [activeCategory, setActiveCategory] = useState(skillCategories[0].name);
-
-    useEffect(() => {
-        if (inView) {
-            controls.start('visible');
-        }
-    }, [controls, inView]);
+  ]
 
     return (
-        <section ref={ref} className="py-16">
-            <AnimatedSectionHeader>Technical Arsenal</AnimatedSectionHeader>
+    <section ref={ref} className="py-16 relative overflow-hidden">
+      {/* Subtle Background Elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-10 left-8 w-16 h-16 bg-gradient-to-r from-primary/5 to-purple-500/5 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-8 w-20 h-20 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
+      </div>
+
             <motion.div
-                animate={controls}
-                initial="hidden"
-                variants={{
-                    visible: { opacity: 1, y: 0 },
-                    hidden: { opacity: 0, y: 50 },
-                }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-            >
-                <Card className="bg-card overflow-hidden">
-                    <CardContent className="p-6 text-center">
-                        <div className="overflow-x-auto pb-4 mb-4">
-                            <div className="flex justify-start md:justify-center gap-4 min-w-max px-4">
-                                {skillCategories.map((category) => (
-                                    <TooltipProvider key={category.name}>
-                                        <Tooltip>
-                                            <TooltipTrigger asChild>
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        className="max-w-5xl mx-auto px-4"
+      >
+        {/* Elegant Header */}
+        <div className="text-center mb-12">
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <span className="bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+              Skills & Expertise
+            </span>
+          </motion.h2>
+          <motion.p 
+            className="text-muted-foreground max-w-xl mx-auto"
+            initial={{ opacity: 0, y: 15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Crafting digital solutions with precision and creativity
+          </motion.p>
+        </div>
+
+        {/* Refined Category Navigation */}
+        <div className="flex justify-center mb-8">
+          <div className="flex flex-wrap justify-center gap-2 p-1 bg-muted/30 backdrop-blur-sm rounded-xl border border-border/30">
+            {skillCategoriesWithColors.map((category, index) => (
                                                 <motion.button
-                                                    whileHover={{ scale: 1.05 }}
-                                                    whileTap={{ scale: 0.95 }}
+                key={category.name}
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
                                                     onClick={() => setActiveCategory(category.name)}
-                                                    className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex-shrink-0 flex items-center justify-center ${activeCategory === category.name ? 'bg-primary text-primary-foreground' : 'bg-muted'
-                                                        }`}
-                                                >
-                                                    <div className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center">
-                                                        {category.icon}
-                                                    </div>
+                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 leading-none ${
+                  activeCategory === category.name
+                    ? `bg-gradient-to-r ${category.gradient} text-white shadow-md`
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                }`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+              >
+                <span className="inline-flex items-center justify-center w-4 h-4">{category.icon}</span>
+                {category.name}
+                {activeCategory === category.name && (
+                  <motion.div
+                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-white/10 to-transparent"
+                    layoutId="activeCategory"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
                                                 </motion.button>
-                                            </TooltipTrigger>
-                                            <TooltipContent>
-                                                <p>{category.name}</p>
-                                            </TooltipContent>
-                                        </Tooltip>
-                                    </TooltipProvider>
                                 ))}
                             </div>
                         </div>
+
+        {/* Clean Skills Display */}
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeCategory}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                                className="text-center"
-                            >
-                                <h3 className="text-2xl font-bold text-primary mb-4">{activeCategory}</h3>
-                                <div className="flex flex-wrap justify-center gap-2">
-                                    {skillCategories.find((cat) => cat.name === activeCategory).skills.map((skill) => (
-                                        <SkillBadge key={skill} skill={skill} />
-                                    ))}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <Card className={`overflow-hidden border-0 bg-gradient-to-br ${skillCategoriesWithColors.find(cat => cat.name === activeCategory)?.bgGradient} backdrop-blur-sm`}>
+              <CardContent className="p-6">
+                {/* Minimalist Category Header */}
+                <div className="text-center mb-8">
+                  <motion.div
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-4 bg-white/10 backdrop-blur-sm"
+                    whileHover={{ rotate: 180 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <div className={`text-xl ${skillCategoriesWithColors.find(cat => cat.name === activeCategory)?.accent}`}>
+                      {skillCategoriesWithColors.find(cat => cat.name === activeCategory)?.icon}
                                 </div>
                             </motion.div>
-                        </AnimatePresence>
+                  <h3 className={`text-xl font-semibold ${skillCategoriesWithColors.find(cat => cat.name === activeCategory)?.accent} mb-2`}>
+                    {activeCategory}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {skillCategoriesWithColors.find(cat => cat.name === activeCategory)?.description}
+                  </p>
+                </div>
+
+                {/* Compact Skills Grid - centered, responsive */}
+                <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+                  {skillCategoriesWithColors.find(cat => cat.name === activeCategory)?.skills.map((skill, index) => (
+                    <motion.div
+                      key={skill}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ 
+                        duration: 0.3, 
+                        delay: index * 0.05,
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 25
+                      }}
+                      whileHover={{ 
+                        scale: 1.05, 
+                        y: -2
+                      }}
+                      onHoverStart={() => setHoveredSkill(skill)}
+                      onHoverEnd={() => setHoveredSkill(null)}
+                      className="group cursor-pointer w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
+                    >
+                      <div className={`
+                        relative p-3 sm:p-4 rounded-xl text-center transition-all duration-200
+                        bg-white/60 dark:bg-white/10 backdrop-blur-sm border border-white/20
+                        hover:shadow-lg hover:shadow-primary/10
+                        ${hoveredSkill === skill ? 'ring-1 ring-primary/30' : ''}
+                      `}>
+                        {/* Skill Name */}
+                        <div className={`font-medium text-xs sm:text-sm ${skillCategoriesWithColors.find(cat => cat.name === activeCategory)?.accent}`}>
+                          {skill}
+                        </div>
+                        
+                        {/* Subtle Decorative Element */}
+                        <div className="absolute top-1 right-1 w-1.5 h-1.5 bg-gradient-to-r from-primary to-purple-500 rounded-full opacity-40 group-hover:opacity-80 transition-opacity"></div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
                     </CardContent>
                 </Card>
+          </motion.div>
+        </AnimatePresence>
             </motion.div>
         </section>
-    );
-};
+  )
+}
 
-const SkillBadge = ({ skill }) => {
-    const badgeRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.unobserve(entry.target);
-                }
-            },
-            { threshold: 0.5 }
-        );
-
-        if (badgeRef.current) {
-            observer.observe(badgeRef.current);
-        }
-
-        return () => {
-            if (badgeRef.current) {
-                observer.unobserve(badgeRef.current);
-            }
-        };
-    }, []);
+// Projects Section - My digital offspring
+const ProjectsSection = () => {
+  const [ref, inView] = useInView({ triggerOnce: true })
+  
+  const projects = [
+    {
+      title: "Bharat Leaf Lens 🌿",
+      description: "Because who needs a botanist when you have AI? Flutter app that identifies medicinal plants using TensorFlow Lite. Now you can impress your friends AND avoid poisoning yourself!",
+      link: "https://github.com/aintyourcupoftea/BharatLeafLens",
+      technologies: ["Flutter", "TensorFlow Lite", "PyTorch", "Plant Whispering"],
+      emoji: "🔬"
+    },
+    {
+      title: "ESP32 Home Automation 🏠",
+      description: "Smart home project that makes your switches smarter than most people. Control everything remotely because walking is overrated.",
+      link: "https://github.com/aintyourcupoftea/ESP32-Home-Automation",
+      technologies: ["ESP32", "IoT", "Web Development", "Lazy Engineering"],
+      emoji: "🤖"
+    },
+    {
+      title: "Meme Fetcher API 😂",
+      description: "Fetching memes from r/ProgrammerHumor because therapy is expensive but laughter is free. Essential for maintaining sanity.",
+      link: "https://github.com/aintyourcupoftea/MemeFetchingRedditAPI",
+      technologies: ["Python", "Reddit API", "Serotonin Generation"],
+      emoji: "🎭"
+    },
+    {
+      title: "PDF Signer API ✍️",
+      description: "Sign PDFs digitally because analog signatures are so last century. Now you can procrastinate paperwork efficiently!",
+      link: "https://github.com/aintyourcupoftea/PDF-Signer",
+      technologies: ["Python", "PDF Processing", "Digital Bureaucracy"],
+      emoji: "📝"
+    },
+    {
+      title: "Student DBMS 🎓",
+      description: "Full-stack student database system. It's like Facebook for academics but with more SQL and less drama.",
+      link: "https://github.com/aintyourcupoftea/student-dbms",
+      technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Academic Wizardry"],
+      emoji: "📚"
+    }
+  ]
 
     return (
+    <section ref={ref} className="py-16 px-4">
         <motion.div
-            ref={badgeRef}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.3, delay: Math.random() * 0.3 }}
-        >
-            <Badge variant="secondary" className="text-sm py-1 px-2">
-                {skill}
-            </Badge>
-        </motion.div>
-    );
-};
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        className="max-w-6xl mx-auto"
+      >
+        <h2 className="text-4xl font-bold text-center mb-4">
+          Projects & Digital Offspring 💻
+        </h2>
+        <p className="text-center text-muted-foreground mb-12">
+          Things I built when I should have been sleeping
+        </p>
 
-const SocialButton = ({ icon, href, label }) => (
-    <Button
-        variant="outline"
-        size="lg"
-        asChild
-        className="group"
-    >
-        <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center">
-            {React.cloneElement(icon, { className: "mr-2 h-4 w-4 group-hover:animate-pulse" })}
-            {label}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 50 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ scale: 1.03 }}
+              className="h-full"
+            >
+              <Card className="h-full bg-gradient-to-br from-card to-primary/5 hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center justify-between">
+                    <span className="flex items-center gap-2">
+                      <span className="text-2xl">{project.emoji}</span>
+                      {project.title}
+                    </span>
+                    <Button variant="ghost" size="icon" asChild>
+                      <a href={project.link} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4" />
         </a>
     </Button>
-);
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex-1">
+                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <Badge key={tech} variant="outline" className="text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardFooter>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </section>
+  )
+}
 
-const IntroductionSection = () => {
-    const controls = useAnimation();
-
-    const [text] = useTypewriter({
-        words: ['Programmer', 'Problem Solver', 'Avid Learner', 'Innovation Enthusiast'],
-        loop: 0,
-        typeSpeed: 70,
-        deleteSpeed: 50,
-        delaySpeed: 1000,
-    });
-
-    useEffect(() => {
-        controls.start({
-            y: 0,
-            opacity: 1,
-            transition: { type: 'spring', stiffness: 100, damping: 15 }
-        });
-    }, [controls]);
+// Experience Section - The professional stuff
+const ExperienceSection = () => {
+  const [ref, inView] = useInView({ triggerOnce: true })
 
     return (
-        <motion.section
-            className="min-h-screen flex flex-col items-center justify-center text-center p-4 relative overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-        >
-            <div className="z-10">
+    <section ref={ref} className="py-16 px-4">
                 <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                    className="mb-8"
-                >
-                    <Avatar className="h-32 w-32 md:h-40 md:w-40 mx-auto border-4 border-primary">
-                        <AvatarImage src="https://img.playbook.com/-PDu_bRrRfxAxJ7gxiYZ2Y8RvY5dUdgoKk1KWi8PUes/Z3M6Ly9wbGF5Ym9v/ay1hc3NldHMtcHVi/bGljL2VjYzkzMjEw/LTk0MTctNDQ4ZC04/NzA0LTAxNWFlOTU2/ZGE0MA" alt="Amit Gavali" />
-                        <AvatarFallback>AG</AvatarFallback>
-                    </Avatar>
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        className="max-w-4xl mx-auto"
+      >
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Professional Adventures 🚀
+        </h2>
+
+        <div className="space-y-8">
+          <Card className="bg-gradient-to-r from-card to-primary/10 hover:shadow-2xl transition-all duration-300">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-2xl text-primary">DevOps Engineer</CardTitle>
+                  <CardDescription className="text-lg font-medium">
+                    TCS for Deutsche Börse AG
+                  </CardDescription>
+                </div>
+                <div className="text-right">
+                  <Badge variant="secondary" className="mb-2">Current</Badge>
+                  <p className="text-sm text-muted-foreground">Jan 16, 2025 - Present</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  Currently orchestrating the chaos at one of Europe's largest financial market infrastructures. 
+                  Making sure traders can trade and systems don't trade their sanity for uptime.
+                </p>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <h4 className="font-semibold flex items-center gap-2">
+                      <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                      What I Do
+                    </h4>
+                    <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                      <li>Keep environments running (most of the time)</li>
+                      <li>Build CI/CD pipelines that actually work</li>
+                      <li>Manage cloud infrastructure like a boss</li>
+                      <li>Debug issues at 3 AM with a smile</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-semibold flex items-center gap-2">
+                      <Award className="h-4 w-4 text-green-500" />
+                      Impact
+                    </h4>
+                    <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                      <li>Reduced deployment anxiety by 90%</li>
+                      <li>Increased coffee consumption by 200%</li>
+                      <li>Made servers happy (they send thank you logs)</li>
+                      <li>Still learning German (Guten Tag, bugs!)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-r from-card to-secondary/10 hover:shadow-xl transition-all duration-300">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-xl">Community Volunteer</CardTitle>
+                  <CardDescription className="font-medium">Taksh</CardDescription>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm text-muted-foreground">Apr 2024 - Present</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground leading-relaxed">
+                Building a community for aspiring developers to escape tutorial hell and build actual projects. 
+                Because watching 50 React tutorials won't make you a developer, but building 5 projects will.
+              </p>
+              <a 
+                href="https://gameoftaksh.live" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-primary hover:underline inline-flex items-center gap-1 mt-2"
+              >
+                gameoftaksh.live <ExternalLink className="h-3 w-3" />
+              </a>
+            </CardContent>
+          </Card>
+        </div>
                 </motion.div>
+    </section>
+  )
+}
 
-                <motion.h1
-                    className="text-4xl md:text-6xl font-bold mb-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                >
-                    Amit Gavali
-                </motion.h1>
+// Education Section
+const EducationSection = () => {
+  const [ref, inView] = useInView({ triggerOnce: true })
 
+  return (
+    <section ref={ref} className="py-16 px-4">
                 <motion.div
-                    className="text-xl md:text-2xl text-muted-foreground mb-6"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                >
-                    <span>{text}</span>
-                    <Cursor cursorColor='primary' />
-                </motion.div>
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        className="max-w-4xl mx-auto"
+      >
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Academic Achievements 🎓
+        </h2>
 
-                <motion.div
-                    className="flex flex-wrap justify-center gap-4 mb-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1 }}
-                >
-                    <SocialButton icon={<Github className="mr-2 h-4 w-4" />} href="https://github.com/aintyourcupoftea" label="GitHub" />
-                    <SocialButton icon={<Linkedin className="mr-2 h-4 w-4" />} href="https://www.linkedin.com/in/aintyourcupoftea" label="LinkedIn" />
-                    <SocialButton icon={<Mail className="mr-2 h-4 w-4" />} href="mailto:amitbabangavali@gmail.com" label="Email" />
-                    <Button
-                        variant="outline"
-                        size="lg"
-                        className="group"
-                        onClick={downloadResume}
-                    >
-                        <Download className="mr-2 h-4 w-4 group-hover:animate-pulse" />
-                        Resume
-                    </Button>
-                </motion.div>
+        <Card className="bg-gradient-to-br from-card via-card to-primary/5 hover:shadow-xl transition-all duration-300">
+          <CardHeader>
+            <CardTitle className="text-2xl text-primary flex items-center gap-2">
+              <Award className="h-6 w-6" />
+              Bachelor of Engineering in Computer Engineering
+            </CardTitle>
+            <CardDescription className="text-lg">
+              Progressive Education Society's Modern College of Engineering, Pune
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4 md:grid-cols-3">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">8.47</div>
+                <div className="text-sm text-muted-foreground">CGPA</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">2024</div>
+                <div className="text-sm text-muted-foreground">Graduation Year</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">4</div>
+                <div className="text-sm text-muted-foreground">Years of Caffeine</div>
+              </div>
             </div>
-        </motion.section>
-    );
-};
+            <div className="mt-6 p-4 bg-muted/50 rounded-lg">
+              <p className="text-sm text-muted-foreground italic text-center">
+                "Four years of turning pizza and energy drinks into a Computer Engineering degree. 
+                Would do it again, but with better sleep schedule."
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+                </motion.div>
+    </section>
+  )
+}
 
+// Meme Section - Because we all need therapy
+const MemeSection = ({ meme, isLoading, error, onRefresh }) => {
+  return (
+    <Card className="bg-gradient-to-br from-card to-secondary/10 hover:shadow-xl transition-all duration-300">
+      <CardHeader>
+        <CardTitle className="flex items-center justify-between">
+          <span className="flex items-center gap-2">
+            <Laugh className="h-5 w-5" />
+            Daily Dose of Sanity
+          </span>
+          <Button variant="ghost" size="sm" onClick={onRefresh}>
+            <Rocket className="h-4 w-4" />
+          </Button>
+        </CardTitle>
+        <CardDescription>
+          Fresh memes to keep your debugging sessions bearable
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        {isLoading ? (
+          <div className="h-64 flex items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin" />
+            </div>
+        ) : error ? (
+          <div className="h-64 flex items-center justify-center">
+            <p className="text-red-500">Meme loading failed. Like my last deployment.</p>
+          </div>
+        ) : meme ? (
+          <div className="text-center">
+            <img src={meme} alt="Programming Meme" className="max-w-full h-auto rounded-lg mx-auto" />
+          </div>
+        ) : (
+          <div className="h-64 flex items-center justify-center">
+            <p className="text-muted-foreground">No memes found. This is the real tragedy.</p>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  )
+}
+
+// Contact Form - Slide into my DMs (professionally)
+const ContactSection = ({ onSubmit, errors, register }) => {
+  const [isSending, setIsSending] = useState(false)
+  const [ref, inView] = useInView({ triggerOnce: true })
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSending(true)
+    try {
+      await onSubmit(e)
+    } finally {
+      setIsSending(false)
+    }
+  }
+
+  return (
+    <section ref={ref} className="py-16 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        className="max-w-2xl mx-auto"
+      >
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4">
+            Let's Build Something Epic 🚀
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            Got an idea? Need help? Just want to chat about code? 
+            Drop me a message and let's make magic happen!
+          </p>
+        </div>
+
+        <Card className="bg-gradient-to-br from-card to-primary/5">
+          <CardContent className="p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="text-sm font-medium">Name</label>
+                  <Input 
+                    id="name" 
+                    placeholder="Your awesome name"
+                    {...register('name', { required: 'Name is required' })}
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm">{errors.name.message}</p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium">Email</label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="your.email@awesome.com"
+                    {...register('email', { 
+                      required: 'Email is required',
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: 'Invalid email address'
+                      }
+                    })}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm">{errors.email.message}</p>
+                  )}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="message" className="text-sm font-medium">Message</label>
+                <Textarea 
+                  id="message" 
+                  placeholder="Tell me about your brilliant idea or just say hi!"
+                  className="min-h-32"
+                  {...register('message', { required: 'Message is required' })}
+                />
+                {errors.message && (
+                  <p className="text-red-500 text-sm">{errors.message.message}</p>
+                )}
+              </div>
+              <Button type="submit" size="lg" className="w-full" disabled={isSending}>
+                {isSending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sending into the void...
+                  </>
+                ) : (
+                  <>
+                    <Mail className="mr-2 h-4 w-4" />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </section>
+  )
+}
+
+// Social Button Component
+const SocialButton = ({ icon, href, label }) => (
+  <Button variant="outline" size="lg" asChild className="group">
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {React.cloneElement(icon, { className: "mr-2 h-4 w-4 group-hover:animate-pulse" })}
+      {label}
+    </a>
+  </Button>
+)
+
+// Download Resume Function
+const downloadResume = () => {
+  const resumeUrl = "https://firebasestorage.googleapis.com/v0/b/amitgavali-5d369.appspot.com/o/AmitGavaliCV.pdf?alt=media&token=2fbc4322-c59f-4c82-b912-107d51091c63"
+  window.open(resumeUrl, '_blank', 'noopener,noreferrer')
+}
+
+// Main Portfolio Component
 export default function Portfolio() {
-    const [mounted, setMounted] = useState(false);
-    const [meme, setMeme] = useState(null);
-    const [memeLoading, setMemeLoading] = useState(true);
-    const [memeError, setMemeError] = useState(null);
-    const [darkMode, setDarkMode] = useState(false);  // Initialize to false
-    const [showScrollToTop, setShowScrollToTop] = useState(false);
-    const [togglePosition, setTogglePosition] = useState(0);
-    const lastScrollY = useRef(0);
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        defaultValues: {
-            name: '',
-            email: '',
-            message: ''
-        },
-        mode: 'onBlur',
-    });
+  const [mounted, setMounted] = useState(false)
+  const [meme, setMeme] = useState(null)
+  const [memeLoading, setMemeLoading] = useState(true)
+  const [memeError, setMemeError] = useState(null)
+  const [darkMode, setDarkMode] = useState(false)
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
 
-    const projects = [
-        {
-            title: 'Bharat Leaf Lens',
-            description: 'Flutter-based medicinal plant recognition app using Tflite and PyTorch.',
-            link: 'https://github.com/aintyourcupoftea/BharatLeafLens',
-            technologies: ['Flutter', 'TensorFlow Lite', 'PyTorch'],
-        },
-        {
-            title: 'Home Automation using ESP32',
-            description: 'Smart home project with remote control of switches via web interface.',
-            link: 'https://github.com/aintyourcupoftea/ESP32-Home-Automation',
-            technologies: ['ESP32', 'IoT', 'Web Development'],
-        },
-        {
-            title: 'Meme Fetcher API',
-            description: 'Fetch memes from r/ProgrammerHumor using Reddit API.',
-            link: 'https://github.com/aintyourcupoftea/MemeFetchingRedditAPI',
-            technologies: ['Python', 'API Development', 'Reddit API'],
-        },
-        {
-            title: 'PDF Signer API',
-            description: 'API to sign PDFs with uploaded signature images.',
-            link: 'https://github.com/aintyourcupoftea/PDF-Signer',
-            technologies: ['Python', 'API Development', 'PDF Processing'],
-        },
-        {
-            title: 'Student Database Management System',
-            description: 'GUI-driven system using HTML, CSS, JavaScript, PHP, and MySQL.',
-            link: 'https://github.com/aintyourcupoftea/student-dbms',
-            technologies: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-        },
-    ];
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    defaultValues: { name: '', email: '', message: '' },
+    mode: 'onBlur'
+  })
 
-    const canvasRef = useRef(null);
-    const sceneRef = useRef(null);
-
+  // Theme management
     useEffect(() => {
-        let animationFrameId;
-
-        const initScene = () => {
-            if (!canvasRef.current) return;
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-            const geometry = new THREE.BufferGeometry();
-            const particlesCount = 5000;
-            const posArray = new Float32Array(particlesCount * 3);
-
-            for (let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 5;
-            }
-
-            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-            const material = new THREE.PointsMaterial({
-                size: 0.005,
-                color: darkMode ? 0xffffff : 0x000000,
-            });
-
-            const particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-
-            camera.position.z = 2;
-
-            sceneRef.current = { scene, camera, renderer, particles };
-        };
-
-        const animate = () => {
-            if (!sceneRef.current) return;
-            const { scene, camera, renderer, particles } = sceneRef.current;
-
-            particles.rotation.x += 0.001;
-            particles.rotation.y += 0.001;
-            renderer.render(scene, camera);
-
-            animationFrameId = requestAnimationFrame(animate);
-        };
-
-        const handleResize = () => {
-            if (!sceneRef.current) return;
-            const { camera, renderer } = sceneRef.current;
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        };
-
-        // Initialize scene after a short delay to ensure canvas is in the DOM
-        const timeoutId = setTimeout(() => {
-            initScene();
-            animate();
-            window.addEventListener('resize', handleResize);
-        }, 100);
-
-        return () => {
-            clearTimeout(timeoutId);
-            window.removeEventListener('resize', handleResize);
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
-            if (sceneRef.current && sceneRef.current.renderer) {
-                sceneRef.current.renderer.dispose();
-            }
-        };
-    }, [darkMode]);
-
-    useEffect(() => {
-        if (sceneRef.current && sceneRef.current.particles) {
-            sceneRef.current.particles.material.color.setHex(darkMode ? 0xffffff : 0x000000);
-        }
-    }, [darkMode]);
-
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('theme')
         if (savedTheme) {
-            setDarkMode(savedTheme === 'dark');
+      setDarkMode(savedTheme === 'dark')
         } else {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            setDarkMode(prefersDark);
-            localStorage.setItem('theme', prefersDark ? 'dark' : 'light');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      setDarkMode(prefersDark)
         }
-        setMounted(true);
-    }, []);
+    setMounted(true)
+  }, [])
 
     useEffect(() => {
         if (mounted) {
             if (darkMode) {
-                document.documentElement.classList.add('dark');
-                document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark')
             } else {
-                document.documentElement.classList.add('light');
-                document.documentElement.classList.remove('dark');
+        document.documentElement.classList.remove('dark')
             }
-            localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+      localStorage.setItem('theme', darkMode ? 'dark' : 'light')
         }
-    }, [darkMode, mounted]);
+  }, [darkMode, mounted])
 
-    useEffect(() => {
-        fetchMeme();
-    }, []);
-
+  // Scroll management
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY > 1000) {
-                setShowScrollToTop(true);
-            } else {
-                setShowScrollToTop(false);
-            }
+      setShowScrollToTop(window.scrollY > 1000)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-            // Move toggle based on scroll position
-            setTogglePosition(Math.max(-currentScrollY, -64)); // -64 to fully hide the toggle
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
+  // Fetch meme
     const fetchMeme = async () => {
-        setMemeLoading(true);
-        setMemeError(null);
-        try {
-            const response = await fetch('http://80.225.218.218:7860');
-            if (!response.ok) {
-                throw new Error('Failed to fetch meme');
-            }
-            const blob = await response.blob();
-            const imageUrl = URL.createObjectURL(blob);
-            setMeme(imageUrl);
+    setMemeLoading(true)
+    setMemeError(null)
+    try {
+      const response = await fetch('https://meme.aintyourcupoftea.dpdns.org/')
+      if (!response.ok) throw new Error('Failed to fetch meme')
+      const blob = await response.blob()
+      const imageUrl = URL.createObjectURL(blob)
+      setMeme(imageUrl)
         } catch (error) {
-            console.error('Error fetching meme:', error);
-            setMemeError(error.message);
+      console.error('Error fetching meme:', error)
+      setMemeError(error.message)
         } finally {
-            setMemeLoading(false);
+      setMemeLoading(false)
         }
-    };
+  }
 
+  useEffect(() => {
+    fetchMeme()
+  }, [])
+
+  // Form submission
     const onSubmit = async (data) => {
         try {
             const response = await fetch(
-                'https://script.google.com/macros/s/AKfycbwr7q7tGJ-apcNbfqVyOxG__EfFGF6gcv8ftTZOk173FgB-uDxqja3S6NoFRki1RKn0/exec',
+        'https://script.google.com/macros/s/AKfycbwr7q7tGJ-apcNbfqVyOxGEfFGF6gcv8ftTZOk173FgB-uDxqja3S6NoFRki1RKn0exec',
                 {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                }
-            );
-
-            console.log('Form submitted successfully');
-            toast.success("Message sent successfully!");
-            reset();
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            toast.error("Failed to send message. Please try again.");
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
         }
-    };
+      )
+      toast.success('Message sent successfully! I\'ll get back to you soon.')
+      reset()
+        } catch (error) {
+      console.error('Error submitting form:', error)
+      toast.error('Failed to send message. Please try again or use email directly.')
+    }
+  }
 
-    const toggleDarkMode = () => {
-        setDarkMode(prevMode => !prevMode);
-    };
+  const toggleDarkMode = () => setDarkMode(prev => !prev)
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    if (!mounted) return null;
+  if (!mounted) return null
 
     return (
-        <>
+    <div className={`min-h-screen font-sans ${darkMode ? 'dark' : ''}`}>
             <ToastContainer />
-            <div className={`min-h-screen font-mono ${darkMode ? 'dark' : ''}`}>
-                <canvas
-                    ref={canvasRef}
-                    className="fixed top-0 left-0 w-full h-full pointer-events-none"
-                    style={{ zIndex: -1 }}
-                />
-                <div className="relative z-10 transition-colors duration-300 bg-background/80 text-foreground">
+      
                     {/* Dark Mode Toggle */}
-                    <div
-                        className="fixed right-8 z-50 transition-transform duration-300"
-                        style={{ transform: `translateY(${togglePosition + 24}px)` }}
-                    >
-                        <div className="flex items-center space-x-2 bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/40 p-2 rounded-full shadow-md">
-                            <Switch
-                                checked={darkMode}
-                                onCheckedChange={toggleDarkMode}
-                                className="data-[state=checked]:bg-primary"
-                            />
+      <div className="fixed top-6 right-6 z-50">
+        <div className="flex items-center space-x-2 bg-background/80 backdrop-blur p-2 rounded-full shadow-lg">
+          <Switch checked={darkMode} onCheckedChange={toggleDarkMode} />
                             {darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
                         </div>
                     </div>
@@ -778,105 +969,59 @@ export default function Portfolio() {
                     {showScrollToTop && (
                         <Button
                             onClick={scrollToTop}
-                            className="fixed bottom-6 right-6 z-50 rounded-full p-2 bg-background/40 hover:bg-background/60 text-foreground/80 hover:text-foreground shadow-md backdrop-blur supports-[backdrop-filter]:bg-background/30"
+          className="fixed bottom-6 right-6 z-50 rounded-full p-3 shadow-lg"
+          size="icon"
                         >
                             <ChevronUp className="h-5 w-5" />
                         </Button>
                     )}
 
-                    <main className="container mx-auto py-8 px-4 space-y-12 md:space-y-16 max-w-4xl">
-                        <IntroductionSection />
-
-                        <AboutMeSection />
-
-                        <AnimatedSectionHeader>Education</AnimatedSectionHeader>
-                        <motion.section
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
-                                <CardContent className="pt-6 space-y-6">
-                                    <div className="space-y-4">
-                                        <h3 className="font-primary text-xl font-semibold">Bachelor of Engineering in Computer Engineering</h3>
-                                        <p className="text-base md:text-lg">
-                                            Progressive Education Society's Modern College of Engineering, Pune<br />
-                                            CGPA: 8.47 | Batch of 2024
-                                        </p>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </motion.section>
-
-                        <AnimatedSectionHeader>Experience</AnimatedSectionHeader>
-                        <motion.section
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <Card className="bg-card hover:shadow-lg transition-shadow duration-300">
-                                <CardContent className="pt-6 space-y-6">
-                                    <div className="space-y-4">
-                                        <h3 className="font-primary text-xl font-semibold">Community Volunteer</h3>
-                                        <p className="text-base md:text-lg">
-                                            Taksh<br />
-                                            Apr 2024 - Present · {Math.floor((new Date() - new Date('2024-04-01')) / (1000 * 60 * 60 * 24 * 30))} mos<br />
-                                            Building a Community for everyone who wants to create a career in Tech by building projects instead of being trapped in a Tutorial Hell!
-                                        </p>
-                                        <a href="https://gameoftaksh.live" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                                            gameoftaksh.live
-                                        </a>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </motion.section>
-
+      <main className="transition-colors duration-300">
+        <HeroSection />
+        <AboutSection />
+        <ExperienceSection />
+        <EducationSection />
                         <SkillsSection />
-
-                        <AnimatedSectionHeader>Projects</AnimatedSectionHeader>
-                        <section>
-                            <div className="grid gap-6 md:gap-8 md:grid-cols-2">
-                                {projects.map((project, index) => (
-                                    <AnimatedProjectCard key={project.title} project={project} />
-                                ))}
-                            </div>
-                        </section>
-                        <div className="grid gap-6 md:gap-8 md:grid-cols-2">
+        <ProjectsSection />
+        
+        {/* Meme and Contact Grid */}
+        <section className="py-16 px-4">
+          <div className="max-w-6xl mx-auto grid gap-8 lg:grid-cols-2">
+            <MemeSection 
+              meme={meme} 
+              isLoading={memeLoading} 
+              error={memeError} 
+              onRefresh={fetchMeme}
+            />
                             <div>
-                                <motion.section
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.5 }}
-                                >
-                                    <MemeSection meme={meme} isLoading={memeLoading} error={memeError} />
-                                </motion.section>
+              <ContactSection 
+                onSubmit={handleSubmit(onSubmit)}
+                errors={errors}
+                register={register}
+              />
                             </div>
-                            <div>
-                                <motion.section
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.5 }}
-                                >
-                                    <ContactForm onSubmit={handleSubmit(onSubmit)} errors={errors} register={register} />
-                                </motion.section>
                             </div>
-                        </div>
+        </section>
                     </main>
 
-                    <footer className="border-t py-8 md:py-10 mt-8">
+      {/* Footer */}
+      <footer className="border-t py-12">
                         <motion.div
-                            className="container mx-auto flex flex-col items-center justify-center px-4"
+          className="container mx-auto text-center px-4"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <p className="text-center text-base md:text-lg font-semibold tracking-wide text-muted-foreground">
-                                Made with ❤️ by <span className="text-primary font-bold">Amit Gavali</span>
+          <p className="text-lg font-semibold text-muted-foreground mb-4">
+            Made with <Heart className="inline h-5 w-5 text-red-500 animate-pulse" /> and probably too much coffee
+          </p>
+          <p className="text-sm text-muted-foreground">
+            © 2025 Amit Gavali. All rights reserved. 
+            <br />
+            <span className="italic">No servers were harmed in the making of this portfolio.</span>
                             </p>
                         </motion.div>
                     </footer>
                 </div>
-            </div>
-        </>
     )
 }
