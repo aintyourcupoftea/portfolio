@@ -8,7 +8,7 @@ import {
   Server, Terminal, Smartphone, ChevronUp, Coffee, Zap, Target,
   AlertTriangle, Award, Calendar, MapPin, Heart, Laugh, ArrowUpRight, Sparkles
 } from 'lucide-react'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer, toast, Slide, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -79,7 +79,7 @@ const HeroSection = () => {
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
           className="mb-8"
         >
-          <Avatar className="h-40 w-40 mx-auto border-4 border-primary shadow-2xl">
+          <Avatar id="hero-avatar" className="h-40 w-40 mx-auto border-4 border-primary shadow-2xl">
             <AvatarImage 
               src="https://img.playbook.com/cbh7qVVWT2_ge8VGrg36O9NXC5srNM_gXkdwRwrXHfE/s:1000:1001/Z3M6Ly9wbGF5Ym9v/ay1hc3NldHMtcHVi/bGljLzdkODEwZjRh/LTFkNjgtNDdiMy1h/YjlhLTFlMTRiNGU2/YWM0Yw" 
               alt="Amit Gavali - The Legend Himself" 
@@ -985,6 +985,7 @@ export default function Portfolio() {
   const [memeError, setMemeError] = useState(null)
   const [darkMode, setDarkMode] = useState(false)
   const [showScrollToTop, setShowScrollToTop] = useState(false)
+  const lightModeTimeoutRef = useRef(null)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     defaultValues: { name: '', email: '', message: '' },
@@ -1011,6 +1012,7 @@ export default function Portfolio() {
         document.documentElement.classList.remove('dark')
             }
       localStorage.setItem('theme', darkMode ? 'dark' : 'light')
+      // Toast is handled during toggle for timing control
         }
   }, [darkMode, mounted])
 
@@ -1065,14 +1067,81 @@ export default function Portfolio() {
     }
   }
 
-  const toggleDarkMode = () => setDarkMode(prev => !prev)
+  const toggleDarkMode = () => {
+    // Clear any pending timers
+    if (lightModeTimeoutRef.current) {
+      clearTimeout(lightModeTimeoutRef.current)
+      lightModeTimeoutRef.current = null
+    }
+    const goingToLight = darkMode === true
+    if (goingToLight) {
+      // First apply light mode, then show a toast with a unique id
+      setDarkMode(false)
+      toast.dismiss()
+      const uniqueToastId = `light-mode-joke-${Date.now()}`
+      showLightModeJokeMaybe(uniqueToastId)
+    } else {
+      // Switching to dark immediately; dismiss any existing toast
+      toast.dismiss()
+      setDarkMode(true)
+    }
+  }
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
+  // Occasionally show a fun, hand-drawn style toast when enabling light mode
+  const showLightModeJokeMaybe = (toastId) => {
+    try {
+      const jokes = [
+        'Light mode? <br> Bold move, developer. 😎',
+        'Look at you, using light mode. <br> That\'s so... bold (and painful).',
+        'Light mode? Bold. <br> Most people can\'t pull that off.',
+        'You live dangerously. Light mode users have stories (and squinty selfies)',
+        'Embracing the light side, I see. <br> May the sun be with you! ☀️'
+      ]
+      
+      const message = jokes[Math.floor(Math.random() * jokes.length)]
+  
+      const toastPosition = 'top-center'
+
+      toast(
+        <div className="relative group transition-all duration-500 ease-out">
+          {/* Simple hand-drawn style bubble */}
+          <div className="inline-flex items-center justify-center px-4 py-3 rounded-xl border-2 border-dashed border-gray-400 bg-white shadow-sm max-w-[320px]">
+            <span className="text-gray-900 text-sm leading-relaxed text-center" dangerouslySetInnerHTML={{ __html: message }} />
+          </div>
+        </div>,
+        {
+          position: toastPosition,
+          autoClose: 3500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          closeButton: false,
+          className: 'mysterious-note',
+          style: { 
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+            padding: '4px',
+            width: 'auto',
+            marginTop: '28px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          },
+          toastId,
+          transition: Zoom
+        }
+      )
+    } catch (_) {
+      // noop
+    }
+  }
+  
   if (!mounted) return null
 
     return (
     <div className={`min-h-screen font-sans ${darkMode ? 'dark' : ''}`}>
-            <ToastContainer />
+            <ToastContainer limit={3} position="top-center" transition={Zoom} />
       
                     {/* Dark Mode Toggle */}
       <div className="fixed top-6 right-6 z-50">
