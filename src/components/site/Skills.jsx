@@ -1,27 +1,25 @@
 import { skills } from '@/content/profile'
-import { Panel } from './primitives'
+import { Frame, Gate, Scene, Title } from './primitives'
 
 export function Skills() {
   return (
-    <Panel id="systems" heading="Systems board" readout={`${skills.length} GROUPS`} className="pt-6 md:pt-8">
-      <dl className="grid md:grid-cols-2">
-        {skills.map((s, i) => (
-          <div
-            key={s.group}
-            className={[
-              'flex flex-col gap-1.5 border-seam px-5 py-5 md:px-8 md:py-6',
-              i > 0 ? 'border-t' : '',
-              i === 1 ? 'md:border-t-0' : '',
-              i % 2 === 1 ? 'md:border-l' : '',
-            ].join(' ')}
-          >
-            <dt className="font-display text-[19px] font-semibold uppercase leading-none tracking-[0.04em] text-lamp">
-              {s.group}
-            </dt>
-            <dd className="text-[15px] leading-relaxed text-lamp-soft">{s.items}</dd>
-          </div>
-        ))}
-      </dl>
-    </Panel>
+    <Scene id="stack" lamp="22 30 124" className="pb-16 md:pb-24">
+      <Frame>
+        <Gate className="px-6 py-9 md:px-10 md:py-14 lg:w-[84%]">
+          <Title slate={`${skills.length} groups`}>What I know</Title>
+
+          <dl className="mt-9 grid border-t rule-plate md:mt-12 md:grid-cols-2 md:gap-x-12">
+            {skills.map((group) => (
+              <div key={group.group} className="flex flex-col gap-1.5 border-b rule-plate py-5 md:py-6">
+                <dt className="t-title text-[17px] md:text-[18px]">{group.group}</dt>
+                <dd className="t-body max-w-[52ch] text-[14.5px] text-ink-soft md:text-[15px]">
+                  {group.items}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Gate>
+      </Frame>
+    </Scene>
   )
 }

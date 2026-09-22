@@ -4,39 +4,43 @@ export default {
   theme: {
     extend: {
       colors: {
-        room: 'rgb(var(--room) / <alpha-value>)',
-        console: 'rgb(var(--console) / <alpha-value>)',
-        well: 'rgb(var(--well) / <alpha-value>)',
-        seam: {
-          DEFAULT: 'rgb(var(--seam) / <alpha-value>)',
-          strong: 'rgb(var(--seam-strong) / <alpha-value>)',
+        hall: {
+          DEFAULT: 'rgb(var(--hall) / <alpha-value>)',
+          deep: 'rgb(var(--hall-deep) / <alpha-value>)',
+        },
+        plate: 'rgb(var(--plate) / <alpha-value>)',
+        ink: {
+          DEFAULT: 'rgb(var(--ink) / <alpha-value>)',
+          soft: 'rgb(var(--ink-soft) / <alpha-value>)',
+          faint: 'rgb(var(--ink-faint) / <alpha-value>)',
+        },
+        lit: {
+          DEFAULT: 'rgb(var(--lit) / <alpha-value>)',
+          soft: 'rgb(var(--lit-soft) / <alpha-value>)',
+          faint: 'rgb(var(--lit-faint) / <alpha-value>)',
         },
         lamp: {
           DEFAULT: 'rgb(var(--lamp) / <alpha-value>)',
-          soft: 'rgb(var(--lamp-soft) / <alpha-value>)',
-          dim: 'rgb(var(--lamp-dim) / <alpha-value>)',
+          glow: 'rgb(var(--glow) / <alpha-value>)',
         },
-        go: {
-          DEFAULT: 'rgb(var(--go) / <alpha-value>)',
-          ink: 'rgb(var(--go-ink) / <alpha-value>)',
+        signal: {
+          DEFAULT: 'rgb(var(--signal) / <alpha-value>)',
+          ink: 'rgb(var(--signal-ink) / <alpha-value>)',
         },
-        legend: 'rgb(var(--legend) / <alpha-value>)',
-        fault: 'rgb(var(--fault) / <alpha-value>)',
       },
       fontFamily: {
-        sans: ['Barlow', 'system-ui', 'sans-serif'],
-        display: ['Barlow Condensed', 'Barlow', 'system-ui', 'sans-serif'],
-        mono: ['Martian Mono Variable', 'ui-monospace', 'monospace'],
+        sans: ['Archivo Variable', 'system-ui', 'sans-serif'],
+        mono: ['Sometype Mono', 'ui-monospace', 'monospace'],
       },
       borderRadius: {
-        DEFAULT: '3px',
-        lg: '6px',
+        none: '0',
+        DEFAULT: '0',
       },
       maxWidth: {
-        site: '1360px',
+        site: '1440px',
       },
       transitionTimingFunction: {
-        out: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        throw: 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
     },
   },

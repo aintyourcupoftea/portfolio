@@ -1,47 +1,62 @@
 import { experience } from '@/content/profile'
-import { Panel, Readout } from './primitives'
+import { cn } from '@/lib/utils'
+import { Frame, Gate, Scene, Slate, Title } from './primitives'
 
+// Where he has worked. The dense passage of the page: figures live inside the
+// lines of the work, never as a slab of numbers.
 export function Experience() {
-  const current = experience.find((j) => j.current)
   return (
-    <Panel id="log" heading="Mission log" readout={current ? `ACTIVE SINCE ${current.period.split(' - ')[0].toUpperCase()}` : undefined} className="pt-6 md:pt-8">
-      <ol className="divide-y divide-seam">
-        {experience.map((job) => (
-          <li key={job.period} className="grid gap-5 px-5 py-7 md:grid-cols-[240px_minmax(0,1fr)] md:gap-10 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-12 md:px-8 md:py-9">
-            <div className="flex flex-col gap-2.5">
-              <Readout className={job.current ? 'legend-amber' : 'text-lamp-dim'}>{job.period.toUpperCase()}</Readout>
-              <h3 className="font-display text-[24px] font-semibold uppercase leading-none tracking-[0.03em] text-lamp md:text-[26px]">
-                {job.title}
-              </h3>
-              {(job.company || job.client) && (
-                <p className="text-[15px] leading-snug text-lamp-soft">
-                  {job.company}
-                  {job.company && job.client && <br />}
-                  {job.client}
-                </p>
-              )}
-            </div>
-            <div className="flex flex-col gap-5">
-              <p className="max-w-[68ch] text-[16px] leading-relaxed text-lamp md:text-[17px]">{job.summary}</p>
-              {job.highlights.length > 0 && (
-                <ul className="flex flex-col gap-2.5 text-[15px] leading-normal text-lamp-soft md:gap-3">
-                  {job.highlights.map((h) => (
-                    <li key={h} className="grid grid-cols-[16px_minmax(0,1fr)] gap-x-3">
-                      <span aria-hidden="true" className="mt-[9px] h-1.5 w-1.5 rounded-[1px] bg-lamp-dim" />
-                      <span className="max-w-[70ch]">{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {job.note && (
-                <p className="border-t border-seam pt-4 text-[14px] text-lamp-dim">
-                  {job.note}
-                </p>
-              )}
-            </div>
-          </li>
-        ))}
-      </ol>
-    </Panel>
+    <Scene id="history" lamp="74 28 128" className="pb-16 md:pb-24">
+      <Frame>
+        <Gate className="px-6 py-9 md:px-10 md:py-14 lg:ml-auto lg:w-[95%]">
+          <Title slate="Since Jan 2025">Where I&apos;ve worked</Title>
+
+          <div className="mt-9 flex flex-col border-t rule-plate md:mt-12">
+            {experience.map((role) => (
+              <article
+                key={role.period}
+                className="grid gap-x-10 gap-y-5 border-b rule-plate py-8 md:py-11 lg:grid-cols-12"
+              >
+                <header className="flex flex-col gap-2 lg:col-span-4">
+                  <Slate className={cn(role.current ? 'live' : 'text-ink-faint')}>
+                    {role.current && <span className="live-mark mr-2 align-middle" aria-hidden="true" />}
+                    {role.period}
+                  </Slate>
+                  <h3 className="t-title text-[24px] md:text-[28px]">{role.title}</h3>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="t-body text-[14px] text-ink-soft">{role.company}</span>
+                    {role.client && <span className="t-body text-[14px] text-ink-faint">{role.client}</span>}
+                  </div>
+                </header>
+
+                <div className="flex flex-col gap-5 lg:col-span-8">
+                  <p className="t-lead max-w-[70ch] text-[16px] text-ink md:text-[17px]">{role.summary}</p>
+
+                  {role.highlights.length > 0 && (
+                    <ul className="flex flex-col gap-0">
+                      {role.highlights.map((h) => (
+                        <li
+                          key={h}
+                          className="t-body max-w-[76ch] border-t rule-plate py-2.5 text-[14.5px] text-ink-soft md:text-[15px]"
+                        >
+                          {h}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {role.note && (
+                    <Slate className="text-ink-faint">
+                      <span className="live-mark mr-2 align-middle" aria-hidden="true" />
+                      {role.note}
+                    </Slate>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </Gate>
+      </Frame>
+    </Scene>
   )
 }

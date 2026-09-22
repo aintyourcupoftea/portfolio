@@ -1,32 +1,40 @@
 import { profile } from '@/content/profile'
-import { MissionClock } from './Nav'
+import { Clock } from './Nav'
+import { Frame, Slate } from './primitives'
 
+// After the last gate the hall goes dark again.
 export function Footer() {
   const links = [
     { label: 'GitHub', href: profile.github },
     { label: 'LinkedIn', href: profile.linkedin },
     { label: 'Email', href: `mailto:${profile.email}` },
+    { label: 'Resume', href: profile.resumeUrl },
   ]
+
   return (
-    <footer className="mt-14 border-t border-seam md:mt-24">
-      <div className="mx-auto flex max-w-site flex-col gap-4 px-4 py-6 md:flex-row md:items-center md:justify-between md:px-8 md:py-7">
-        <div className="flex items-baseline gap-3">
-          <span className="font-display text-[15px] font-semibold uppercase tracking-[0.08em] text-lamp">{profile.name}</span>
-          <span className="text-[13px] text-lamp-dim">{profile.role}</span>
+    <footer className="relative z-[2] border-t rule-hall py-8">
+      <Frame className="flex flex-wrap items-center justify-between gap-x-8 gap-y-5">
+        <div className="flex flex-col gap-1">
+          <span className="t-control text-[15px] text-lit">{profile.name}</span>
+          <Slate className="text-lit-faint">
+            {profile.role} · {profile.location}
+          </Slate>
         </div>
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+        <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
           {links.map((l) => (
             <a
               key={l.label}
               href={l.href}
-              className="font-display text-[14px] font-medium uppercase tracking-[0.08em] text-lamp-soft transition-colors hover:text-lamp"
+              target={l.href.startsWith('http') ? '_blank' : undefined}
+              rel="noopener noreferrer"
+              className="t-slate min-h-11 text-[10.5px] leading-[44px] text-lit-soft transition-colors hover:text-lamp"
             >
               {l.label}
             </a>
           ))}
-          <MissionClock className="inline-flex" />
+          <Clock />
         </div>
-      </div>
+      </Frame>
     </footer>
   )
 }

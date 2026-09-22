@@ -1,6 +1,7 @@
 import { Nav } from './components/site/Nav'
+import { Light } from './components/site/light'
 import { Hero } from './components/site/Hero'
-import { Consoles } from './components/site/Consoles'
+import { Operate } from './components/site/Operate'
 import { Experience } from './components/site/Experience'
 import { Work } from './components/site/Work'
 import { Meme } from './components/site/Meme'
@@ -11,11 +12,11 @@ import { Footer } from './components/site/Footer'
 
 export default function App() {
   return (
-    <>
+    <Light>
       <Nav />
       <main>
         <Hero />
-        <Consoles />
+        <Operate />
         <Experience />
         <Work />
         <Meme />
@@ -24,6 +25,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </Light>
   )
 }

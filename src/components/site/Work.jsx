@@ -1,37 +1,47 @@
 import { work } from '@/content/profile'
-import { Panel, Readout, TextLink } from './primitives'
+import { Frame, Gate, OutLink, Scene, Slate, Title } from './primitives'
 
-// Flight records: one ruled row per project. The right-hand readout says who it
-// was for and whether the code is public; client work carries no link.
+// What he has built. Client work is named and described but never linked:
+// there is no public repository for it, and inventing one would be a lie.
 export function Work() {
   return (
-    <Panel id="records" heading="Flight records" readout={`${work.length} RECORDS`} className="pt-6 md:pt-8">
-      <ol className="divide-y divide-seam">
-        {work.map((item) => (
-          <li
-            key={item.title}
-            className="grid gap-x-10 gap-y-3 px-5 py-6 md:grid-cols-[260px_minmax(0,1fr)] md:px-8 md:py-7 lg:grid-cols-[300px_minmax(0,1fr)_260px]"
-          >
-            <h3 className="font-display text-[22px] font-semibold uppercase leading-none tracking-[0.03em] text-lamp md:text-[24px]">
-              {item.title}
-            </h3>
-            <div className="flex flex-col gap-3">
-              <p className="max-w-[62ch] text-[15px] leading-relaxed text-lamp-soft md:text-base">{item.description}</p>
-              <p className="font-mono text-[10.5px] leading-relaxed tracking-[0.02em] text-lamp-dim">{item.tags.join(', ')}</p>
-            </div>
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 md:col-start-2 lg:col-start-3 lg:flex-col lg:items-end lg:justify-start">
-              <Readout className="text-lamp-soft">{item.context.toUpperCase()}</Readout>
-              {item.link ? (
-                <TextLink href={item.link} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap">
-                  {item.linkLabel}
-                </TextLink>
-              ) : (
-                <Readout className="text-lamp-dim">CLIENT WORK · NO PUBLIC CODE</Readout>
-              )}
-            </div>
-          </li>
-        ))}
-      </ol>
-    </Panel>
+    <Scene id="built" lamp="32 30 126" className="pb-16 md:pb-24">
+      <Frame>
+        <Gate className="px-6 py-9 md:px-10 md:py-12">
+          <Title slate={`${work.length} records`}>What I&apos;ve built</Title>
+
+          <ul className="mt-9 flex flex-col border-t rule-plate md:mt-12">
+            {work.map((item) => (
+              <li
+                key={item.title}
+                className="grid gap-x-8 gap-y-3 border-b rule-plate py-6 md:py-8 lg:grid-cols-12"
+              >
+                <div className="flex flex-col gap-1.5 lg:col-span-4">
+                  <h3 className="t-title text-[20px] md:text-[23px]">{item.title}</h3>
+                  <Slate className="text-ink-faint">{item.context}</Slate>
+                </div>
+
+                <div className="flex flex-col gap-2.5 lg:col-span-5">
+                  <p className="t-body max-w-[66ch] text-[15px] text-ink-soft md:text-[16px]">
+                    {item.description}
+                  </p>
+                  <Slate className="text-ink-faint">{item.tags.join(' · ')}</Slate>
+                </div>
+
+                <div className="lg:col-span-3 lg:text-right">
+                  {item.link ? (
+                    <OutLink href={item.link} target="_blank" rel="noopener noreferrer">
+                      {item.linkLabel || 'Source on GitHub'}
+                    </OutLink>
+                  ) : (
+                    <Slate className="pt-1 text-ink-faint">Client work · no public code</Slate>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Gate>
+      </Frame>
+    </Scene>
   )
 }

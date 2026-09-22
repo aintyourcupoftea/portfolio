@@ -1,0 +1,4 @@
+{
+  "prompt": "Derived asset, not generated. Origin: public/avatar.jpg (the owner's own photograph, already in this repo).\nProcessed with ImageMagick for The Throw's single-light rule, so the portrait carries the lamp's colour and nothing else:\nmagick public/avatar.jpg -crop 700x933+210+55 +repage -resize 1080x1440 -colorspace Gray -level 4%,96%,1.02 \\( -size 1x512 gradient:'#13100B-#FFEFD6' \\) -clut -channel R -gamma 1.14 -channel B -gamma 0.86 +channel -brightness-contrast -6x12 -quality 88 public/portrait-lit.jpg\nthen multiplied by a radial falloff (radial-gradient #FFFFFF-#5A5A5A) so the light drops off toward the frame edges.\nThe .webp is the same file at -quality 82. Replace both from a new source photo the same way.\n",
+  "createdAt": "2026-09-22T23:00:42.695Z"
+}

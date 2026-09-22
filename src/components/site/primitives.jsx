@@ -1,124 +1,74 @@
-import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-export const ease = [0.16, 1, 0.3, 1]
+// Nothing here encloses anything. A Scene is a stretch of the hall; a Gate is
+// the lit plate inside it; rows are separated by hairline rules, never boxes.
 
-// Powers a block on when it scrolls into view: a short lamp overshoot, then settle.
-// Reserved for the few panels that earn an entrance; everything else is lit on arrival.
-export function PowerOn({ as = 'div', delay = 0, className, children }) {
-  const reduce = useReducedMotion()
-  const Tag = motion[as]
+export function Scene({ id, lamp = '64 22 118', className, children }) {
   return (
-    <Tag
-      className={className}
-      initial={reduce ? false : { opacity: 0, filter: 'brightness(0.5)' }}
-      whileInView={reduce ? undefined : { opacity: [0, 1, 1], filter: ['brightness(0.5)', 'brightness(1.6)', 'brightness(1)'] }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.7, delay, ease, times: [0, 0.4, 1] }}
-    >
-      {children}
-    </Tag>
-  )
-}
-
-export function Section({ id, className, children }) {
-  return (
-    <section id={id} className={cn('mx-auto w-full max-w-site px-4 md:px-8', className)}>
+    <section id={id} data-scene={id} data-lamp={lamp} className={cn('relative', className)}>
       {children}
     </section>
   )
 }
 
-// A console panel: the framed face every section sits on. The header row is
-// the panel's legend strip: heading left, a mono readout right.
-export function Panel({ id, heading, readout, className, children }) {
-  return (
-    <section
-      id={id}
-      className={cn('mx-auto w-full max-w-site px-4 md:px-8', className)}
-    >
-      <div className="panel rounded-lg border border-seam">
-        <header className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-seam px-5 py-4 md:px-8 md:py-5">
-          <Heading>{heading}</Heading>
-          {readout && <Readout>{readout}</Readout>}
-        </header>
-        {children}
-      </div>
-    </section>
-  )
+export function Frame({ className, children }) {
+  return <div className={cn('mx-auto w-full max-w-site px-5 md:px-8', className)}>{children}</div>
 }
 
-export function Heading({ children, className }) {
+// The gate: a lit plate, keystoned a hair off the lamp's throw axis the way a
+// projected rectangle never lands perfectly square on a wall.
+export function Gate({ dim = false, keystone = true, className, children }) {
   return (
-    <h2
-      className={cn(
-        'font-display text-[26px] font-semibold uppercase leading-none tracking-[0.04em] text-lamp md:text-[32px]',
-        className
-      )}
+    <div
+      data-plate=""
+      className={cn('plate', dim && 'plate-dim', className)}
+      style={keystone ? { transform: 'perspective(2600px) rotateY(-0.5deg)' } : undefined}
     >
       {children}
-    </h2>
+    </div>
   )
 }
 
-// A mono readout: small tabular data, never a sentence.
-export function Readout({ className, children }) {
+// A scene's title, set as ink in the light. No kicker above it: it carries
+// its own weight, and the slate line sits beneath.
+export function Title({ children, slate, className }) {
   return (
-    <span className={cn('whitespace-nowrap font-mono text-[11px] tracking-[0.02em] text-lamp-dim md:text-xs', className)}>
+    <div className={cn('flex flex-wrap items-end justify-between gap-x-8 gap-y-3', className)}>
+      <h2 className="t-head text-balance break-words text-[28px] md:text-[42px] lg:text-[52px]">{children}</h2>
+      {slate && <Slate className="pb-1.5 opacity-70">{slate}</Slate>}
+    </div>
+  )
+}
+
+// Slate data: a count, a period, a state, a tool list. Never a sentence.
+export function Slate({ className, children, ...props }) {
+  return (
+    <span className={cn('t-slate block text-[10.5px] leading-[1.7] md:text-[11px]', className)} {...props}>
       {children}
     </span>
   )
 }
 
-const buttonBase =
-  'inline-flex h-12 items-center justify-center gap-2.5 rounded px-5 font-display text-[17px] font-semibold uppercase tracking-[0.06em] transition-[filter,background-color,border-color] duration-200 ease-out active:translate-y-px'
-
-export function ButtonLink({ variant = 'primary', className, children, ...props }) {
+export function Key({ as: Tag = 'button', quiet = false, className, children, ...props }) {
   return (
-    <a
-      className={cn(
-        buttonBase,
-        variant === 'primary' && 'bg-go text-go-ink hover:brightness-110',
-        variant === 'outline' &&
-          'border border-seam-strong bg-console text-lamp hover:border-lamp-dim hover:brightness-125',
-        className
-      )}
-      {...props}
-    >
+    <Tag className={cn(quiet ? 'key-quiet' : 'key', 't-control text-[14px] md:text-[15px]', className)} {...props}>
       {children}
-    </a>
+    </Tag>
   )
 }
 
-export function Button({ variant = 'primary', className, children, ...props }) {
-  return (
-    <button
-      className={cn(
-        buttonBase,
-        variant === 'primary' && 'bg-go text-go-ink hover:brightness-110 disabled:opacity-60 disabled:hover:brightness-100',
-        variant === 'outline' &&
-          'border border-seam-strong bg-console text-lamp hover:border-lamp-dim hover:brightness-125',
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </button>
-  )
-}
-
-export function TextLink({ className, children, ...props }) {
+export function OutLink({ className, children, ...props }) {
   return (
     <a
       className={cn(
-        'inline-flex min-h-11 items-center gap-1.5 font-display text-[15px] font-medium uppercase tracking-[0.06em] text-lamp-soft transition-colors hover:text-go',
+        't-slate group inline-flex min-h-11 items-center gap-1.5 text-[10.5px] text-ink-soft underline decoration-ink/25 decoration-1 underline-offset-[5px] transition-colors hover:text-signal-ink hover:decoration-signal-ink md:text-[11px]',
         className
       )}
       {...props}
     >
       {children}
-      <ArrowUpRight size={14} strokeWidth={2} />
+      <ArrowUpRight size={13} strokeWidth={2.25} className="transition-transform group-hover:translate-x-px" />
     </a>
   )
 }

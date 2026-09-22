@@ -2,175 +2,472 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Mission Control. One scheme only: a dark flight-operations room.
-   Tokens are RGB channels so Tailwind can apply alpha: rgb(var(--x) / a). */
+/* The Throw. A dark hall with one projector in it: everything you read is what
+   is lit. One scheme only. Tokens are RGB channels so Tailwind can apply alpha
+   as rgb(var(--x) / a).
+
+   The two grounds are the whole system. HALL is the unlit room and carries
+   light ink; PLATE is the lit gate and carries dark ink. Body copy belongs on
+   a plate. Nothing is enclosed: there are no panels, cards, wells or seams,
+   only light, hairline rules and the dark. */
+
+/* Registered so the lamp can actually travel: unregistered custom properties
+   jump between values instead of interpolating. */
+@property --lx {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 64%;
+}
+@property --ly {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 22%;
+}
+@property --throw {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 118%;
+}
+
 @layer base {
   :root {
-    --room: 14 18 17; /* the room, farthest back */
-    --console: 22 28 26; /* console panel faces */
-    --well: 9 12 11; /* recessed display wells */
-    --seam: 44 54 50; /* panel joinery */
-    --seam-strong: 66 80 74;
-    --lamp: 236 233 222; /* lamp-white ink */
-    --lamp-soft: 190 196 188;
-    --lamp-dim: 132 142 136;
-    --go: 92 224 150; /* phosphor green, only where something is live */
-    --go-ink: 9 12 11;
-    --legend: 233 180 76; /* backlit amber, the single current marker */
-    --fault: 239 106 92;
+    /* The hall: unlit, warm, never pure black */
+    --hall: 23 19 14;
+    --hall-deep: 15 12 9;
+
+    /* The gate: the lit plate and its ink */
+    --plate: 239 231 214;
+    --ink: 27 23 18;
+    --ink-soft: 74 63 50;
+    --ink-faint: 92 79 62;
+
+    /* Ink in the hall */
+    --lit: 232 219 197;
+    --lit-soft: 156 141 120;
+    --lit-faint: 143 129 105;
+
+    /* The lamp: the page's only light source */
+    --lamp: 255 212 156;
+    --glow: 255 239 214;
+
+    /* The leader red: one signal hue, rendered for whichever ground it sits on */
+    --signal: 228 86 62;
+    --signal-ink: 168 48 28;
+
+    --lx: 64%;
+    --ly: 22%;
+    --throw: 118%;
+
     color-scheme: dark;
   }
 
+  /* The lamp travels between scenes; this is the page's one authored moment. */
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
-    background: rgb(var(--room));
+    background: rgb(var(--hall));
+    transition:
+      --lx 1100ms cubic-bezier(0.22, 1, 0.36, 1),
+      --ly 1100ms cubic-bezier(0.22, 1, 0.36, 1),
+      --throw 1400ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   body {
-    @apply bg-room text-lamp font-sans;
-    font-feature-settings: 'ss01', 'tnum';
+    @apply bg-hall font-sans text-lit;
+    font-variation-settings: 'wdth' 100;
+    font-feature-settings: 'tnum';
+    overflow-x: hidden;
   }
 
-  /* In-page anchors land below the sticky console rail */
   section[id] {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 92px;
   }
 
+  /* Browser surfaces are lit by the same lamp as everything else. */
   ::selection {
-    background: rgb(var(--go) / 0.28);
-    color: rgb(var(--lamp));
+    background: rgb(var(--lamp) / 0.85);
+    color: rgb(var(--hall-deep));
   }
 
   :focus-visible {
-    outline: 2px solid rgb(var(--go));
+    outline: 2px solid rgb(var(--lamp));
     outline-offset: 3px;
+  }
+
+  .plate :focus-visible {
+    outline-color: rgb(var(--signal-ink));
   }
 
   input,
   textarea {
-    caret-color: rgb(var(--go));
-    accent-color: rgb(var(--go));
+    caret-color: rgb(var(--signal-ink));
+    accent-color: rgb(var(--signal-ink));
   }
 
-  /* Scrollbar as a thin console track */
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgb(var(--seam-strong)) rgb(var(--room));
+    scrollbar-color: rgb(var(--lamp) / 0.38) rgb(var(--hall-deep));
   }
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 11px;
+    height: 11px;
   }
   ::-webkit-scrollbar-track {
-    background: rgb(var(--room));
+    background: rgb(var(--hall-deep));
   }
   ::-webkit-scrollbar-thumb {
-    background: rgb(var(--seam-strong));
-    border: 3px solid rgb(var(--room));
-    border-radius: 6px;
+    background: rgb(var(--lamp) / 0.34);
+    border: 3px solid rgb(var(--hall-deep));
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--lamp) / 0.6);
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+      transition: none;
     }
   }
 }
 
 @layer components {
-  /* A console panel face: a hairline of light along the top edge, a dark edge beneath */
-  .panel {
-    background: rgb(var(--console));
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.045),
-      0 1px 0 rgb(0 0 0 / 0.55),
-      0 18px 40px -28px rgb(0 0 0 / 0.9);
+  /* ---- The light -------------------------------------------------------- */
+
+  /* The beam itself: one fixed light source behind everything, thrown from the
+     lamp position the active scene sets. */
+  .beam {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        var(--throw) calc(var(--throw) * 0.92) at var(--lx) var(--ly),
+        rgb(var(--lamp) / 0.15) 0%,
+        rgb(var(--lamp) / 0.075) 26%,
+        rgb(var(--lamp) / 0.022) 48%,
+        transparent 70%
+      ),
+      radial-gradient(90% 70% at var(--lx) var(--ly), rgb(var(--glow) / 0.05) 0%, transparent 55%);
   }
 
-  /* An indicator lamp: a lit dot with a soft bloom, only beside a live state */
-  .lamp {
+  /* The hall falls away from the lamp. This is what makes the gates read as lit
+     rather than as pale rectangles: the dark has to be genuinely dark where the
+     throw never reaches. */
+  .beam::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      calc(var(--throw) * 1.1) var(--throw) at var(--lx) var(--ly),
+      transparent 0%,
+      rgb(var(--hall-deep) / 0.5) 52%,
+      rgb(var(--hall-deep) / 0.92) 100%
+    );
+  }
+
+  /* Dust suspended in the beam, drifting on one shared clock. */
+  .dust {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url('/dust.png');
+    background-size: 420px 420px;
+    opacity: 0.5;
+    mix-blend-mode: screen;
+    -webkit-mask-image: radial-gradient(
+      var(--throw) var(--throw) at var(--lx) var(--ly),
+      rgb(0 0 0 / 0.9) 0%,
+      rgb(0 0 0 / 0.35) 34%,
+      transparent 62%
+    );
+    mask-image: radial-gradient(
+      var(--throw) var(--throw) at var(--lx) var(--ly),
+      rgb(0 0 0 / 0.9) 0%,
+      rgb(0 0 0 / 0.35) 34%,
+      transparent 62%
+    );
+    animation: drift 62s linear infinite;
+  }
+
+  @keyframes drift {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -420px -420px;
+    }
+  }
+
+  /* Gate weave: the almost imperceptible unsteadiness of a real gate. */
+  @keyframes weave {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    33% {
+      transform: translate3d(0.4px, -0.3px, 0);
+    }
+    66% {
+      transform: translate3d(-0.3px, 0.4px, 0);
+    }
+  }
+  .weave {
+    animation: weave 5.5s steps(3, end) infinite;
+  }
+
+  /* ---- The gate --------------------------------------------------------- */
+
+  /* A plate is a lit surface. --fx/--fy are written per frame from the lamp's
+     real position relative to this plate's box, so the falloff is the lamp's
+     and not a decoration. */
+  .plate {
+    position: relative;
+    isolation: isolate;
+    background: rgb(var(--plate));
+    color: rgb(var(--ink));
+  }
+
+  .plate > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* The hot centre of the throw */
+  .plate::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      88% 92% at var(--fx, 50%) var(--fy, 0%),
+      rgb(var(--glow) / 0.75) 0%,
+      rgb(var(--glow) / 0.28) 26%,
+      transparent 58%
+    );
+    mix-blend-mode: screen;
+  }
+
+  /* The falloff toward the corners the light never reaches */
+  .plate::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      128% 132% at var(--fx, 50%) var(--fy, 0%),
+      transparent 34%,
+      rgb(var(--hall) / 0.05) 62%,
+      rgb(var(--hall) / 0.16) 100%
+    );
+    mix-blend-mode: multiply;
+  }
+
+  /* A plate that catches only the edge of the throw: the quiet passage. */
+  .plate-dim {
+    background: rgb(var(--hall-deep));
+    color: rgb(var(--lit));
+  }
+  .plate-dim::before {
+    background: radial-gradient(
+      96% 100% at var(--fx, 50%) var(--fy, 0%),
+      rgb(var(--lamp) / 0.2) 0%,
+      rgb(var(--lamp) / 0.07) 34%,
+      transparent 66%
+    );
+  }
+  .plate-dim::after {
+    background: none;
+  }
+
+  /* ---- Type ------------------------------------------------------------- */
+
+  /* Width is hierarchy: the more light a thing has, the narrower and heavier
+     it is set. One family, three widths, one mono for slate data. */
+  .t-display {
+    font-variation-settings: 'wdth' 74, 'wght' 800;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    line-height: 0.84;
+  }
+
+  .t-head {
+    font-variation-settings: 'wdth' 80, 'wght' 700;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 0.9;
+  }
+
+  .t-title {
+    font-variation-settings: 'wdth' 92, 'wght' 680;
+    letter-spacing: -0.005em;
+    line-height: 1.08;
+  }
+
+  .t-lead {
+    font-variation-settings: 'wdth' 100, 'wght' 420;
+    line-height: 1.45;
+  }
+
+  .t-body {
+    font-variation-settings: 'wdth' 100, 'wght' 400;
+    line-height: 1.6;
+  }
+
+  .t-control {
+    font-variation-settings: 'wdth' 88, 'wght' 680;
+    text-transform: uppercase;
+    letter-spacing: 0.055em;
+    line-height: 1;
+  }
+
+  /* Slate data: a value, a time, a count, a period. Never a sentence. */
+  .t-slate {
+    font-family: 'Sometype Mono', ui-monospace, monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-feature-settings: 'tnum';
+  }
+
+  /* ---- Marks ------------------------------------------------------------ */
+
+  /* The one signal: what is live right now. Nothing else is ever this colour. */
+  .live {
+    color: rgb(var(--signal));
+  }
+  .plate .live {
+    color: rgb(var(--signal-ink));
+  }
+
+  .live-mark {
     display: inline-block;
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
+    flex: none;
     border-radius: 999px;
-    background: rgb(var(--go));
-    box-shadow: 0 0 6px 1px rgb(var(--go) / 0.55);
+    background: rgb(var(--signal));
+    box-shadow: 0 0 8px 1px rgb(var(--signal) / 0.6);
   }
-  .lamp-amber {
-    background: rgb(var(--legend));
-    box-shadow: 0 0 6px 1px rgb(var(--legend) / 0.5);
-  }
-
-  /* A recessed display well: the surface a screen sits in */
-  .well {
-    background: rgb(var(--well));
-    box-shadow:
-      inset 0 1px 0 rgb(0 0 0 / 0.6),
-      inset 0 10px 24px -12px rgb(0 0 0 / 0.9),
-      0 1px 0 rgb(var(--seam) / 0.6);
+  .plate .live-mark {
+    background: rgb(var(--signal-ink));
+    box-shadow: none;
   }
 
-  /* Phosphor text: a soft bloom, offset so it reads as light on glass */
-  .phosphor {
-    color: rgb(var(--go));
-    text-shadow: 0 0 12px rgb(var(--go) / 0.45);
+  /* Hairline rules are how rows are separated. They are not enclosures. */
+  .rule-hall {
+    border-color: rgb(var(--lit) / 0.16);
+  }
+  .rule-plate {
+    border-color: rgb(var(--ink) / 0.16);
   }
 
-  .legend-amber {
-    color: rgb(var(--legend));
-    text-shadow: 0 0 12px rgb(var(--legend) / 0.4);
+  /* ---- Controls --------------------------------------------------------- */
+
+  /* Controls are lit or unlit, never bordered boxes with a fill. */
+  .key {
+    @apply inline-flex h-12 items-center justify-center gap-2.5 px-6;
+    background: rgb(var(--lamp));
+    color: rgb(var(--hall-deep));
+    transition:
+      background-color 220ms ease,
+      box-shadow 220ms ease,
+      transform 120ms ease;
+    box-shadow: 0 0 0 rgb(var(--lamp) / 0);
+  }
+  .key:hover {
+    background: rgb(var(--glow));
+    box-shadow: 0 0 28px -4px rgb(var(--lamp) / 0.55);
+  }
+  .key:active {
+    transform: translateY(1px);
+  }
+  .key:disabled {
+    background: rgb(var(--lamp) / 0.42);
+    box-shadow: none;
   }
 
-  /* Lamp-on: an overshoot flash that settles. Used only where a row lights. */
-  @keyframes lamp-on {
+  .key-quiet {
+    @apply inline-flex h-12 items-center justify-center gap-2.5 px-6;
+    background: transparent;
+    color: rgb(var(--ink));
+    box-shadow: inset 0 0 0 1px rgb(var(--ink) / 0.28);
+    transition:
+      background-color 220ms ease,
+      box-shadow 220ms ease,
+      transform 120ms ease;
+  }
+  .key-quiet:hover {
+    background: rgb(var(--ink) / 0.06);
+    box-shadow: inset 0 0 0 1px rgb(var(--ink) / 0.55);
+  }
+  .key-quiet:active {
+    transform: translateY(1px);
+  }
+
+  /* A field is a shallow recess cut into the lit plate. */
+  .slot {
+    width: 100%;
+    background: rgb(var(--ink) / 0.045);
+    color: rgb(var(--ink));
+    box-shadow: inset 0 1px 0 rgb(var(--ink) / 0.18);
+    border-bottom: 1px solid rgb(var(--ink) / 0.3);
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease;
+  }
+  .slot::placeholder {
+    color: rgb(var(--ink-faint));
+  }
+  .slot:focus {
+    outline: none;
+    background: rgb(var(--ink) / 0.02);
+    border-bottom-color: rgb(var(--signal-ink));
+  }
+
+  /* ---- Motion ----------------------------------------------------------- */
+
+  /* Content is lit on arrival. The only thing that moves on a scene change is
+     the light: the lamp flares as it reaches a new gate, then settles. */
+  @keyframes flare {
     0% {
       opacity: 0;
-      filter: brightness(0.6);
     }
-    45% {
-      opacity: 1;
-      filter: brightness(1.8);
+    18% {
+      opacity: 0.5;
     }
     100% {
-      opacity: 1;
-      filter: brightness(1);
-    }
-  }
-  .lamp-on {
-    animation: lamp-on 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-
-  /* Flicker-on: a legend that catches twice before it holds */
-  @keyframes flicker-on {
-    0% {
       opacity: 0;
     }
-    30% {
-      opacity: 1;
-    }
-    45% {
-      opacity: 0.35;
-    }
-    60% {
-      opacity: 1;
-    }
-    75% {
-      opacity: 0.6;
-    }
-    100% {
-      opacity: 1;
-    }
   }
-  .flicker-on {
-    animation: flicker-on 420ms steps(1, end) both;
+  .flare {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(
+      70% 60% at var(--lx) var(--ly),
+      rgb(var(--glow) / 0.5) 0%,
+      transparent 62%
+    );
+    animation: flare 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .lamp-on,
-    .flicker-on {
+    .dust,
+    .weave {
       animation: none;
-      opacity: 1;
+    }
+    .dust {
+      opacity: 0.22;
+    }
+    .flare {
+      display: none;
     }
   }
 }

@@ -9,8 +9,8 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/aintyourcupoftea',
   resumeUrl: '/Amit_Gavali_Resume.pdf',
   avatar: '/avatar.jpg',
-  // Cropped and graded from avatar.jpg for the dark hero. Replace both when the photo changes.
-  portrait: '/operator.jpg',
+  // Duotoned from avatar.jpg to the lamp's single light. Replace both when the photo changes.
+  portrait: '/portrait-lit.jpg',
   siteUrl: 'https://amit-gavali.web.app',
   // Contact form delivery via Web3Forms (https://web3forms.com). Get a free
   // access key by entering your email there; it is a public key, safe to commit.
@@ -25,8 +25,8 @@ export const hero = {
     "I build and operate Google Cloud infrastructure for Deutsche Börse Group's C7-SCS securities clearing platform, via Tata Consultancy Services: a regulated, high-availability system, from Terraform and Kubernetes through change-managed release into production.",
 }
 
-// The wall board behind the operator. Rows light GO in this order on load.
-// The last row is the platform itself and reads ON CONSOLE instead of GO.
+// What he keeps running, in the dark beside the light. The last row is the
+// platform itself and is the one thing on the page marked live.
 export const board = [
   { system: 'GKE, Compute Engine, Filestore', domain: 'Google Cloud' },
   { system: 'Terraform Enterprise, Ansible', domain: 'Infrastructure as code' },
@@ -42,39 +42,34 @@ export const board = [
   },
 ]
 
-// Consoles: what Amit is responsible for and how he works it. This replaces a
-// metrics strip on purpose: competence, not superlatives. No numbers here.
-export const consoles = [
+// What Amit is responsible for and how he works it. Competence, not
+// superlatives: no numbers here, and no invented job titles.
+export const disciplines = [
   {
-    callsign: 'FIDO',
     discipline: 'Infrastructure as code',
     brief:
       'Provisions GCP with Terraform Enterprise and Ansible, then keeps every SDLC environment identical through a post-provisioning framework so drift never reaches production.',
     tools: 'Terraform, TFE, Ansible, Compute Engine',
   },
   {
-    callsign: 'BOOSTER',
     discipline: 'Build and release',
     brief:
       'Designs and runs high-availability Jenkins and GitHub Actions pipelines: build, test, release and controlled hotfix promotion into a change-managed production environment.',
     tools: 'Jenkins, GitHub Actions, GitLab CI, release management',
   },
   {
-    callsign: 'GNC',
     discipline: 'Containers and orchestration',
     brief:
       'Deploys and operates trade-processing workloads on Kubernetes and OpenShift with Helm, including PostgreSQL 17 behind mutual TLS and namespace quota governance.',
     tools: 'Kubernetes, OpenShift, Docker, Podman, Helm, VPA',
   },
   {
-    callsign: 'EECOM',
     discipline: 'Observability and incident response',
     brief:
       'Instruments pipelines and production with Prometheus, Grafana, the ELK Stack and Cloud Monitoring, and works incidents from alert to root cause.',
     tools: 'Prometheus, Grafana, ELK, Cloud Monitoring, Cloud Logging',
   },
   {
-    callsign: 'INCO',
     discipline: 'Security and access',
     brief:
       'Owns IAM and certificate management across the estate: mTLS, TLS/PKI trust chains, Linux hardening, and scripted access provisioning that keeps compliance auditable.',
