@@ -8,7 +8,7 @@ export function Credentials() {
   return (
     <Scene id="credentials" lamp="78 44 146" className="pb-16 md:pb-24">
       <Frame>
-        <Gate dim className="grid gap-px md:grid-cols-2">
+        <Gate dim className="grid md:grid-cols-2">
           <div className="flex flex-col gap-4 px-6 py-10 md:px-10 md:py-14">
             <Slate className="text-lit-faint">Certification · {certification.date}</Slate>
             <h2 className="t-head max-w-[22ch] text-[24px] text-lamp md:text-[28px]">{certification.name}</h2>

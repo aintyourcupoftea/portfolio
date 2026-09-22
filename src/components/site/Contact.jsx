@@ -12,7 +12,7 @@ function Field({ label, id, error, children }) {
       </label>
       {children}
       {error && (
-        <p role="alert" className="t-slate text-[10.5px] text-signal-ink">
+        <p role="alert" className="t-body text-[13.5px] text-signal-ink">
           {error}
         </p>
       )}

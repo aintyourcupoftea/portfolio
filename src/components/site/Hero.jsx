@@ -1,41 +1,44 @@
-import { board, hero, profile } from '@/content/profile'
-import { cn } from '@/lib/utils'
+import { certification, hero, platform, profile } from '@/content/profile'
+import { Clock } from './Nav'
 import { Frame, Gate, Key, Scene, Slate } from './primitives'
 
-// The first viewport: a dark hall with one gate lit in it. Amit is in the
-// light; the platform he keeps up waits in the dark beside him.
+// The rail in the dark carries state and nothing else: where he is, what time
+// it is there, what he is certified for, and what he is on right now. The
+// tools themselves live in their own scene further down.
+function Readout({ label, children }) {
+  return (
+    <div className="flex flex-col gap-1.5 border-b rule-hall py-3.5">
+      <Slate className="text-[10px] text-lit-faint">{label}</Slate>
+      {children}
+    </div>
+  )
+}
+
+// The first viewport: a dark hall with one gate lit in it, and Amit in the light.
 export function Hero() {
   return (
     <Scene id="top" lamp="62 26 132" className="pb-16 md:pb-24">
-      <Frame className="grid items-stretch gap-10 pt-2 lg:min-h-[calc(100vh-7rem)] lg:grid-cols-12 lg:gap-12 lg:pt-2">
-        {/* The hall: what he runs, unlit, and the one thing that is live. */}
-        <aside className="order-2 flex flex-col justify-center gap-7 lg:order-1 lg:col-span-4">
-          <div className="flex flex-col gap-3">
-            <Slate className="text-lit-faint">Systems I keep up</Slate>
-            <ul className="flex flex-col border-t rule-hall">
-              {board.map((row) => (
-                <li
-                  key={row.system}
-                  className={cn(
-                    'flex flex-col gap-0.5 border-b rule-hall py-2.5',
-                    row.current && 'pt-3'
-                  )}
-                >
-                  <Slate className={cn('text-[10px]', row.current ? 'live' : 'text-lit-faint')}>
-                    {row.current && <span className="live-mark mr-2 align-middle" aria-hidden="true" />}
-                    {row.domain}
-                  </Slate>
-                  <span
-                    className={cn(
-                      't-title text-[15px] md:text-[16px]',
-                      row.current ? 'text-lamp' : 'text-lit-soft'
-                    )}
-                  >
-                    {row.system}
-                  </span>
-                </li>
-              ))}
-            </ul>
+      <Frame className="grid items-stretch gap-10 pt-2 lg:min-h-[calc(100vh-9.5rem)] lg:grid-cols-12 lg:gap-12 lg:pt-2">
+        <aside className="order-2 flex flex-col justify-center lg:order-1 lg:col-span-4">
+          <div className="flex flex-col border-t rule-hall">
+            <Readout label="Based in">
+              <span className="t-title text-[16px] text-lit">{profile.location}</span>
+            </Readout>
+            <Readout label="Local time">
+              <Clock className="!text-[11px]" />
+            </Readout>
+            <Readout label="Certified">
+              <span className="t-title text-balance text-[15px] leading-snug text-lit md:text-[16px]">
+                {certification.name}
+              </span>
+            </Readout>
+            <Readout label="On the platform now">
+              <span className="t-title flex items-start gap-2.5 text-[16px] text-lamp">
+                <span className="live-mark mt-2" aria-hidden="true" />
+                {platform.name}
+              </span>
+              <Slate className="live text-[10px]">{platform.owner}</Slate>
+            </Readout>
           </div>
         </aside>
 
@@ -77,7 +80,7 @@ export function Hero() {
                 height="1440"
                 className="absolute inset-0 h-full w-full object-cover object-[50%_12%]"
               />
-              {/* The edge of the throw: the portrait dissolves back into the hall. */}
+              {/* The edge of the throw: the portrait dissolves back into the light. */}
               <div
                 aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-plate to-transparent sm:hidden"

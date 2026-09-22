@@ -1,332 +1,305 @@
 ---
 name: Amit Gavali Portfolio
-description: A dark flight-operations room where the operator stands in front of the wall board that polls his systems and every one answers GO.
+description: A dark hall with one projector in it, where everything you read is what is lit.
 colors:
-  room: "#0E1211"
-  console: "#161C1A"
-  well: "#090C0B"
-  seam: "#2C3632"
-  seam-strong: "#42504A"
-  lamp: "#ECE9DE"
-  lamp-soft: "#BEC4BC"
-  lamp-dim: "#848E88"
-  go: "#5CE096"
-  go-ink: "#090C0B"
-  legend: "#E9B44C"
-  fault: "#EF6A5C"
+  hall: "#17130E"
+  hall-deep: "#0F0C09"
+  plate: "#EFE7D6"
+  ink: "#1B1712"
+  ink-soft: "#4A3F32"
+  ink-faint: "#5C4F3E"
+  lit: "#E8DBC5"
+  lit-soft: "#9C8D78"
+  lit-faint: "#8F8169"
+  lamp: "#FFD49C"
+  glow: "#FFEFD6"
+  signal: "#E4563E"
+  signal-ink: "#A8301C"
 typography:
   display:
-    fontFamily: "Barlow Condensed, Barlow, system-ui, sans-serif"
-    fontSize: "clamp(3.75rem, 5.4vw, 5.5rem)"
-    fontWeight: 600
-    lineHeight: 0.9
-    letterSpacing: "0.01em"
-  headline:
-    fontFamily: "Barlow Condensed, Barlow, system-ui, sans-serif"
+    fontFamily: "Archivo Variable, system-ui, sans-serif"
+    fontSize: "clamp(3.4rem, 10.5vw, 7rem)"
+    fontWeight: 800
+    lineHeight: 0.84
+    letterSpacing: "-0.005em"
+    fontVariation: "'wdth' 74, 'wght' 800"
+  head:
+    fontFamily: "Archivo Variable, system-ui, sans-serif"
     fontSize: "32px"
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "0.04em"
+    fontWeight: 700
+    lineHeight: 0.9
+    letterSpacing: "0.005em"
+    fontVariation: "'wdth' 80, 'wght' 700"
   title:
-    fontFamily: "Barlow Condensed, Barlow, system-ui, sans-serif"
-    fontSize: "24px"
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "0.03em"
-  legend:
-    fontFamily: "Barlow Condensed, Barlow, system-ui, sans-serif"
-    fontSize: "24px"
-    fontWeight: 500
-    lineHeight: 1.25
-    letterSpacing: "0.04em"
-  body:
-    fontFamily: "Barlow, system-ui, sans-serif"
+    fontFamily: "Archivo Variable, system-ui, sans-serif"
     fontSize: "17px"
-    fontWeight: 400
-    lineHeight: 1.625
-    letterSpacing: "normal"
-  body-small:
-    fontFamily: "Barlow, system-ui, sans-serif"
-    fontSize: "16px"
-    fontWeight: 400
-    lineHeight: 1.625
-    letterSpacing: "normal"
+    fontWeight: 680
+    lineHeight: 1.08
+    letterSpacing: "-0.005em"
+    fontVariation: "'wdth' 92, 'wght' 680"
   control:
-    fontFamily: "Barlow Condensed, Barlow, system-ui, sans-serif"
-    fontSize: "17px"
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "0.06em"
-  label:
-    fontFamily: "Barlow Condensed, Barlow, system-ui, sans-serif"
+    fontFamily: "Archivo Variable, system-ui, sans-serif"
     fontSize: "15px"
-    fontWeight: 500
+    fontWeight: 680
     lineHeight: 1
-    letterSpacing: "0.08em"
-  readout:
-    fontFamily: "Martian Mono Variable, ui-monospace, monospace"
-    fontSize: "12px"
+    letterSpacing: "0.055em"
+    fontVariation: "'wdth' 88, 'wght' 680"
+  lead:
+    fontFamily: "Archivo Variable, system-ui, sans-serif"
+    fontSize: "16px"
+    fontWeight: 420
+    lineHeight: 1.45
+    letterSpacing: "normal"
+    fontVariation: "'wdth' 100, 'wght' 420"
+  body:
+    fontFamily: "Archivo Variable, system-ui, sans-serif"
+    fontSize: "15px"
     fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: "0.02em"
-  readout-small:
-    fontFamily: "Martian Mono Variable, ui-monospace, monospace"
+    lineHeight: 1.6
+    letterSpacing: "normal"
+    fontVariation: "'wdth' 100, 'wght' 400"
+  slate:
+    fontFamily: "Sometype Mono, ui-monospace, monospace"
     fontSize: "10.5px"
-    fontWeight: 400
-    lineHeight: 1.625
-    letterSpacing: "0.02em"
+    fontWeight: 500
+    lineHeight: 1.7
+    letterSpacing: "0.09em"
+    fontFeature: "'tnum'"
 rounded:
-  control: "3px"
-  panel: "6px"
-  lamp: "999px"
+  none: "0"
+  DEFAULT: "0"
+  mark: "999px"
 spacing:
-  2xs: "4px"
-  xs: "8px"
-  sm: "12px"
-  md: "16px"
-  lg: "20px"
-  xl: "24px"
-  2xl: "32px"
-  3xl: "40px"
-  section: "96px"
+  gutter: "20px"
+  gutter-md: "32px"
+  gate-x: "24px"
+  gate-x-md: "40px"
+  gate-y: "36px"
+  gate-y-md: "56px"
+  scene-bottom: "64px"
+  scene-bottom-md: "96px"
+  control-h: "48px"
+  touch-min: "44px"
 components:
-  button-primary:
-    backgroundColor: "{colors.go}"
-    textColor: "{colors.go-ink}"
+  key:
+    backgroundColor: "{colors.lamp}"
+    textColor: "{colors.hall-deep}"
     typography: "{typography.control}"
-    rounded: "{rounded.control}"
-    padding: "0 20px"
-    height: "48px"
-  button-outline:
-    backgroundColor: "{colors.console}"
-    textColor: "{colors.lamp}"
+    rounded: "{rounded.none}"
+    padding: "0 24px"
+    height: "{spacing.control-h}"
+  key-hover:
+    backgroundColor: "{colors.glow}"
+    textColor: "{colors.hall-deep}"
+  key-quiet:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
     typography: "{typography.control}"
-    rounded: "{rounded.control}"
-    padding: "0 20px"
-    height: "48px"
-  button-icon:
-    backgroundColor: "{colors.room}"
-    textColor: "{colors.lamp-dim}"
-    rounded: "{rounded.control}"
-    padding: "0"
-    size: "44px"
-  text-link:
-    textColor: "{colors.lamp-soft}"
-    typography: "{typography.label}"
-    padding: "0"
-    height: "44px"
-  input:
-    backgroundColor: "{colors.well}"
-    textColor: "{colors.lamp}"
-    typography: "{typography.body-small}"
-    rounded: "{rounded.control}"
+    rounded: "{rounded.none}"
+    padding: "0 24px"
+    height: "{spacing.control-h}"
+  slot:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
     padding: "0 14px"
-    height: "48px"
-  panel:
-    backgroundColor: "{colors.console}"
+    height: "{spacing.control-h}"
+    width: "100%"
+  plate:
+    backgroundColor: "{colors.plate}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    padding: "{spacing.gate-y} {spacing.gate-x}"
+  plate-dim:
+    backgroundColor: "{colors.hall-deep}"
+    textColor: "{colors.lit}"
+    rounded: "{rounded.none}"
+    padding: "{spacing.gate-y} {spacing.gate-x}"
+  scene-strip:
+    backgroundColor: "{colors.hall-deep}"
+    textColor: "{colors.lit-faint}"
+    typography: "{typography.slate}"
+    rounded: "{rounded.none}"
+    padding: "0 16px"
+  scene-strip-active:
     textColor: "{colors.lamp}"
-    rounded: "{rounded.panel}"
-    padding: "20px 32px"
-  well:
-    backgroundColor: "{colors.well}"
-    textColor: "{colors.lamp-soft}"
-    rounded: "{rounded.panel}"
-    padding: "12px 20px"
-  wallboard-row:
-    backgroundColor: "{colors.well}"
-    textColor: "{colors.lamp-soft}"
-    typography: "{typography.readout}"
-    padding: "15px 20px"
-  wallboard-row-current:
-    backgroundColor: "{colors.well}"
-    textColor: "{colors.lamp}"
-    typography: "{typography.readout}"
-    padding: "15px 20px"
-  mission-clock:
-    backgroundColor: "{colors.well}"
-    textColor: "{colors.go}"
-    typography: "{typography.readout}"
-    rounded: "{rounded.control}"
-    padding: "6px 12px"
-  record-row:
-    backgroundColor: "{colors.console}"
-    textColor: "{colors.lamp}"
-    padding: "28px 32px"
-  lamp:
-    backgroundColor: "{colors.go}"
-    rounded: "{rounded.lamp}"
-    size: "7px"
-  lamp-amber:
-    backgroundColor: "{colors.legend}"
-    rounded: "{rounded.lamp}"
-    size: "7px"
+  live-mark:
+    backgroundColor: "{colors.signal}"
+    rounded: "{rounded.mark}"
+    size: "6px"
 ---
 
 # Design System: Amit Gavali Portfolio
 
 ## Overview
 
-**Creative North Star: "Mission Control"**
+**Creative North Star: "The Throw"**
 
-The site is a dark flight-operations room. The operator stands in the foreground; the platform he keeps up is the wall board behind him, and each system he runs answers GO in turn. A control room says competence without a superlative: every discipline has a console, every console has a callsign, every row has a readout. The world refuses the category defaults it replaced (a centred name over a glow, skill chips, project cards, a big-number metrics slab) and the retired white resume page.
+A dark hall with one projector in it. Everything you read is what the lamp is currently lighting; everything else is warm charcoal and dust. There is exactly one light source on the page, and it governs every colour: the plate is lit by it, the hall falls away from it, the primary control is filled with it, the browser's own scrollbar is drawn in it. Rank is not carried by a border or a card — it is carried by how much light lands on a thing and how far from the lamp it sits.
 
-The ground is grey-green in three depths, never pure black: the room farthest back, console panel faces on it, recessed display wells sunk into those. Ink is warm lamp white in three steps. Light is scarce and meaningful: one phosphor green is the live signal and appears only where something is actually running or GO; one backlit amber marks the single current item, ON CONSOLE; one fault red is for errors and lost signal. Density is high but ruled: sections are panels, panels hold ruled rows, rows end in a right-hand mono readout column.
+The system runs on two grounds and one rule that binds them. The HALL (#17130E, deepening to #0F0C09) is the unlit room and carries light ink. The PLATE (#EFE7D6) is the lit gate and carries dark ink. Body copy belongs on a plate. The testable discriminator for this world is that prose is **dark ink on a lit ground**, never light text on a dark ground behind a radial gradient — if a paragraph is pale text floating on charcoal, the world has been broken.
 
-Structure is panel joinery rather than cards. Every surface meets its neighbour at a 1px seam; panel faces carry a hairline of light on their top edge and a dark edge beneath; wells carry an inset top shadow so a screen reads as set into the console. Motion is lamp-on: the wall board rows light in sequence on load, a legend catches twice before it holds, and the two panels that earn an entrance power on with a brightness overshoot. Everything else is lit on arrival.
+The light is computed rather than painted. Each scene declares where the lamp stands (`data-lamp="x y throw"`); the controller moves `--lx`/`--ly`/`--throw` on the document element, and because those three are registered with `@property` they interpolate instead of jumping. Every lit surface then recomputes `--fx`/`--fy` from the lamp's real viewport position relative to its own box on a rAF-throttled scroll handler, so its hot centre and its falloff are the lamp's and not a decorative vignette. That travel is the page's one authored moment. Nothing else animates on arrival: content is lit when it appears, and no copy waits for motion to become readable.
 
 **Key Characteristics:**
-- Dark-only: one scheme, `color-scheme: dark`, no light theme and no toggle.
-- Three-depth grey-green ground (room, console, well) with 1px seams; no cards, no floating surfaces.
-- Phosphor green appears only on live states; amber appears only on the one current marker.
-- Three typefaces with strict jobs: Barlow Condensed tracked caps for display and controls, Barlow for prose, Martian Mono for every readout.
-- One authored motion moment (the GO poll) plus two PowerOn entrances; hover brightens, never lifts.
-- The person leads the first viewport; the work follows as ruled records, never as a metrics slab.
+- Two grounds, one rule: light ink in the hall, dark ink on the plate.
+- One light source (#FFD49C / #FFEFD6) governing every colour; no second decorative hue exists.
+- One signal hue at two renditions, used only for what is live and what has failed.
+- Enclosure never: no panels, cards, wells or seams. Hairline rules separate rows; they do not bound regions.
+- Square corners everywhere (0 radius); the 6px live mark is the only round form on the page.
+- One type family at three widths, plus one mono reserved for slate data.
+- Computed falloff, capped at 0.16 alpha so the darkest corner of a plate still clears contrast.
 
 ## Colors
 
-A console-grey palette with a green cast, lit by lamp-white ink and pierced by exactly one phosphor, one amber and one fault red. Tokens are stored as RGB channel triplets on `:root` (`--room`, `--console`, and so on) so Tailwind can apply alpha; the hex values in the frontmatter are their conversions.
+One warm tungsten palette derived entirely from a single lamp, plus one leader red that appears only where something is live or wrong.
 
 ### Primary
-- **Phosphor Green** (`go`): the live signal. Used on the GO legend and its lamp on wall-board rows once they light, the ticking mission-clock digits, the SIGNAL LOCKED and CHANNEL OPEN readouts, the STAFFED lamps on the consoles, the `.phosphor` text bloom, text-link and contact-channel hover, the focus ring, the caret, and text selection. It is also the fill of the one primary button per view. Its ink is **Go Ink** (`go-ink`), the same value as the well, so the button reads as a lit key with dark engraving.
+- **Tungsten Lamp** (#FFD49C): the page's only light source. Fills the primary control, tints the beam and the plate halation, paints the active scene mark in the strip, and draws the scrollbar thumb (34% over hall-deep).
+- **Lamp Glow** (#FFEFD6): the hot centre of the throw. The plate's inner highlight (screen blend), the 16px edge bloom, the flare on scene change, and the primary control's hover state.
 
 ### Secondary
-- **Backlit Amber** (`legend`): the single current marker. It appears as ON CONSOLE on the hero plate and the last wall-board row, on the active period in the mission log, and as the transitional ACQUIRING / SENDING states of the downlink and the contact channel. Carried by `.legend-amber` text and `.lamp-amber`.
-
-### Tertiary
-- **Fault Red** (`fault`): form validation errors, NO SIGNAL on the downlink and FAULT on the contact channel. Nothing else.
+- **Leader Red** (#E4563E): the signal on the hall — the live marker beside the active scene and the "on the platform now" readout.
+- **Leader Red, Inked** (#A8301C): the same signal rendered for a lit plate — form errors, focused field rules, focus outlines inside a plate, caret and accent colour, link hover in ink.
 
 ### Neutral
-- **Room** (`room`): the page ground, the sticky rail (at 90% with backdrop blur), the icon-button face and the scrollbar track.
-- **Console** (`console`): the face of every section panel, the outline button and the hero lede plate.
-- **Well** (`well`): recessed displays: the wall board, the mission clock, the operator plate, the downlink monitor and every text field.
-- **Seam** (`seam`): all panel borders, dividers between rows and between grid cells, the rail's bottom rule.
-- **Seam Strong** (`seam-strong`): the heavier stroke on controls: outline buttons, text fields, the scrollbar thumb.
-- **Lamp White** (`lamp`): primary ink: headings, the display name, row titles, body copy in the mission log, control text, the callsign in the rail.
-- **Lamp Soft** (`lamp-soft`): secondary ink: descriptive prose, nav links, labels, the SYSTEMS POLL readout, a lit wall-board system name that is not current.
-- **Lamp Dim** (`lamp-dim`): tertiary ink: readouts at rest, tool lists and tags, domains, notes, placeholders, the highlight bullet squares, unlit poll legends.
+- **Hall** (#17130E): the unlit room. The page ground and the top rail's fade-out scrim. Warm charcoal, never pure black, never emissive.
+- **Hall Deep** (#0F0C09): the darkest reach of the room. The scene strip's opaque ground, the scrollbar track, the quiet dim gate, and the corner falloff the beam paints into the hall.
+- **Plate** (#EFE7D6): the lit gate. Every surface that carries prose.
+- **Plate Ink** (#1B1712): dark warm ink on a plate — headlines, titles, field text.
+- **Ink Soft** (#4A3F32) / **Ink Faint** (#5C4F3E): supporting prose and slate labels on a plate. Ink Faint is the contrast floor of this world.
+- **Lit** (#E8DBC5) / **Lit Soft** (#9C8D78) / **Lit Faint** (#8F8169): the three weights of light ink for the hall — rail readouts, footer, inactive scene labels.
 
 ### Named Rules
-**The Live-Only Phosphor Rule.** Phosphor green means something is running right now. It lights a GO row, a ticking clock, a LOCKED signal, an OPEN channel, a STAFFED lamp, a focused field, or the one primary action; it never colours a heading, an icon at rest, a decorative rule or a static label (a text link and its arrow may turn phosphor together on hover).
+**The One Lamp Rule.** Every colour on the page is the hall, the plate, their inks, or the lamp. No second decorative hue is ever introduced. A new accent is not a palette extension, it is a second light source, and this room has one.
 
-**The One Amber Rule.** Amber is the current marker. Exactly one thing on the board is ON CONSOLE, and amber appears there, on the active mission-log period and on transitional states (ACQUIRING, SENDING) that are about to resolve to phosphor. It is never a second accent.
+**The Two Grounds Rule.** Light ink in the hall, dark ink on the plate, and never the reverse. Prose lives on a plate. A paragraph set in `--lit` over `--hall` is a defect, not a variant.
 
-**The Dark-Only Rule.** There is one scheme. The ground is grey-green (never pure black) and `color-scheme: dark` is declared; no `prefers-color-scheme: light` branch exists and none should be added.
+**The Signal Scarcity Rule.** `--signal` / `--signal-ink` mean exactly two things: this is live right now, or this failed. They are never used for emphasis, for decoration, or for a call to action.
+
+**The Falloff Cap Rule.** The plate's multiply falloff tops out at `rgb(var(--hall) / 0.16)`. That ceiling is a contrast constraint, not a taste choice: at 0.16, Ink Faint (#5C4F3E) still clears 4.5:1 against the darkest corner of a plate. Do not raise it to deepen the mood.
 
 ## Typography
 
-**Display Font:** Barlow Condensed (with Barlow, system-ui), weights 500 and 600 only
-**Body Font:** Barlow (with system-ui), weights 400 and 500 only
-**Label/Mono Font:** Martian Mono Variable (with ui-monospace)
+**Display / Body Font:** Archivo Variable (self-hosted via `@fontsource-variable/archivo/wdth.css` — the width-axis build, with `system-ui, sans-serif` fallback)
+**Label/Mono Font:** Sometype Mono (weights 400 and 500, with `ui-monospace, monospace` fallback)
 
-**Character:** Engraved console legends. Everything set in Barlow Condensed is uppercase and tracked, from the display name to the smallest form label, so headings, controls and labels read as one family of plates. Barlow carries the prose plainly. Martian Mono is the instrument: wide, tabular (`font-feature-settings: 'ss01', 'tnum'` on the body), and used for every value the room reports. All four faces are self-hosted via Fontsource; no system display face is used.
+**Character:** One grotesk, worked across its width axis. The more light a thing has, the narrower and heavier it is set — a compressed 800 for the name in the gate, a 400 at full width for prose. Hierarchy is width before it is size. Sometype Mono is the slate: small, tracked, uppercase, tabular, and never a sentence.
 
 ### Hierarchy
-- **Display** (600, `clamp(3.75rem, 5.4vw, 5.5rem)` at lg; `clamp(3.5rem, 13vw, 5.25rem)` below, line-height 0.9, tracking 0.01em, uppercase): the operator's name, set over the portrait at the bottom of the plate. Used once.
-- **Headline** (600, 32px desktop / 26px mobile, line-height 1, tracking 0.04em, uppercase): panel headings in the legend strip (CONSOLES, MISSION LOG, FLIGHT RECORDS, CAPCOM). The CAPCOM hook runs larger (44px / 34px, line-height 0.95) and the downlink and credential titles sit between (30px / 26px, line-height 0.95).
-- **Title** (600, 24px desktop / 22px mobile, line-height 1, tracking 0.03em, uppercase): row titles inside a panel: a console discipline, a flight record, a mission-log role (26px / 24px). Systems-board group names are the small step (19px, tracking 0.04em).
-- **Legend** (500, 24px desktop / 22px mobile, line-height 1.25, tracking 0.04em, uppercase): the role line under the display name. Wall-board system names use the same weight at 19px / 17px with tracking 0.01em.
-- **Body** (400, 17px desktop / 16px mobile, line-height 1.625): the mission-log summary and the hero lede and contact body, at 58 to 68ch measure.
-- **Body Small** (400, 16px desktop / 15px mobile, line-height 1.625): console briefs, record descriptions, skill lists, highlights (15px, line-height 1.5), at 62 to 70ch. Notes and captions step to 14px or 13px in Lamp Dim.
-- **Control** (600, 17px, tracking 0.06em, uppercase): button text. The rail callsign is the same weight at 17px with 0.08em tracking.
-- **Label** (500, 15px, tracking 0.08em, uppercase): nav links, form labels, text links (0.06em), footer links (14px); the open mobile menu uses 18px.
-- **Readout** (Martian Mono, 12px desktop / 11px mobile, tracking 0.02em, `white-space: nowrap`): every value in the legend strip and the right-hand column: counts, periods, positions, the clock, GO and ON CONSOLE (11px, 500, tracking 0.08em), SIGNAL and CHANNEL states, form errors, the contact channel labels. Uppercase by content, not by CSS.
-- **Readout Small** (Martian Mono, 10.5px, tracking 0.02em, line-height 1.625): tool lists under a console brief, tags under a record, the domain column on the wall board, the location beside the callsign.
+- **Display** (wdth 74 / wght 800, `clamp(3.4rem, 10.5vw, 7rem)`, line-height 0.84, uppercase): the name in the gate. One per page.
+- **Head** (wdth 80 / wght 700, 24–54px by scene, line-height 0.9, uppercase): scene titles, set as ink in the light.
+- **Title** (wdth 92 / wght 680, 15–19px, line-height 1.08): the ranked line inside a row — a role, a record name, a rail readout's value.
+- **Lead** (wdth 100 / wght 420, 15–17px, line-height 1.45): the opening paragraph of a scene, one step lighter than it is large.
+- **Body** (wdth 100 / wght 400, 13.5–17px, line-height 1.6): running prose, held to 46–76ch.
+- **Control** (wdth 88 / wght 680, 14–15px, tracking 0.055em, uppercase): buttons and the wordmark.
+- **Slate** (Sometype Mono 500, 9–11px, tracking 0.09em, uppercase, tabular): data only — a count, a time, a period, a state, a tool list, a scene label.
 
 ### Named Rules
-**The Readouts Are Never Sentences Rule.** Martian Mono carries values: a count, a timestamp, a callsign, a period, a state word, a comma-separated tool list. If it has a verb, it is prose and is set in Barlow. The one mono line that approaches a sentence (the certification name on the hero plate) is a credential title, not copy.
+**The Width-Is-Hierarchy Rule.** Rank is set on the width axis first: 74 / 80 / 92 / 88 / 100. Do not introduce a second family, a display serif or a new weight to signal importance — narrow it.
 
-**The Engraved Caps Rule.** Barlow Condensed is never set in sentence case. Every use is uppercase with tracking between 0.01em (display) and 0.08em (labels), tightening as the size grows.
+**The Slate Rule.** The mono face is for slate data and nothing else. It never carries a sentence and it is never worn as a "technical" costume. If it reads as prose, it is set wrong.
+
+**The No-Kicker Rule.** A scene title carries its own weight. There is no eyebrow, kicker or label above a heading anywhere in this system; the slate line sits beneath or beside the title, never above it as a decorative tag.
 
 ## Layout
 
-A single 1360px measure (`max-w-site`) centred with 16px gutters on mobile and 32px from md (768px). Every section is a `Panel`: a full-width console face inside that measure, stacked with 24px between panels on mobile and 32px from md (`pt-6 md:pt-8`); the first panel after the hero sits 56px / 96px down. The footer follows a 56px / 96px gap.
+The page is a vertical run of scenes in one hall, each scene a full-width stretch of dark with one lit gate in it. The content frame is `max-w-site` (1440px) with 20px gutters rising to 32px from md; scenes close with 64px of hall, 96px from md.
 
-The hero is a 12-column grid at lg (1024px): the operator plate takes 5 columns and the wall board plus lede plate take 7, with 40px column gap (48px at xl) and a minimum height of `100vh - 64px`. Below lg the plate stacks over the board at a 520px / 600px minimum height.
+The gate re-frames per scene rather than sitting in a fixed centred column: plates take different widths and offsets — `lg:w-[93%]` (Operate), `lg:ml-auto lg:w-[95%]` (Experience), `lg:mx-auto lg:w-[90%]` (Meme), `lg:w-[84%]` (Skills), full width (Hero, Work, Contact) — so the composition registers to the lamp's throw axis, not to a neutral container. Every gate carries a hair of keystone (`perspective(2600px) rotateY(-0.5deg)`), the way a projected rectangle never lands perfectly square on a wall.
 
-Inside a panel the legend strip is a flex row (heading left, readout right, baseline aligned, 20px / 32px horizontal padding, 16px / 20px vertical). Rows are ruled by 1px seam dividers, padded 20px / 32px horizontally and 24px to 36px vertically, and are grids: a fixed left column (260px at md, 300px or 320px at lg) for the title, a fluid middle for prose, and at lg only a right-hand readout column (200px or 260px) that is right-aligned and stacked. Two-column splits (Systems board, Credentials) happen at md with a seam between the cells; the CAPCOM split (5 / 6 of 11 columns, seam between) and the Downlink split (5 / 7 of 12) happen at lg. Wall-board rows are two-column below lg (system with the domain beneath it, then the legend) and three-column at lg (168px domain, system, legend).
+Inside a gate, padding is 24px/36px rising to 40px/56px from md. Rows within a scene are separated by hairline top or bottom rules at 16% of the ground's ink, never by a box. Measure is held explicitly per block (30–46ch for lede copy, 52–76ch for body). Controls are 48px tall; every interactive target clears a 44px minimum.
 
-The console rail is sticky at the top, 56px tall on mobile and 64px from md, with the callsign and location left, five section links from lg, and the mission clock right from sm (640px). Below lg the links collapse behind a 44px icon button into a stacked menu that also carries the clock below sm. In-page anchors land 80px below the top so the rail never covers a heading.
+The top rail is sticky, 64px tall, and fades out through a gradient scrim over the hall rather than sitting on a solid bar. The scene strip is fixed to the bottom edge at every width and scales by font size (9px → 10.5px from sm) instead of wrapping or collapsing to a menu.
+
+### Named Rules
+**The Re-Framing Gate Rule.** The lit plate changes width, offset and throw per scene. A new scene inherits the gate vocabulary, not a previous scene's exact geometry — but it must sit on the lamp's side of the frame, matching its `data-lamp` position.
+
+**The Unbroken Strip Rule.** The scene strip never wraps, never collapses into a hamburger, and never drops labels. It scales.
 
 ## Elevation & Depth
 
-Depth is tonal and inset: the three ground tones do the work, and shadows exist only as joinery. A panel face carries a 1px hairline of light along its top edge, a 1px dark edge beneath and a wide, low-opacity drop that only reads at the bottom; a well carries an inset top shadow so its contents sit below the console surface. Nothing floats or lifts: hover changes brightness or border colour, never elevation, and pressing a control nudges it down by 1px.
+This system has no elevation in the material sense: nothing is lifted, stacked or floated above anything else. Depth is depth of field. A surface reads as near because it is lit and sharp; it recedes because the throw does not reach it. There is exactly one z-relationship that matters — inside the beam or outside it.
 
-The only glows are light sources: the 7px indicator lamp's bloom and the text bloom on phosphor and amber legends. They signal a lit state, never decorate a surface.
+Box-shadow is used, but never to imply a raised card. It is used as **halation**: the light spill a genuinely luminous surface throws onto the dark around it. A plate carries three layers of it so it reads as a light source rather than a pale rectangle.
 
 ### Shadow Vocabulary
-- **Panel face** (`box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.045), 0 1px 0 rgb(0 0 0 / 0.55), 0 18px 40px -28px rgb(0 0 0 / 0.9)`): every `.panel`: section panels, the hero lede plate.
-- **Recessed well** (`box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.6), inset 0 10px 24px -12px rgb(0 0 0 / 0.9), 0 1px 0 rgb(44 54 50 / 0.6)`): every `.well`: the wall board, operator plate, clock, downlink monitor, text fields.
-- **Lamp bloom** (`box-shadow: 0 0 6px 1px rgb(92 224 150 / 0.55)`, amber variant `rgb(233 180 76 / 0.5)`): the 7px indicator lamp only.
-- **Phosphor bloom** (`text-shadow: 0 0 12px rgb(92 224 150 / 0.45)`, amber variant `rgb(233 180 76 / 0.4)`): live text legends only.
+- **Plate halation** (`0 0 16px 0 rgb(var(--glow) / 0.3), 0 0 90px -8px rgb(var(--lamp) / 0.2), 0 24px 190px -24px rgb(var(--lamp) / 0.16)`): every lit gate. Edge bloom, near spill, far spill.
+- **Dim halation** (`0 0 60px -10px rgb(var(--lamp) / 0.09)`): the quiet gate that catches only the edge of the throw.
+- **Key glow** (`0 0 28px -4px rgb(var(--lamp) / 0.55)`): the primary control on hover. Hover is more light falling on a thing, never a lift.
+- **Live bloom** (`0 0 8px 1px rgb(var(--signal) / 0.6)`): the 6px live marker in the hall only. On a plate the marker is flat.
+- **Ring** (`inset 0 0 0 1px rgb(var(--ink) / 0.28)`): the quiet control's hairline. An inset ring on a control, not a container border.
 
 ### Named Rules
-**The Panel Joinery Rule.** Surfaces are joined, not stacked. A panel sits on the room with a seam and a top hairline; a well sits inside a panel with an inset shadow. There are no cards, no floating containers and no hover lift anywhere.
+**The Enclosure-Never Rule.** No panels, cards, wells, seams or dividers-as-containers, anywhere. Hairline rules separate rows; they never close a shape around a region. A background fill that is neither the hall nor a lit plate is a card in disguise.
 
-**The One Authored Motion Rule.** The page has one composed moment: the GO poll, where wall-board rows lamp on 150ms apart starting 700ms after load (a 520ms opacity and brightness overshoot on `cubic-bezier(0.16, 1, 0.3, 1)`) and each legend flickers on (420ms, stepped). The hero blocks fade up 14px over 0.8s on the same ease, staggered 0.05s to 0.4s. Only two blocks power on when scrolled into view (the consoles list and the downlink monitor: 0.7s, brightness 0.5 to 1.6 to 1, once, at 30% visibility). Control transitions are 200ms brightness, background or border changes. Under `prefers-reduced-motion` every entrance renders fully lit and static and the clock still ticks.
+**The No-Recess Rule.** Nothing is inset. There are no wells and no inner shadows in this world except the quiet control's 1px ring. A field that regains a fill or an inset shadow has become a well and is wrong.
+
+**The Hover-Is-Light Rule.** Interactive feedback is a change in how much light falls on a thing — a glow, a brightened fill, an ink shift. Never a translateY lift, never a new border appearing on hover.
 
 ## Shapes
 
-Rectilinear and slightly eased. Controls (buttons, fields, the clock, the icon button) use a 3px radius; panels, wells and the operator plate use 6px; the scrollbar thumb also uses 6px. A 4px `md` step exists in the config but no shipped surface uses it. Every border is 1px: Seam for surfaces and dividers, Seam Strong for controls. The indicator lamp is a fully round 7px dot with bloom; the highlight bullet is a 6px square with a 1px radius in Lamp Dim. There is no clipping, no diagonal, no pill except the lamp.
+Rectangles, hard-cornered. `borderRadius.DEFAULT` is set to `0` in the Tailwind config so every utility-rounded surface is square by default: plates, controls, fields, images, the strip. The one round form on the page is the 6px live marker (999px), plus the browser scrollbar thumb; a circle in this system means "live", so it is not available as decoration.
+
+Lines are hairlines at 16% ink (`.rule-hall` at `rgb(var(--lit) / 0.16)`, `.rule-plate` at `rgb(var(--ink) / 0.16)`), applied on one edge at a time. A rule that appears on all four edges of something is a border, and borders are not part of this vocabulary.
+
+The gate's keystone — a 0.5° Y rotation at 2600px perspective — is the only non-orthogonal geometry, and it is applied to lit plates only.
 
 ## Components
 
-The controls feel like console keys and lamps: flat faces, engraved caps, a brightness change when touched.
-
 ### Buttons
-- **Shape:** eased rectangle (3px), 48px tall, 20px horizontal padding, 10px gap between icon and text, Control type (Barlow Condensed 600, 17px, 0.06em, uppercase).
-- **Primary:** Phosphor Green face with Go Ink text. One per view: START THE SEQUENCE under the hero, ANOTHER ONE on the downlink, SEND MESSAGE on CAPCOM. Hover brightens to 110%; disabled drops to 60% opacity and stops brightening.
-- **Outline:** Console face, 1px Seam Strong border, Lamp White text. Hover raises the border to Lamp Dim and brightness to 125%. DOWNLOAD RESUME.
-- **Icon button:** 44px square, 3px radius, 1px Seam border, Lamp Dim glyph (Lucide, 18px, 1.75 stroke) that turns Lamp White on hover. The mobile menu toggle.
-- **Active / Focus:** every control nudges down 1px on press; focus is a 2px Phosphor outline offset 3px.
-- **Text link:** Label type in Lamp Soft with a 14px arrow-up-right glyph, 44px minimum hit height, turns Phosphor on hover. Used for outbound links (Source on GitHub, View credential, Standalone Go scanner on GitHub).
-
-### Panel (Cards / Containers)
-- **Corner Style:** 6px.
-- **Background:** Console, with the panel-face shadow.
-- **Border:** 1px Seam all round; a 1px Seam rule under the legend strip and between rows.
-- **Legend strip:** heading left in Headline type, a mono readout right in Lamp Dim (a count or state: `5 POSITIONS · ALL STAFFED`, `6 RECORDS`, `SIGNAL LOCKED`, `CHANNEL OPEN`), baseline aligned, wrapping on narrow screens.
-- **Internal Padding:** 20px horizontal on mobile, 32px from md; rows 24px to 36px vertical.
-- **Well variant:** a recessed display inside a panel or the hero: Well background, 1px Seam border, 6px radius, the well shadow, and its own smaller legend strip (16px / 20px horizontal, 10px to 12px vertical) with Lamp Soft readout left and Lamp Dim readout right.
+The key is the one thing in a scene that is filled with the lamp itself.
+- **Shape:** square (0 radius), 48px tall, 24px horizontal padding, control type (uppercase, 0.055em).
+- **Primary (`.key`):** lamp fill (#FFD49C) with hall-deep ink. One per scene.
+- **Hover / Focus:** fill brightens to glow (#FFEFD6) with a 28px lamp glow, 220ms ease; active nudges 1px down. Focus is the 2px lamp outline at 3px offset, resolving to Leader Red Inked inside a plate.
+- **Disabled:** lamp at 42%, no glow.
+- **Quiet (`.key-quiet`):** transparent with a 1px inset ink ring at 28%; hover deepens the ring to 55% and washes 6% ink behind it.
 
 ### Inputs / Fields
-- **Style:** a well: Well background, 1px Seam Strong border, 3px radius, 48px tall (textarea 5 rows, 12px vertical padding, vertically resizable), 14px horizontal padding, Barlow 15px (16px on mobile so iOS does not zoom) in Lamp White, placeholder in Lamp Dim.
-- **Label:** Label type in Lamp Soft above the field, 8px gap.
-- **Focus:** border turns Phosphor; caret and accent colour are Phosphor.
-- **Error:** a mono 11px line in Fault Red beneath the field with `role="alert"`; `aria-invalid` on the field. A status line under the submit button reports sent or failed in Barlow 14px.
+A field is the lit ground itself, ruled underneath. The light tells you where to write.
+- **Style:** transparent ground, ink text, a single 1px bottom rule at 30% ink. 48px tall, 14px horizontal padding, square.
+- **Focus:** the bottom rule turns Leader Red Inked; caret and accent-color are the same red.
+- **Error:** the message is set in Leader Red Inked beneath the field with `role="alert"`; the field itself is marked `aria-invalid`, not recoloured into a box.
 
 ### Navigation
-- **Style:** the console rail: sticky, Room at 90% with backdrop blur, 1px Seam bottom rule, 56px / 64px tall. Callsign in Barlow Condensed 600 17px 0.08em Lamp White with the location beside it in mono 10.5px Lamp Dim.
-- **Links:** Label type in Lamp Soft, 28px apart, turning Lamp White on hover; visible from lg. No active-state marker.
-- **Mobile:** below lg the links fold into a Room-coloured menu of 18px labels with 12px vertical padding, opened by the icon button; the clock moves into the menu below sm.
-- **Footer:** the rail's mirror: callsign and role left, three footer links and a second mission clock right, above a 1px Seam top rule.
+- **Top rail:** sticky, 64px, no bar — a gradient scrim from hall to transparent. Wordmark in control type, location and a live dual-zone IST/CET clock in slate. The clock ticks under reduced motion too: it is information, not decoration.
+- **Scene strip:** fixed to the bottom edge, opaque hall-deep with a hairline top rule, slate labels, 44px minimum targets. The active scene is lamp-coloured and carries the live mark; inactive scenes are lit-faint and hover to lit. Opaque by design — a translucent scrim over a lit plate would dim the ground its dark ink depends on.
 
-### Mission Clock (signature)
-A well the size of a readout: 3px radius, 1px Seam border, 6px by 12px padding, mono 11px. Two zones (IST, CET) with the zone label in Lamp Dim and the digits in Phosphor with bloom, tabular so they do not jitter; ticks every second, including under reduced motion.
+### The Gate (signature)
+The page's only light source and its only container-shaped thing, which is why it is not a container: it is a lit surface, not a box around content.
+- **Lit (`.plate`):** plate fill, ink text, three-layer halation, a screen-blended hot centre and a multiply-blended falloff, both positioned from the lamp's real coordinates. Keystoned 0.5°.
+- **Dim (`.plate-dim`):** hall-deep fill, lit text, a single weak spill, no falloff layer — the quiet passage that catches only the edge of the throw.
+- **Behaviour:** `data-plate` opts a surface into per-frame falloff computation; `data-lamp="x y throw"` on the enclosing scene sets where the lamp stands for it.
 
-### Wall Board Row (signature)
-A ruled row inside the SYSTEMS POLL well: domain in mono 10.5px Lamp Dim (168px column at lg, folded under the system name below), the system in Barlow Condensed 500 19px, and a right-hand legend in mono 11px 500 0.08em. Unlit the row sits at 25% opacity with `····` in Lamp Dim; lit it plays lamp-on, and the legend shows a 7px lamp and GO in Phosphor with the flicker-on legend. The one current row uses Lamp White for the system and the amber lamp with ON CONSOLE in Backlit Amber.
+### Motion
+The lamp's travel is the page's one authored moment: 1100ms on position and 1400ms on throw, `cubic-bezier(0.22, 1, 0.36, 1)`. Around it sit three ambient effects — `drift` (dust in the beam, 62s linear, masked to the throw), `weave` (sub-pixel gate unsteadiness, 5.5s in 3 steps), and `flare` (a 900ms glow pulse at each scene change). There are no entrance animations and nothing fades in on scroll.
 
-### Record Row (signature)
-The ruled row every list panel uses (Consoles, Mission log, Flight records): 1px Seam dividers, title in Title type left, prose in Lamp Soft with a mono tool list or tag list in Lamp Dim beneath, and a right-hand column of readouts at lg (context in Lamp Soft, then a state such as `STAFFED` with a lamp, `CLIENT WORK · NO PUBLIC CODE`, or a text link). Client work never carries a link.
-
-### Indicator Lamp (signature)
-A 7px round dot with a 6px bloom, Phosphor by default and Backlit Amber for the current marker, always inline with the legend it belongs to (`STAFFED`, `GO`, `ON CONSOLE`) and always `aria-hidden`.
+Under `prefers-reduced-motion: reduce`: the dust and weave stop (dust drops to 22% opacity), the flare is removed entirely, lamp travel is instant rather than animated (the lamp still repositions per scene, it just jumps) and the page renders fully lit and static, smooth scrolling is off — and the clock still ticks.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep the three ground tones in order: Room behind, Console panels on it, Well recesses inside them, every join a 1px Seam.
-- **Do** put a mono readout at the right of every legend strip and at the right of every list row at lg; it holds a value (count, period, state, callsign), never a sentence.
-- **Do** reserve Phosphor Green for live states and the one primary button per view, and Backlit Amber for the single current marker or a transitional state about to resolve.
-- **Do** set every Barlow Condensed string uppercase and tracked, tighter as it gets larger (0.01em display, 0.04em headings, 0.08em labels).
-- **Do** make hover a brightness or colour change (110% / 125% brightness, border to Lamp Dim, text to Phosphor) and press a 1px downward nudge.
-- **Do** render every entrance fully lit and static under `prefers-reduced-motion`, and keep the clock ticking.
+- **Do** set prose as dark ink on a lit plate. If a new surface needs a paragraph, it needs a gate.
+- **Do** give every new scene a `data-lamp="x y throw"` and every lit surface a `data-plate`, so the falloff is computed from the real lamp instead of faked with a static gradient.
+- **Do** carry rank on the width axis (74 / 80 / 92 / 88 / 100) before reaching for size.
+- **Do** separate rows with a one-edge hairline at 16% ink (`.rule-hall` in the dark, `.rule-plate` on a plate).
+- **Do** keep corners square (0 radius); reserve the 999px round form for the 6px live mark.
+- **Do** make hover a change in light — a glow, a brighter fill, an ink shift at 220ms ease.
+- **Do** keep the falloff multiply capped at 0.16 alpha; that value is what keeps Ink Faint legible in a plate's darkest corner.
+- **Do** keep browser surfaces inside the palette: selection in lamp at 85%, caret and accent in Leader Red Inked, scrollbar thumb in lamp at 34% over hall-deep.
+- **Do** keep the scene strip opaque and full-width at every breakpoint; scale it by font size rather than wrapping or collapsing it.
+- **Do** ship content lit on arrival — reduced motion removes the flare and the drift, and the page must remain complete without them.
 
 ### Don't:
-- **Don't** add a light theme, a theme toggle or a `prefers-color-scheme: light` branch; the room is dark-only and declares `color-scheme: dark`.
-- **Don't** use cards, floating containers or hover lifts, and don't add drop shadows beyond the panel-face and well-recess vocabulary; depth is joinery, not stacking.
-- **Don't** colour a heading, an icon at rest, a rule or a static label in Phosphor Green, and don't introduce a second accent beyond amber and fault red.
-- **Don't** set prose in Martian Mono or set Barlow Condensed in sentence case.
-- **Don't** add a metrics slab, big-number counters or superlative headlines; figures live inside the lines of a record.
-- **Don't** author new entrance choreography or scroll-triggered motion beyond PowerOn on a display that earns it; the GO poll is the page's one composed moment.
-- **Don't** use pure black or a stock Tailwind radius (8px and up); the ground is grey-green and the only radii are 3px and 6px.
+- **Don't** enclose anything. No panels, cards, wells, seams or dividers-as-containers; a fill that is neither hall nor plate is a card in disguise.
+- **Don't** set light text on a dark ground behind a radial gradient and call it a plate. That is the exact failure this world is defined against.
+- **Don't** introduce a second hue. Every colour must be the hall, the plate, their inks, or the lamp.
+- **Don't** spend the signal red on anything but "live right now" or "this failed".
+- **Don't** give `.slot` a fill, a full border or an inset shadow; it is a ruled line on the lit ground, not a well.
+- **Don't** lift on hover or interaction. No translateY elevation, no shadow that implies a raised card; the only box-shadows in this system are halation, the key glow, the live bloom and the quiet control's ring.
+- **Don't** put a kicker, eyebrow or label above a heading. Slate sits beneath or beside a title, never above it.
+- **Don't** add a second type family or a display serif; and don't set prose in the mono face.
+- **Don't** raise the plate falloff past 0.16 alpha or darken `--ink-faint` further — both trade legibility for mood.
+- **Don't** add entrance animations or scroll-triggered reveals. The lamp travels; content does not.
+- **Don't** lay a translucent scrim over a lit plate — it dims the ground the dark ink depends on.

@@ -25,22 +25,11 @@ export const hero = {
     "I build and operate Google Cloud infrastructure for Deutsche Börse Group's C7-SCS securities clearing platform, via Tata Consultancy Services: a regulated, high-availability system, from Terraform and Kubernetes through change-managed release into production.",
 }
 
-// What he keeps running, in the dark beside the light. The last row is the
-// platform itself and is the one thing on the page marked live.
-export const board = [
-  { system: 'GKE, Compute Engine, Filestore', domain: 'Google Cloud' },
-  { system: 'Terraform Enterprise, Ansible', domain: 'Infrastructure as code' },
-  { system: 'Jenkins, GitHub Actions', domain: 'CI/CD' },
-  { system: 'Kubernetes, Red Hat OpenShift', domain: 'Orchestration' },
-  { system: 'PostgreSQL 17 with mutual TLS', domain: 'Data' },
-  { system: 'Prometheus, Grafana, ELK Stack', domain: 'Observability' },
-  { system: 'IAM, PKI, RHEL 9 hardening', domain: 'Security' },
-  {
-    system: 'C7-SCS securities clearing platform',
-    domain: 'Deutsche Börse Group, via TCS',
-    current: true,
-  },
-]
+// The one thing on the page that is live right now: the platform he is on.
+export const platform = {
+  name: 'C7-SCS securities clearing platform',
+  owner: 'Deutsche Börse Group, via TCS',
+}
 
 // What Amit is responsible for and how he works it. Competence, not
 // superlatives: no numbers here, and no invented job titles.

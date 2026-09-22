@@ -1,590 +1,378 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-22T16:30:00+05:30",
+  "generatedAt": "2026-09-23T00:00:00+05:30",
   "title": "Design System: Amit Gavali Portfolio",
   "extensions": {
     "colorMeta": {
-      "room": {
+      "hall": {
         "role": "neutral",
-        "displayName": "Room",
-        "canonical": "rgb(14 18 17)",
-        "cssVar": "--room",
-        "channels": "14 18 17",
-        "hex": "#0E1211",
-        "purpose": "The page ground, the sticky rail at 90% with backdrop blur, the icon-button face, the scrollbar track.",
-        "tonalRamp": [
-          "#0A0B0B",
-          "#232625",
-          "#3F4342",
-          "#5D6261",
-          "#7E8482",
-          "#A1A6A5",
-          "#C6CAC9",
-          "#ECEFEE"
-        ]
+        "displayName": "Hall",
+        "canonical": "rgb(23 19 14)",
+        "cssVar": "--hall",
+        "channels": "23 19 14",
+        "hex": "#17130E",
+        "purpose": "The unlit room. Page ground and the top rail's fade-out scrim. Warm charcoal, never pure black.",
+        "tonalRamp": ["#0B0907", "#17130E", "#2C251B", "#453A2C", "#61533F", "#8A785C", "#B5A183", "#E3D8C2"]
       },
-      "console": {
+      "hall-deep": {
         "role": "neutral",
-        "displayName": "Console",
-        "canonical": "rgb(22 28 26)",
-        "cssVar": "--console",
-        "channels": "22 28 26",
-        "hex": "#161C1A",
-        "purpose": "The face of every section panel, the outline button and the hero lede plate.",
-        "tonalRamp": [
-          "#0A0C0B",
-          "#222625",
-          "#3E4341",
-          "#5C6361",
-          "#7D8482",
-          "#9FA7A4",
-          "#C4CBC8",
-          "#EBF0EE"
-        ]
+        "displayName": "Hall Deep",
+        "canonical": "rgb(15 12 9)",
+        "cssVar": "--hall-deep",
+        "channels": "15 12 9",
+        "hex": "#0F0C09",
+        "purpose": "The darkest reach of the room: the scene strip's opaque ground, the scrollbar track, the dim gate, the beam's corner falloff, and the ink of the lamp-filled key.",
+        "tonalRamp": ["#0F0C09", "#1C1710", "#2F271B", "#473C2A", "#63543C", "#8B7758", "#B5A07C", "#E2D3B8"]
       },
-      "well": {
-        "role": "neutral",
-        "displayName": "Well",
-        "canonical": "rgb(9 12 11)",
-        "cssVar": "--well",
-        "channels": "9 12 11",
-        "hex": "#090C0B",
-        "purpose": "Recessed displays: the wall board, the mission clock, the operator plate, the downlink monitor, every text field.",
-        "tonalRamp": [
-          "#0A0B0B",
-          "#232625",
-          "#404342",
-          "#5E6261",
-          "#7F8382",
-          "#A2A6A5",
-          "#C6CAC9",
-          "#ECEFEE"
-        ]
+      "plate": {
+        "role": "primary",
+        "displayName": "Plate",
+        "canonical": "rgb(239 231 214)",
+        "cssVar": "--plate",
+        "channels": "239 231 214",
+        "hex": "#EFE7D6",
+        "purpose": "The lit gate. Every surface that carries prose. Dark ink sits on this and nowhere else.",
+        "tonalRamp": ["#26210F", "#3E3720", "#585034", "#746B4B", "#928866", "#B3A887", "#D3C9AC", "#EFE7D6"]
       },
-      "seam": {
+      "ink": {
         "role": "neutral",
-        "displayName": "Seam",
-        "canonical": "rgb(44 54 50)",
-        "cssVar": "--seam",
-        "channels": "44 54 50",
-        "hex": "#2C3632",
-        "purpose": "All panel borders, dividers between rows and grid cells, the rail rule.",
-        "tonalRamp": [
-          "#090C0B",
-          "#212724",
-          "#3C4441",
-          "#596460",
-          "#7A8581",
-          "#9CA8A3",
-          "#C2CCC8",
-          "#E9F1ED"
-        ]
+        "displayName": "Plate Ink",
+        "canonical": "rgb(27 23 18)",
+        "cssVar": "--ink",
+        "channels": "27 23 18",
+        "hex": "#1B1712",
+        "purpose": "Dark warm ink on a lit plate: headlines, titles, field text. Also the source of the 16% hairline rule and the quiet control's ring.",
+        "tonalRamp": ["#0C0A08", "#1B1712", "#312A20", "#4A4030", "#665843", "#8E7C60", "#B8A585", "#E5D9C4"]
       },
-      "seam-strong": {
+      "ink-soft": {
         "role": "neutral",
-        "displayName": "Seam Strong",
-        "canonical": "rgb(66 80 74)",
-        "cssVar": "--seam-strong",
-        "channels": "66 80 74",
-        "hex": "#42504A",
-        "purpose": "The heavier stroke on controls: outline buttons, text fields, the scrollbar thumb.",
-        "tonalRamp": [
-          "#080C0A",
-          "#1F2724",
-          "#394540",
-          "#57655F",
-          "#778680",
-          "#9AA9A2",
-          "#BFCDC7",
-          "#E7F1ED"
-        ]
+        "displayName": "Ink Soft",
+        "canonical": "rgb(74 63 50)",
+        "cssVar": "--ink-soft",
+        "channels": "74 63 50",
+        "hex": "#4A3F32",
+        "purpose": "Supporting prose on a plate: lede paragraphs, body copy, out-links at rest.",
+        "tonalRamp": ["#14110D", "#241E18", "#352D23", "#4A3F32", "#655646", "#8B7963", "#B4A288", "#E0D3BD"]
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Ink Faint",
+        "canonical": "rgb(92 79 62)",
+        "cssVar": "--ink-faint",
+        "channels": "92 79 62",
+        "hex": "#5C4F3E",
+        "purpose": "The contrast floor of the world: slate labels and placeholders on a plate. Sized against the 0.16 falloff cap so it still clears 4.5:1 in a plate's darkest corner.",
+        "tonalRamp": ["#171410", "#28231B", "#3A3327", "#4D4334", "#5C4F3E", "#8A7761", "#B4A186", "#E0D4BE"]
+      },
+      "lit": {
+        "role": "neutral",
+        "displayName": "Lit",
+        "canonical": "rgb(232 219 197)",
+        "cssVar": "--lit",
+        "channels": "232 219 197",
+        "hex": "#E8DBC5",
+        "purpose": "Light ink in the hall: rail readout values, the wordmark, footer name, hovered scene labels.",
+        "tonalRamp": ["#221D14", "#3A3223", "#544934", "#716348", "#8F7F5F", "#B2A181", "#D0C1A4", "#E8DBC5"]
+      },
+      "lit-soft": {
+        "role": "neutral",
+        "displayName": "Lit Soft",
+        "canonical": "rgb(156 141 120)",
+        "cssVar": "--lit-soft",
+        "channels": "156 141 120",
+        "hex": "#9C8D78",
+        "purpose": "Secondary light ink in the hall: footer links at rest.",
+        "tonalRamp": ["#1D1913", "#312A21", "#463D2F", "#5D5240", "#766854", "#9C8D78", "#BFB29B", "#E2D8C4"]
+      },
+      "lit-faint": {
+        "role": "neutral",
+        "displayName": "Lit Faint",
+        "canonical": "rgb(143 129 105)",
+        "cssVar": "--lit-faint",
+        "channels": "143 129 105",
+        "hex": "#8F8169",
+        "purpose": "Quietest light ink in the hall: slate labels on the rail, inactive scene-strip labels, the clock's zone tags.",
+        "tonalRamp": ["#1B1711", "#2E271D", "#41392B", "#574D3A", "#6F624B", "#8F8169", "#B6A98E", "#DED3B9"]
       },
       "lamp": {
-        "role": "neutral",
-        "displayName": "Lamp White",
-        "canonical": "rgb(236 233 222)",
+        "role": "primary",
+        "displayName": "Tungsten Lamp",
+        "canonical": "rgb(255 212 156)",
         "cssVar": "--lamp",
-        "channels": "236 233 222",
-        "hex": "#ECE9DE",
-        "purpose": "Primary ink: headings, the display name, row titles, control text.",
-        "tonalRamp": [
-          "#0C0B08",
-          "#262520",
-          "#44423A",
-          "#646158",
-          "#858278",
-          "#A8A59B",
-          "#CCC9C0",
-          "#F0EEE8"
-        ]
+        "channels": "255 212 156",
+        "hex": "#FFD49C",
+        "purpose": "The page's only light source. Fills the primary key, tints the beam and the plate halation, marks the active scene, draws the scrollbar thumb at 34% and the focus outline.",
+        "tonalRamp": ["#3A2410", "#5B3A1C", "#7E552C", "#A3723F", "#C69355", "#E3B473", "#FFD49C", "#FFE7C6"]
       },
-      "lamp-soft": {
-        "role": "neutral",
-        "displayName": "Lamp Soft",
-        "canonical": "rgb(190 196 188)",
-        "cssVar": "--lamp-soft",
-        "channels": "190 196 188",
-        "hex": "#BEC4BC",
-        "purpose": "Secondary ink: descriptive prose, nav links, labels.",
-        "tonalRamp": [
-          "#0A0C0A",
-          "#232622",
-          "#3F433E",
-          "#5E635C",
-          "#7F847D",
-          "#A1A79F",
-          "#C6CBC4",
-          "#ECF0EB"
-        ]
-      },
-      "lamp-dim": {
-        "role": "neutral",
-        "displayName": "Lamp Dim",
-        "canonical": "rgb(132 142 136)",
-        "cssVar": "--lamp-dim",
-        "channels": "132 142 136",
-        "hex": "#848E88",
-        "purpose": "Tertiary ink: readouts at rest, tool lists, tags, notes, placeholders.",
-        "tonalRamp": [
-          "#090C0A",
-          "#212623",
-          "#3D4440",
-          "#5A645E",
-          "#7B857F",
-          "#9EA8A2",
-          "#C3CCC6",
-          "#EAF0EC"
-        ]
-      },
-      "go": {
+      "glow": {
         "role": "primary",
-        "displayName": "Phosphor Green",
-        "canonical": "rgb(92 224 150)",
-        "cssVar": "--go",
-        "channels": "92 224 150",
-        "hex": "#5CE096",
-        "purpose": "The live signal: GO rows, the ticking clock, LOCKED and OPEN states, STAFFED lamps, focus, caret, selection, the one primary button.",
-        "tonalRamp": [
-          "#001202",
-          "#00320D",
-          "#00551F",
-          "#007937",
-          "#009D58",
-          "#36C179",
-          "#7CE2A5",
-          "#BBFFD4"
-        ]
+        "displayName": "Lamp Glow",
+        "canonical": "rgb(255 239 214)",
+        "cssVar": "--glow",
+        "channels": "255 239 214",
+        "hex": "#FFEFD6",
+        "purpose": "The hot centre of the throw: the plate's screen-blended highlight, its 16px edge bloom, the scene-change flare, and the primary key's hover fill.",
+        "tonalRamp": ["#3C2D18", "#5D4926", "#806735", "#A58746", "#C8A95F", "#E4CA8F", "#F6E2BE", "#FFEFD6"]
       },
-      "go-ink": {
-        "role": "primary",
-        "displayName": "Go Ink",
-        "canonical": "rgb(9 12 11)",
-        "cssVar": "--go-ink",
-        "channels": "9 12 11",
-        "hex": "#090C0B",
-        "purpose": "Text on a phosphor button; byte-identical to Well.",
-        "tonalRamp": [
-          "#0A0B0B",
-          "#232625",
-          "#404342",
-          "#5E6261",
-          "#7F8382",
-          "#A2A6A5",
-          "#C6CAC9",
-          "#ECEFEE"
-        ]
-      },
-      "legend": {
+      "signal": {
         "role": "secondary",
-        "displayName": "Backlit Amber",
-        "canonical": "rgb(233 180 76)",
-        "cssVar": "--legend",
-        "channels": "233 180 76",
-        "hex": "#E9B44C",
-        "purpose": "The single current marker (ON CONSOLE, the active period) and transitional ACQUIRING / SENDING states.",
-        "tonalRamp": [
-          "#160700",
-          "#391E00",
-          "#603800",
-          "#875600",
-          "#AA7800",
-          "#CF9B2E",
-          "#EEC271",
-          "#FFEAB1"
-        ]
+        "displayName": "Leader Red",
+        "canonical": "rgb(228 86 62)",
+        "cssVar": "--signal",
+        "channels": "228 86 62",
+        "hex": "#E4563E",
+        "purpose": "The one signal on the hall: the live marker on the active scene and the 'on the platform now' readout. Never used for emphasis or for a call to action.",
+        "tonalRamp": ["#2E0C06", "#4C150B", "#6C2011", "#8E2D19", "#B03A22", "#D04A2E", "#E4563E", "#F49380"]
       },
-      "fault": {
-        "role": "tertiary",
-        "displayName": "Fault Red",
-        "canonical": "rgb(239 106 92)",
-        "cssVar": "--fault",
-        "channels": "239 106 92",
-        "hex": "#EF6A5C",
-        "purpose": "Form validation errors, NO SIGNAL, FAULT. Nothing else.",
-        "tonalRamp": [
-          "#200000",
-          "#4C0202",
-          "#7D0F0D",
-          "#AC2B23",
-          "#D45145",
-          "#FC7667",
-          "#FFA596",
-          "#FFD5C9"
-        ]
+      "signal-ink": {
+        "role": "secondary",
+        "displayName": "Leader Red, Inked",
+        "canonical": "rgb(168 48 28)",
+        "cssVar": "--signal-ink",
+        "channels": "168 48 28",
+        "hex": "#A8301C",
+        "purpose": "The same signal rendered for a lit plate: form errors, the focused field rule, the focus outline inside a plate, caret and accent-color, link hover in ink.",
+        "tonalRamp": ["#250800", "#3E0F04", "#5A180A", "#791F0F", "#951F13", "#A8301C", "#C85A42", "#E79379"]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "The operator's name over the portrait. Used once.",
-        "responsive": {
-          "base": "clamp(3.5rem, 13vw, 5.25rem)",
-          "lg": "clamp(3.75rem, 5.4vw, 5.5rem)"
-        },
-        "transform": "uppercase"
+        "purpose": "The name in the gate. One per page. Narrowest and heaviest setting in the system (wdth 74 / wght 800), uppercase, line-height 0.84."
       },
-      "headline": {
-        "displayName": "Headline",
-        "purpose": "Panel headings in the legend strip. CAPCOM hook runs 44px / 34px; downlink and credential titles 30px / 26px.",
-        "responsive": {
-          "base": "26px",
-          "md": "32px"
-        },
-        "transform": "uppercase"
+      "head": {
+        "displayName": "Head",
+        "purpose": "Scene titles set as ink in the light (wdth 80 / wght 700), uppercase. Sized per scene from 24px up to 54px; no kicker ever sits above it."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Row titles inside a panel: console discipline, flight record, mission-log role (26px / 24px). Systems-board groups at 19px.",
-        "responsive": {
-          "base": "22px",
-          "md": "24px"
-        },
-        "transform": "uppercase"
-      },
-      "legend": {
-        "displayName": "Legend",
-        "purpose": "The role line under the display name; wall-board system names at 19px / 17px with 0.01em tracking.",
-        "responsive": {
-          "base": "22px",
-          "md": "24px"
-        },
-        "transform": "uppercase"
-      },
-      "body": {
-        "displayName": "Body",
-        "purpose": "Mission-log summary, hero lede, contact body; 58 to 68ch measure.",
-        "responsive": {
-          "base": "16px",
-          "md": "17px"
-        }
-      },
-      "body-small": {
-        "displayName": "Body Small",
-        "purpose": "Console briefs, record descriptions, skill lists, highlights (15px, line-height 1.5); 62 to 70ch. Notes step to 14px / 13px.",
-        "responsive": {
-          "base": "15px",
-          "md": "16px"
-        }
+        "purpose": "The ranked line inside a row (wdth 92 / wght 680): a role, a record name, a rail readout's value."
       },
       "control": {
         "displayName": "Control",
-        "purpose": "Button text; the rail callsign at the same weight with 0.08em tracking.",
-        "transform": "uppercase"
+        "purpose": "Buttons and the wordmark (wdth 88 / wght 680), uppercase, tracking 0.055em."
       },
-      "label": {
-        "displayName": "Label",
-        "purpose": "Nav links, form labels, text links (0.06em), footer links (14px), open mobile menu (18px).",
-        "transform": "uppercase"
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The opening paragraph of a scene (wdth 100 / wght 420), one step lighter than it is large. Held to 42-70ch."
       },
-      "readout": {
-        "displayName": "Readout",
-        "purpose": "Every value in a legend strip or right-hand column: counts, periods, the clock, GO and ON CONSOLE (11px, 500, 0.08em), SIGNAL and CHANNEL states, form errors. Never a sentence.",
-        "responsive": {
-          "base": "11px",
-          "md": "12px"
-        },
-        "features": "'ss01', 'tnum'"
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running prose (wdth 100 / wght 400, line-height 1.6), held to 46-76ch. Always dark ink on a lit plate."
       },
-      "readout-small": {
-        "displayName": "Readout Small",
-        "purpose": "Tool lists under a console brief, tags under a record, the wall-board domain column, the location beside the callsign."
+      "slate": {
+        "displayName": "Slate",
+        "purpose": "Sometype Mono 500, uppercase, tracking 0.09em, tabular figures. Data only: a count, a time, a period, a state, a tool list, a scene label. Never a sentence."
       }
     },
     "shadows": [
       {
-        "name": "panel-face",
-        "value": "inset 0 1px 0 rgb(255 255 255 / 0.045), 0 1px 0 rgb(0 0 0 / 0.55), 0 18px 40px -28px rgb(0 0 0 / 0.9)",
-        "purpose": "Every .panel: a hairline of light on the top edge, a dark edge beneath, a low drop that only reads at the bottom."
+        "name": "plate-halation",
+        "value": "0 0 16px 0 rgb(var(--glow) / 0.3), 0 0 90px -8px rgb(var(--lamp) / 0.2), 0 24px 190px -24px rgb(var(--lamp) / 0.16)",
+        "purpose": "Every lit gate. Edge bloom, near spill, far spill: this is what makes the plate read as a light source rather than a pale rectangle. Not elevation."
       },
       {
-        "name": "well-recess",
-        "value": "inset 0 1px 0 rgb(0 0 0 / 0.6), inset 0 10px 24px -12px rgb(0 0 0 / 0.9), 0 1px 0 rgb(44 54 50 / 0.6)",
-        "purpose": "Every .well: an inset top shadow so a display sits below the console surface."
+        "name": "plate-dim-halation",
+        "value": "0 0 60px -10px rgb(var(--lamp) / 0.09)",
+        "purpose": "The quiet gate that catches only the edge of the throw."
       },
       {
-        "name": "lamp-bloom",
-        "value": "0 0 6px 1px rgb(92 224 150 / 0.55)",
-        "purpose": "The 7px indicator lamp only."
+        "name": "key-glow",
+        "value": "0 0 28px -4px rgb(var(--lamp) / 0.55)",
+        "purpose": "The primary control on hover. Hover is more light falling on a thing, never a lift."
       },
       {
-        "name": "lamp-bloom-amber",
-        "value": "0 0 6px 1px rgb(233 180 76 / 0.5)",
-        "purpose": "The amber indicator lamp only."
+        "name": "live-bloom",
+        "value": "0 0 8px 1px rgb(var(--signal) / 0.6)",
+        "purpose": "The 6px live marker, in the hall only. On a plate the marker is flat."
       },
       {
-        "name": "phosphor-bloom",
-        "value": "text-shadow: 0 0 12px rgb(92 224 150 / 0.45)",
-        "purpose": "Live phosphor text legends (.phosphor)."
+        "name": "quiet-ring",
+        "value": "inset 0 0 0 1px rgb(var(--ink) / 0.28)",
+        "purpose": "The quiet control's hairline; deepens to 0.55 on hover. The only inset in the system, and it is on a control, never a container."
       },
       {
-        "name": "legend-bloom",
-        "value": "text-shadow: 0 0 12px rgb(233 180 76 / 0.4)",
-        "purpose": "Amber text legends (.legend-amber)."
+        "name": "plate-hot-centre",
+        "value": "radial-gradient(88% 92% at var(--fx, 50%) var(--fy, 0%), rgb(var(--glow) / 0.75) 0%, rgb(var(--glow) / 0.28) 26%, transparent 58%); mix-blend-mode: screen",
+        "purpose": "The plate's ::before. Positioned from the lamp's real coordinates relative to this plate's box."
+      },
+      {
+        "name": "plate-falloff",
+        "value": "radial-gradient(128% 132% at var(--fx, 50%) var(--fy, 0%), transparent 34%, rgb(var(--hall) / 0.05) 62%, rgb(var(--hall) / 0.16) 100%); mix-blend-mode: multiply",
+        "purpose": "The plate's ::after. The 0.16 ceiling is a contrast constraint: at that alpha, Ink Faint still clears 4.5:1 in the darkest corner. Do not raise it."
       }
     ],
     "motion": [
       {
-        "name": "ease-out",
-        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "The only authored easing: Tailwind ease-out override, Framer ease array, lamp-on."
+        "name": "ease-throw",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "The lamp's easing. Used for every light movement: travel, throw, flare."
       },
       {
-        "name": "lamp-on",
-        "value": "lamp-on 520ms cubic-bezier(0.16, 1, 0.3, 1) both (opacity 0 to 1, brightness 0.6 to 1.8 to 1)",
-        "purpose": "A wall-board row lighting during the GO poll."
+        "name": "lamp-travel",
+        "value": "--lx 1100ms, --ly 1100ms, --throw 1400ms, all on ease-throw",
+        "purpose": "The page's one authored moment. --lx/--ly/--throw are registered with @property so they interpolate instead of jumping between scenes. Under prefers-reduced-motion the transition is removed: the lamp still repositions per scene, instantly rather than animated."
       },
       {
-        "name": "flicker-on",
-        "value": "flicker-on 420ms steps(1, end) both (opacity 0, 1, 0.35, 1, 0.6, 1)",
-        "purpose": "A GO / ON CONSOLE legend catching twice before it holds."
+        "name": "flare",
+        "value": "900ms ease-throw both; opacity 0 -> 0.5 at 18% -> 0",
+        "purpose": "The lamp pulsing as it reaches a new gate. Removed entirely under prefers-reduced-motion."
       },
       {
-        "name": "go-poll",
-        "value": "start 700ms, step 150ms per row",
-        "purpose": "The one composed moment: rows light in sequence on load."
+        "name": "drift",
+        "value": "62s linear infinite; background-position 0 0 -> -420px -420px",
+        "purpose": "Dust suspended in the beam on one shared clock, masked to the throw. Stops under reduced motion; opacity drops 0.5 -> 0.22."
       },
       {
-        "name": "hero-enter",
-        "value": "opacity 0 to 1, y 14px to 0, 0.8s ease-out, delays 0.05s to 0.4s",
-        "purpose": "Hero blocks fading up on load."
+        "name": "weave",
+        "value": "5.5s steps(3, end) infinite; sub-pixel translate3d within 0.4px",
+        "purpose": "The almost imperceptible unsteadiness of a real gate. Stops under reduced motion."
       },
       {
-        "name": "power-on",
-        "value": "opacity 0 to 1, brightness 0.5 to 1.6 to 1, 0.7s ease-out, times [0, 0.4, 1], once at 30% in view",
-        "purpose": "Only the consoles list and the downlink monitor."
-      },
-      {
-        "name": "downlink-swap",
-        "value": "opacity 0 to 1, brightness 1.6 to 1, 0.5s ease-out; exit opacity 0",
-        "purpose": "Crossfade when a new meme lands."
-      },
-      {
-        "name": "control",
-        "value": "filter, background-color, border-color 200ms ease-out; active translateY(1px)",
-        "purpose": "Every button and link: hover brightens, press nudges 1px."
-      },
-      {
-        "name": "reduced-motion",
-        "value": "animation: none; opacity: 1; scroll-behavior: auto; Framer initial=false",
-        "purpose": "Everything renders lit and static; the clock still ticks."
+        "name": "state",
+        "value": "220ms ease (color/shadow), 120ms ease (transform), 200ms ease (field rule)",
+        "purpose": "Control and field state changes. Transform is a 1px active nudge only, never a hover lift."
       }
     ],
     "breakpoints": [
-      {
-        "name": "sm",
-        "value": "640px"
-      },
-      {
-        "name": "md",
-        "value": "768px"
-      },
-      {
-        "name": "lg",
-        "value": "1024px"
-      },
-      {
-        "name": "xl",
-        "value": "1280px"
-      },
-      {
-        "name": "site",
-        "value": "1360px"
-      }
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "site", "value": "1440px" }
     ],
-    "fonts": [
-      {
-        "family": "Barlow Condensed",
-        "weights": [
-          500,
-          600
-        ],
-        "source": "@fontsource/barlow-condensed"
-      },
-      {
-        "family": "Barlow",
-        "weights": [
-          400,
-          500
-        ],
-        "source": "@fontsource/barlow"
-      },
-      {
-        "family": "Martian Mono Variable",
-        "weights": "variable",
-        "source": "@fontsource-variable/martian-mono"
-      }
-    ],
-    "scheme": {
-      "colorScheme": "dark",
-      "lightTheme": false
+    "layoutMeta": {
+      "container": "max-w-site 1440px, gutters 20px rising to 32px from md",
+      "gatePadding": "24px x / 36px y, rising to 40px x / 56px y from md",
+      "gateOffsets": ["lg:w-[93%]", "lg:ml-auto lg:w-[95%]", "lg:mx-auto lg:w-[90%]", "lg:w-[84%]", "full width"],
+      "keystone": "perspective(2600px) rotateY(-0.5deg) on every lit gate",
+      "lampPositions": "per scene via data-lamp=\"x y throw\": 62 26 132 (hero), 74 28 128, 26 32 124, 46 26 152, 78 44 146, 22 30 124, 58 38 118, 32 30 126",
+      "touchMinimum": "44px on every interactive target; controls are 48px tall"
+    },
+    "assets": {
+      "portrait": "public/portrait-lit.jpg / .webp - duotone derivation of the owner's own public/avatar.jpg, graded so the lit half matches the plate and the shadow half dissolves into the hall. Not generated, not stock.",
+      "dust": "public/dust.png - 420px tile, screen-blended, masked to the throw.",
+      "provenance": "impeccable embed-prompt --scan public reports 4 rasters, 0 missing."
     }
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "Key (primary)",
       "kind": "button",
-      "refersTo": "button-primary",
-      "description": "The one lit key per view: START THE SEQUENCE, ANOTHER ONE, SEND MESSAGE. Phosphor face, Go Ink engraving; hover brightens, press nudges 1px.",
-      "html": "<button class=\"ds-btn-primary\" type=\"button\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8\"/><path d=\"M21 3v5h-5\"/><path d=\"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16\"/><path d=\"M8 16H3v5\"/></svg>Another one</button>",
-      "css": ".ds-btn-primary { display: inline-flex; height: 48px; align-items: center; justify-content: center; gap: 10px; border-radius: 3px; padding: 0 20px; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 17px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1; text-decoration: none; cursor: pointer; transition: filter 200ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), border-color 200ms cubic-bezier(0.16,1,0.3,1); background: #5CE096; color: #090C0B; border: none; } .ds-btn-primary:hover { filter: brightness(1.1); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:disabled { opacity: 0.6; filter: none; cursor: default; } .ds-btn-primary:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
+      "refersTo": "key",
+      "description": "The one action per scene that is filled with the lamp itself. Square, 48px, dark ink on tungsten.",
+      "html": "<button class=\"ds-key\">Step into the light</button>",
+      "css": ".ds-key { display: inline-flex; height: 48px; align-items: center; justify-content: center; gap: 10px; padding: 0 24px; border: none; border-radius: 0; background: #FFD49C; color: #0F0C09; font-family: 'Archivo Variable', system-ui, sans-serif; font-variation-settings: 'wdth' 88, 'wght' 680; font-size: 15px; line-height: 1; letter-spacing: 0.055em; text-transform: uppercase; cursor: pointer; transition: background-color 220ms ease, box-shadow 220ms ease, transform 120ms ease; box-shadow: 0 0 0 rgba(255,212,156,0); } .ds-key:hover { background: #FFEFD6; box-shadow: 0 0 28px -4px rgba(255,212,156,0.55); } .ds-key:active { transform: translateY(1px); } .ds-key:focus-visible { outline: 2px solid #A8301C; outline-offset: 3px; } .ds-key:disabled { background: rgba(255,212,156,0.42); box-shadow: none; cursor: not-allowed; }"
     },
     {
-      "name": "Outline Button",
+      "name": "Key Quiet (secondary)",
       "kind": "button",
-      "refersTo": "button-outline",
-      "description": "The secondary action (DOWNLOAD RESUME): a console-faced key with a Seam Strong border that brightens and lifts its border colour on hover, never its elevation.",
-      "html": "<a class=\"ds-btn-outline\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\"/></svg>Download resume</a>",
-      "css": ".ds-btn-outline { display: inline-flex; height: 48px; align-items: center; justify-content: center; gap: 10px; border-radius: 3px; padding: 0 20px; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 17px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1; text-decoration: none; cursor: pointer; transition: filter 200ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), border-color 200ms cubic-bezier(0.16,1,0.3,1); background: #161C1A; color: #ECE9DE; border: 1px solid #42504A; } .ds-btn-outline:hover { border-color: #848E88; filter: brightness(1.25); } .ds-btn-outline:active { transform: translateY(1px); } .ds-btn-outline:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
+      "refersTo": "key-quiet",
+      "description": "The unlit companion action: transparent ground, a 1px ink ring, no fill at rest.",
+      "html": "<button class=\"ds-key-quiet\">Download resume</button>",
+      "css": ".ds-key-quiet { display: inline-flex; height: 48px; align-items: center; justify-content: center; gap: 10px; padding: 0 24px; border: none; border-radius: 0; background: transparent; color: #1B1712; font-family: 'Archivo Variable', system-ui, sans-serif; font-variation-settings: 'wdth' 88, 'wght' 680; font-size: 15px; line-height: 1; letter-spacing: 0.055em; text-transform: uppercase; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(27,23,18,0.28); transition: background-color 220ms ease, box-shadow 220ms ease, transform 120ms ease; } .ds-key-quiet:hover { background: rgba(27,23,18,0.06); box-shadow: inset 0 0 0 1px rgba(27,23,18,0.55); } .ds-key-quiet:active { transform: translateY(1px); } .ds-key-quiet:focus-visible { outline: 2px solid #A8301C; outline-offset: 3px; }"
     },
     {
-      "name": "Icon Button",
-      "kind": "button",
-      "refersTo": "button-icon",
-      "description": "The 44px menu toggle on the console rail below lg: Seam border, Lamp Dim glyph that turns Lamp White on hover.",
-      "html": "<button class=\"ds-btn-icon\" type=\"button\" aria-label=\"Open menu\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><line x1=\"4\" x2=\"20\" y1=\"12\" y2=\"12\"/><line x1=\"4\" x2=\"20\" y1=\"6\" y2=\"6\"/><line x1=\"4\" x2=\"20\" y1=\"18\" y2=\"18\"/></svg></button>",
-      "css": ".ds-btn-icon { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 3px; border: 1px solid #2C3632; background: #0E1211; color: #848E88; cursor: pointer; transition: color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-icon:hover { color: #ECE9DE; } .ds-btn-icon:active { transform: translateY(1px); } .ds-btn-icon:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
-    },
-    {
-      "name": "Text Link",
-      "kind": "button",
-      "refersTo": "text-link",
-      "description": "An outbound link as a tracked label with an arrow-up-right glyph; Lamp Soft at rest, Phosphor on hover.",
-      "html": "<a class=\"ds-text-link\" href=\"#\">View credential<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a>",
-      "css": ".ds-text-link { display: inline-flex; min-height: 44px; align-items: center; gap: 6px; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 15px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #BEC4BC; text-decoration: none; transition: color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-text-link:hover { color: #5CE096; } .ds-text-link:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
-    },
-    {
-      "name": "Text Field",
+      "name": "Slot (field)",
       "kind": "input",
-      "refersTo": "input",
-      "description": "A CAPCOM form field: a recessed well with a Seam Strong border, a tracked label above, Phosphor border and caret on focus, a mono Fault Red error line beneath.",
-      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-email\">Email</label><input class=\"ds-input\" id=\"ds-email\" type=\"email\" placeholder=\"you@company.com\" aria-invalid=\"true\" /><p class=\"ds-field-error\" role=\"alert\">Enter a valid email address</p></div>",
-      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; } .ds-field-label { font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 15px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #BEC4BC; } .ds-input { width: 100%; height: 48px; padding: 0 14px; border-radius: 3px; border: 1px solid #42504A; background: #090C0B; color: #ECE9DE; font-family: Barlow, system-ui, sans-serif; font-size: 15px; caret-color: #5CE096; accent-color: #5CE096; box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.6), inset 0 10px 24px -12px rgb(0 0 0 / 0.9), 0 1px 0 rgb(44 54 50 / 0.6); transition: border-color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-input::placeholder { color: #848E88; } .ds-input:focus { outline: none; border-color: #5CE096; } .ds-field-error { margin: 0; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.02em; color: #EF6A5C; }"
+      "refersTo": "slot",
+      "description": "A field is the lit ground itself, ruled underneath. Not a well: no fill, no full border, no inset shadow.",
+      "html": "<label class=\"ds-slot-label\" for=\"ds-email\">Email</label><input class=\"ds-slot\" id=\"ds-email\" type=\"email\" placeholder=\"you@company.com\" />",
+      "css": ".ds-slot-label { display: block; margin-bottom: 8px; font-family: 'Sometype Mono', ui-monospace, monospace; font-weight: 500; font-size: 10.5px; line-height: 1.7; letter-spacing: 0.09em; text-transform: uppercase; color: #5C4F3E; } .ds-slot { width: 100%; height: 48px; padding: 0 14px; background: transparent; color: #1B1712; border: none; border-bottom: 1px solid rgba(27,23,18,0.3); border-radius: 0; font-family: 'Archivo Variable', system-ui, sans-serif; font-variation-settings: 'wdth' 100, 'wght' 400; font-size: 15px; line-height: 1.6; caret-color: #A8301C; accent-color: #A8301C; transition: border-color 200ms ease; } .ds-slot::placeholder { color: #5C4F3E; } .ds-slot:focus { outline: none; border-bottom-color: #A8301C; } .ds-slot:focus-visible { outline: 2px solid #A8301C; outline-offset: 3px; }"
     },
     {
-      "name": "Panel",
+      "name": "Gate (lit plate)",
       "kind": "card",
-      "refersTo": "panel",
-      "description": "The console face every section sits on: Console ground, 1px Seam border, 6px radius, top hairline and dark under-edge; the legend strip carries the heading left and a mono readout right.",
-      "html": "<section class=\"ds-panel\"><header class=\"ds-panel-strip\"><h2 class=\"ds-panel-heading\">Flight records</h2><span class=\"ds-readout\">6 RECORDS</span></header><div class=\"ds-panel-body\"><p class=\"ds-panel-prose\">Storage-governance service for GCP Filestore that enforces quotas and surfaces orphaned data; reclaimed 3 TB of capacity on the clearing platform.</p></div></section>",
-      "css": ".ds-panel { background: #161C1A; border: 1px solid #2C3632; border-radius: 6px; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.045), 0 1px 0 rgb(0 0 0 / 0.55), 0 18px 40px -28px rgb(0 0 0 / 0.9); } .ds-panel-strip { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 24px; padding: 20px 32px; border-bottom: 1px solid #2C3632; } .ds-panel-heading { margin: 0; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 32px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; color: #ECE9DE; } .ds-panel-body { padding: 28px 32px; } .ds-panel-prose { margin: 0; max-width: 62ch; font-family: Barlow, system-ui, sans-serif; font-size: 16px; line-height: 1.625; color: #BEC4BC; } .ds-readout { white-space: nowrap; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.02em; color: #848E88; font-feature-settings: 'ss01', 'tnum'; } .ds-readout-soft { color: #BEC4BC; } .ds-phosphor { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); } .ds-legend-amber { color: #E9B44C; text-shadow: 0 0 12px rgb(233 180 76 / 0.4); }"
+      "refersTo": "plate",
+      "description": "The signature surface: a lit rectangle that is a light source, not a container. Three-layer halation, a screen-blended hot centre and a multiply-blended falloff, keystoned a hair off square.",
+      "html": "<div class=\"ds-gate\"><h2 class=\"ds-gate-head\">What I operate</h2><p class=\"ds-gate-body\">Provisions GCP with Terraform Enterprise and Ansible, then keeps every SDLC environment identical through a post-provisioning framework so drift never resurfaces.</p></div>",
+      "css": ".ds-gate { position: relative; isolation: isolate; padding: 36px 24px; background: #EFE7D6; color: #1B1712; border-radius: 0; transform: perspective(2600px) rotateY(-0.5deg); box-shadow: 0 0 16px 0 rgba(255,239,214,0.3), 0 0 90px -8px rgba(255,212,156,0.2), 0 24px 190px -24px rgba(255,212,156,0.16); } .ds-gate::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(88% 92% at 50% 0%, rgba(255,239,214,0.75) 0%, rgba(255,239,214,0.28) 26%, transparent 58%); mix-blend-mode: screen; } .ds-gate::after { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(128% 132% at 50% 0%, transparent 34%, rgba(23,19,14,0.05) 62%, rgba(23,19,14,0.16) 100%); mix-blend-mode: multiply; } .ds-gate > * { position: relative; z-index: 1; } .ds-gate-head { margin: 0 0 16px; font-family: 'Archivo Variable', system-ui, sans-serif; font-variation-settings: 'wdth' 80, 'wght' 700; font-size: 32px; line-height: 0.9; letter-spacing: 0.005em; text-transform: uppercase; } .ds-gate-body { margin: 0; max-width: 66ch; font-family: 'Archivo Variable', system-ui, sans-serif; font-variation-settings: 'wdth' 100, 'wght' 400; font-size: 15px; line-height: 1.6; color: #4A3F32; }"
     },
     {
-      "name": "Wall Board Row",
+      "name": "Scene Strip",
+      "kind": "nav",
+      "refersTo": "scene-strip",
+      "description": "One unbroken line on the bottom edge at every width, scaling by font size instead of wrapping, with a live mark on the active scene. Opaque by design.",
+      "html": "<nav class=\"ds-strip\" aria-label=\"Scenes\"><a class=\"ds-strip-item ds-strip-active\" href=\"#top\" aria-current=\"true\"><span class=\"ds-live-mark\" aria-hidden=\"true\"></span>Top</a><a class=\"ds-strip-item\" href=\"#operate\">Operate</a><a class=\"ds-strip-item\" href=\"#history\">History</a><a class=\"ds-strip-item\" href=\"#built\">Built</a><a class=\"ds-strip-item\" href=\"#stack\">Stack</a><a class=\"ds-strip-item\" href=\"#contact\">Contact</a></nav>",
+      "css": ".ds-strip { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: #0F0C09; border-top: 1px solid rgba(232,219,197,0.16); border-radius: 0; } .ds-strip-item { display: flex; min-height: 44px; align-items: center; gap: 8px; white-space: nowrap; text-decoration: none; font-family: 'Sometype Mono', ui-monospace, monospace; font-weight: 500; font-size: 10.5px; line-height: 1; letter-spacing: 0.09em; text-transform: uppercase; color: #8F8169; transition: color 300ms ease; } .ds-strip-item:hover { color: #E8DBC5; } .ds-strip-active { color: #FFD49C; } .ds-strip-item:focus-visible { outline: 2px solid #FFD49C; outline-offset: 3px; } .ds-live-mark { display: inline-block; width: 6px; height: 6px; flex: none; border-radius: 999px; background: #E4563E; box-shadow: 0 0 8px 1px rgba(228,86,62,0.6); opacity: 0; } .ds-strip-active .ds-live-mark { opacity: 1; }"
+    },
+    {
+      "name": "Rail Readout",
       "kind": "custom",
-      "refersTo": "wallboard-row",
-      "description": "A SYSTEMS POLL row inside the well: domain, system, and a phosphor GO legend with its lamp; the one current row answers ON CONSOLE in amber. Rows lamp on 150ms apart on load.",
-      "html": "<ol class=\"ds-well ds-board\"><li class=\"ds-board-row ds-lamp-on\"><span class=\"ds-board-domain\">Containers</span><span class=\"ds-board-system\">Kubernetes, Red Hat OpenShift</span><span class=\"ds-board-legend ds-phosphor ds-flicker-on\"><span class=\"ds-lamp\"></span>GO</span></li><li class=\"ds-board-row ds-lamp-on\"><span class=\"ds-board-domain\">Deutsche Börse Group, via TCS</span><span class=\"ds-board-system ds-board-current\">C7-SCS securities clearing platform</span><span class=\"ds-board-legend ds-legend-amber ds-flicker-on\"><span class=\"ds-lamp ds-lamp-amber\"></span>ON CONSOLE</span></li><li class=\"ds-board-row ds-board-unlit\"><span class=\"ds-board-domain\">Security</span><span class=\"ds-board-system\">IAM, PKI, RHEL 9 hardening</span><span class=\"ds-board-legend\">····</span></li></ol>",
-      "css": ".ds-well { background: #090C0B; border: 1px solid #2C3632; border-radius: 6px; box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.6), inset 0 10px 24px -12px rgb(0 0 0 / 0.9), 0 1px 0 rgb(44 54 50 / 0.6); } .ds-board { list-style: none; margin: 0; padding: 0; } .ds-board-row { display: grid; grid-template-columns: 168px minmax(0,1fr) auto; align-items: center; column-gap: 16px; padding: 15px 20px; border-top: 1px solid rgb(44 54 50 / 0.7); } .ds-board-row:first-child { border-top: none; } .ds-board-unlit { opacity: 0.25; } .ds-board-domain { font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.02em; color: #848E88; } .ds-board-system { font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 19px; font-weight: 500; line-height: 1.25; letter-spacing: 0.01em; color: #BEC4BC; } .ds-board-current { color: #ECE9DE; } .ds-board-legend { display: inline-flex; align-items: center; gap: 8px; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: #848E88; } .ds-phosphor { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); } .ds-legend-amber { color: #E9B44C; text-shadow: 0 0 12px rgb(233 180 76 / 0.4); } .ds-lamp { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #5CE096; box-shadow: 0 0 6px 1px rgb(92 224 150 / 0.55); } .ds-lamp-amber { background: #E9B44C; box-shadow: 0 0 6px 1px rgb(233 180 76 / 0.5); } @keyframes ds-lamp-on { 0% { opacity: 0; filter: brightness(0.6); } 45% { opacity: 1; filter: brightness(1.8); } 100% { opacity: 1; filter: brightness(1); } } .ds-lamp-on { animation: ds-lamp-on 520ms cubic-bezier(0.16,1,0.3,1) both; } .ds-lamp-on:nth-child(2) { animation-delay: 150ms; } @keyframes ds-flicker-on { 0% { opacity: 0; } 30% { opacity: 1; } 45% { opacity: 0.35; } 60% { opacity: 1; } 75% { opacity: 0.6; } 100% { opacity: 1; } } .ds-flicker-on { animation: ds-flicker-on 420ms steps(1, end) both; } @media (prefers-reduced-motion: reduce) { .ds-lamp-on, .ds-flicker-on { animation: none; opacity: 1; } }"
+      "description": "The rail in the unlit hall: a slate label over a light-ink value, on a single hairline bottom rule. No box, no fill.",
+      "html": "<div class=\"ds-readout\"><span class=\"ds-readout-label\">On the platform now</span><span class=\"ds-readout-value\"><span class=\"ds-live-mark ds-live-on\" aria-hidden=\"true\"></span>C7-SCS securities clearing platform</span><span class=\"ds-readout-sub\">Deutsche Borse Group, via TCS</span></div>",
+      "css": ".ds-readout { display: flex; flex-direction: column; gap: 6px; padding: 14px 0; border-bottom: 1px solid rgba(232,219,197,0.16); background: #17130E; } .ds-readout-label { font-family: 'Sometype Mono', ui-monospace, monospace; font-weight: 500; font-size: 10px; line-height: 1.7; letter-spacing: 0.09em; text-transform: uppercase; color: #8F8169; } .ds-readout-value { display: flex; align-items: flex-start; gap: 10px; font-family: 'Archivo Variable', system-ui, sans-serif; font-variation-settings: 'wdth' 92, 'wght' 680; font-size: 16px; line-height: 1.08; color: #FFD49C; } .ds-readout-sub { font-family: 'Sometype Mono', ui-monospace, monospace; font-weight: 500; font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #E4563E; } .ds-live-mark { display: inline-block; width: 6px; height: 6px; flex: none; margin-top: 8px; border-radius: 999px; background: #E4563E; box-shadow: 0 0 8px 1px rgba(228,86,62,0.6); } .ds-live-on { opacity: 1; }"
     },
     {
-      "name": "Mission Clock",
+      "name": "Out Link",
       "kind": "custom",
-      "refersTo": "mission-clock",
-      "description": "The rail and footer readout: two zones (IST, CET) in a small well, zone labels Lamp Dim, digits Phosphor with bloom and tabular so they never jitter. Ticks every second, including under reduced motion.",
-      "html": "<div class=\"ds-clock\"><span class=\"ds-clock-zone\"><span class=\"ds-clock-label\">IST</span><time class=\"ds-clock-time\">16:01:04</time></span><span class=\"ds-clock-zone\"><span class=\"ds-clock-label\">CET</span><time class=\"ds-clock-time\">12:31:04</time></span></div>",
-      "css": ".ds-clock { display: inline-flex; align-items: center; gap: 20px; padding: 6px 12px; border-radius: 3px; border: 1px solid #2C3632; background: #090C0B; box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.6), inset 0 10px 24px -12px rgb(0 0 0 / 0.9), 0 1px 0 rgb(44 54 50 / 0.6); font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.02em; } .ds-clock-zone { display: flex; align-items: baseline; gap: 6px; } .ds-clock-label { color: #848E88; } .ds-clock-time { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); font-variant-numeric: tabular-nums; }"
+      "description": "The only link style on a plate: slate type on a hairline underline, turning the signal red on hover. The arrow is an inline SVG, never an icon font.",
+      "html": "<a class=\"ds-outlink\" href=\"#\">GitHub<svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7\"/><path d=\"M7 7h10v10\"/></svg></a>",
+      "css": ".ds-outlink { display: inline-flex; min-height: 44px; align-items: center; gap: 6px; font-family: 'Sometype Mono', ui-monospace, monospace; font-weight: 500; font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; color: #4A3F32; text-decoration: underline; text-decoration-color: rgba(27,23,18,0.25); text-decoration-thickness: 1px; text-underline-offset: 5px; transition: color 200ms ease, text-decoration-color 200ms ease; } .ds-outlink:hover { color: #A8301C; text-decoration-color: #A8301C; } .ds-outlink:hover svg { transform: translateX(1px); } .ds-outlink svg { transition: transform 200ms ease; } .ds-outlink:focus-visible { outline: 2px solid #A8301C; outline-offset: 3px; }"
     },
     {
-      "name": "Record Row",
-      "kind": "custom",
-      "refersTo": "record-row",
-      "description": "The ruled row every list panel uses (Consoles, Mission log, Flight records): title left, prose and a mono tool list in the middle, a stacked right-hand readout column. Client work carries no link.",
-      "html": "<ol class=\"ds-records\"><li class=\"ds-record\"><h3 class=\"ds-record-title\">Spacewarden</h3><div class=\"ds-record-body\"><p class=\"ds-record-prose\">Storage-governance service for GCP Filestore that enforces quotas and surfaces orphaned data.</p><p class=\"ds-record-tools\">GCP Filestore, Go, Python</p></div><div class=\"ds-record-side\"><span class=\"ds-readout ds-readout-soft\">DEUTSCHE BÖRSE · VIA TCS</span><a class=\"ds-text-link\" href=\"#\">Standalone Go scanner on GitHub<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a></div></li><li class=\"ds-record\"><h3 class=\"ds-record-title\">VPA right-sizing</h3><div class=\"ds-record-body\"><p class=\"ds-record-prose\">Vertical Pod Autoscaler initiative across every C7-SCS environment.</p><p class=\"ds-record-tools\">Kubernetes, Bash</p></div><div class=\"ds-record-side\"><span class=\"ds-readout ds-readout-soft\">DEUTSCHE BÖRSE · VIA TCS</span><span class=\"ds-readout\">CLIENT WORK · NO PUBLIC CODE</span></div></li></ol>",
-      "css": ".ds-records { list-style: none; margin: 0; padding: 0; background: #161C1A; } .ds-record { display: grid; grid-template-columns: 300px minmax(0,1fr) 260px; column-gap: 40px; row-gap: 12px; padding: 28px 32px; border-top: 1px solid #2C3632; } .ds-record:first-child { border-top: none; } .ds-record-title { margin: 0; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 24px; font-weight: 600; line-height: 1; text-transform: uppercase; letter-spacing: 0.03em; color: #ECE9DE; } .ds-record-body { display: flex; flex-direction: column; gap: 12px; } .ds-record-prose { margin: 0; max-width: 62ch; font-family: Barlow, system-ui, sans-serif; font-size: 16px; line-height: 1.625; color: #BEC4BC; } .ds-record-tools { margin: 0; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 10.5px; line-height: 1.625; letter-spacing: 0.02em; color: #848E88; } .ds-record-side { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; } .ds-readout { white-space: nowrap; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.02em; color: #848E88; font-feature-settings: 'ss01', 'tnum'; } .ds-readout-soft { color: #BEC4BC; } .ds-phosphor { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); } .ds-legend-amber { color: #E9B44C; text-shadow: 0 0 12px rgb(233 180 76 / 0.4); } .ds-text-link { display: inline-flex; align-items: center; gap: 6px; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 15px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #BEC4BC; text-decoration: none; white-space: nowrap; transition: color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-text-link:hover { color: #5CE096; } .ds-text-link:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
-    },
-    {
-      "name": "Indicator Lamp",
-      "kind": "chip",
-      "refersTo": "lamp",
-      "description": "A 7px lit dot with bloom beside a live legend (STAFFED, GO); the amber variant marks the one current item (ON CONSOLE). Always inline, always aria-hidden.",
-      "html": "<span class=\"ds-legend ds-readout\"><span class=\"ds-lamp\" aria-hidden=\"true\"></span>STAFFED</span> <span class=\"ds-legend ds-legend-amber\"><span class=\"ds-lamp ds-lamp-amber\" aria-hidden=\"true\"></span>ON CONSOLE</span>",
-      "css": ".ds-legend { display: inline-flex; align-items: center; gap: 8px; margin-right: 24px; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; } .ds-lamp { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #5CE096; box-shadow: 0 0 6px 1px rgb(92 224 150 / 0.55); } .ds-lamp-amber { background: #E9B44C; box-shadow: 0 0 6px 1px rgb(233 180 76 / 0.5); } .ds-readout { white-space: nowrap; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.02em; color: #848E88; font-feature-settings: 'ss01', 'tnum'; } .ds-readout-soft { color: #BEC4BC; } .ds-phosphor { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); } .ds-legend-amber { color: #E9B44C; text-shadow: 0 0 12px rgb(233 180 76 / 0.4); }"
+      "name": "Dim Gate",
+      "kind": "card",
+      "refersTo": "plate-dim",
+      "description": "The quiet passage: a plate that catches only the edge of the throw. Hall-deep ground, light ink, one weak spill, no falloff layer.",
+      "html": "<div class=\"ds-gate-dim\"><span class=\"ds-gate-dim-slate\">Certification</span><h2 class=\"ds-gate-dim-head\">Google Cloud Certified Professional Cloud DevOps Engineer</h2></div>",
+      "css": ".ds-gate-dim { position: relative; isolation: isolate; padding: 36px 24px; background: #0F0C09; color: #E8DBC5; border-radius: 0; transform: perspective(2600px) rotateY(-0.5deg); box-shadow: 0 0 60px -10px rgba(255,212,156,0.09); } .ds-gate-dim::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(96% 100% at 50% 0%, rgba(255,212,156,0.2) 0%, rgba(255,212,156,0.07) 34%, transparent 66%); } .ds-gate-dim > * { position: relative; z-index: 1; } .ds-gate-dim-slate { display: block; margin-bottom: 12px; font-family: 'Sometype Mono', ui-monospace, monospace; font-weight: 500; font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; color: #8F8169; } .ds-gate-dim-head { margin: 0; max-width: 22ch; font-family: 'Archivo Variable', system-ui, sans-serif; font-variation-settings: 'wdth' 80, 'wght' 700; font-size: 28px; line-height: 0.9; letter-spacing: 0.005em; text-transform: uppercase; color: #FFD49C; }"
     }
   ],
   "narrative": {
-    "northStar": "Mission Control",
-    "overview": "The site is a dark flight-operations room. The operator stands in the foreground; the platform he keeps up is the wall board behind him, and each system he runs answers GO in turn. A control room says competence without a superlative: every discipline has a console, every console has a callsign, every row has a readout. The world refuses the category defaults it replaced (a centred name over a glow, skill chips, project cards, a big-number metrics slab) and the retired white resume page.\n\nThe ground is grey-green in three depths, never pure black: the room farthest back, console panel faces on it, recessed display wells sunk into those. Ink is warm lamp white in three steps. Light is scarce and meaningful: one phosphor green is the live signal and appears only where something is actually running or GO; one backlit amber marks the single current item, ON CONSOLE; one fault red is for errors and lost signal. Density is high but ruled: sections are panels, panels hold ruled rows, rows end in a right-hand mono readout column.\n\nStructure is panel joinery rather than cards. Every surface meets its neighbour at a 1px seam; panel faces carry a hairline of light on their top edge and a dark edge beneath; wells carry an inset top shadow so a screen reads as set into the console. Motion is lamp-on: the wall board rows light in sequence on load, a legend catches twice before it holds, and the two panels that earn an entrance power on with a brightness overshoot. Everything else is lit on arrival.",
+    "northStar": "The Throw",
+    "overview": "A dark hall with one projector in it. Everything you read is what the lamp is currently lighting; everything else is warm charcoal and dust. There is exactly one light source on the page, and it governs every colour: the plate is lit by it, the hall falls away from it, the primary control is filled with it, the browser's own scrollbar is drawn in it. Rank is not carried by a border or a card - it is carried by how much light lands on a thing and how far from the lamp it sits.\n\nThe system runs on two grounds and one rule that binds them. The HALL (#17130E, deepening to #0F0C09) is the unlit room and carries light ink. The PLATE (#EFE7D6) is the lit gate and carries dark ink. Body copy belongs on a plate. The testable discriminator for this world is that prose is dark ink on a lit ground, never light text on a dark ground behind a radial gradient - if a paragraph is pale text floating on charcoal, the world has been broken.\n\nThe light is computed rather than painted. Each scene declares where the lamp stands (data-lamp=\"x y throw\"); the controller moves --lx/--ly/--throw on the document element, and because those three are registered with @property they interpolate instead of jumping. Every lit surface then recomputes --fx/--fy from the lamp's real viewport position relative to its own box on a rAF-throttled scroll handler, so its hot centre and its falloff are the lamp's and not a decorative vignette. That travel is the page's one authored moment. Nothing else animates on arrival: content is lit when it appears, and no copy waits for motion to become readable.",
     "keyCharacteristics": [
-      "Dark-only: one scheme, `color-scheme: dark`, no light theme and no toggle.",
-      "Three-depth grey-green ground (room, console, well) with 1px seams; no cards, no floating surfaces.",
-      "Phosphor green appears only on live states; amber appears only on the one current marker.",
-      "Three typefaces with strict jobs: Barlow Condensed tracked caps for display and controls, Barlow for prose, Martian Mono for every readout.",
-      "One authored motion moment (the GO poll) plus two PowerOn entrances; hover brightens, never lifts.",
-      "The person leads the first viewport; the work follows as ruled records, never as a metrics slab."
+      "Two grounds, one rule: light ink in the hall, dark ink on the plate.",
+      "One light source (#FFD49C / #FFEFD6) governing every colour; no second decorative hue exists.",
+      "One signal hue at two renditions, used only for what is live and what has failed.",
+      "Enclosure never: no panels, cards, wells or seams. Hairline rules separate rows; they do not bound regions.",
+      "Square corners everywhere (0 radius); the 6px live mark is the only round form on the page.",
+      "One type family at three widths, plus one mono reserved for slate data.",
+      "Computed falloff, capped at 0.16 alpha so the darkest corner of a plate still clears contrast."
     ],
     "rules": [
-      {
-        "name": "The Live-Only Phosphor Rule",
-        "body": "Phosphor green means something is running right now. It lights a GO row, a ticking clock, a LOCKED signal, an OPEN channel, a STAFFED lamp, a focused field, or the one primary action; it never colours a heading, an icon at rest, a decorative rule or a static label (a text link and its arrow may turn phosphor together on hover).",
-        "section": "colors"
-      },
-      {
-        "name": "The One Amber Rule",
-        "body": "Amber is the current marker. Exactly one thing on the board is ON CONSOLE, and amber appears there, on the active mission-log period and on transitional states (ACQUIRING, SENDING) that are about to resolve to phosphor. It is never a second accent.",
-        "section": "colors"
-      },
-      {
-        "name": "The Dark-Only Rule",
-        "body": "There is one scheme. The ground is grey-green (never pure black) and `color-scheme: dark` is declared; no `prefers-color-scheme: light` branch exists and none should be added.",
-        "section": "colors"
-      },
-      {
-        "name": "The Readouts Are Never Sentences Rule",
-        "body": "Martian Mono carries values: a count, a timestamp, a callsign, a period, a state word, a comma-separated tool list. If it has a verb, it is prose and is set in Barlow. The one mono line that approaches a sentence (the certification name on the hero plate) is a credential title, not copy.",
-        "section": "typography"
-      },
-      {
-        "name": "The Engraved Caps Rule",
-        "body": "Barlow Condensed is never set in sentence case. Every use is uppercase with tracking between 0.01em (display) and 0.08em (labels), tightening as the size grows.",
-        "section": "typography"
-      },
-      {
-        "name": "The Panel Joinery Rule",
-        "body": "Surfaces are joined, not stacked. A panel sits on the room with a seam and a top hairline; a well sits inside a panel with an inset shadow. There are no cards, no floating containers and no hover lift anywhere.",
-        "section": "elevation"
-      },
-      {
-        "name": "The One Authored Motion Rule",
-        "body": "The page has one composed moment: the GO poll, where wall-board rows lamp on 150ms apart starting 700ms after load (a 520ms opacity and brightness overshoot on `cubic-bezier(0.16, 1, 0.3, 1)`) and each legend flickers on (420ms, stepped). The hero blocks fade up 14px over 0.8s on the same ease, staggered 0.05s to 0.4s. Only two blocks power on when scrolled into view (the consoles list and the downlink monitor: 0.7s, brightness 0.5 to 1.6 to 1, once, at 30% visibility). Control transitions are 200ms brightness, background or border changes. Under `prefers-reduced-motion` every entrance renders fully lit and static and the clock still ticks.",
-        "section": "elevation"
-      }
+      { "name": "The One Lamp Rule", "body": "Every colour on the page is the hall, the plate, their inks, or the lamp. No second decorative hue is ever introduced. A new accent is not a palette extension, it is a second light source, and this room has one.", "section": "colors" },
+      { "name": "The Two Grounds Rule", "body": "Light ink in the hall, dark ink on the plate, and never the reverse. Prose lives on a plate. A paragraph set in --lit over --hall is a defect, not a variant.", "section": "colors" },
+      { "name": "The Signal Scarcity Rule", "body": "--signal / --signal-ink mean exactly two things: this is live right now, or this failed. They are never used for emphasis, for decoration, or for a call to action.", "section": "colors" },
+      { "name": "The Falloff Cap Rule", "body": "The plate's multiply falloff tops out at rgb(var(--hall) / 0.16). That ceiling is a contrast constraint, not a taste choice: at 0.16, Ink Faint (#5C4F3E) still clears 4.5:1 against the darkest corner of a plate. Do not raise it to deepen the mood.", "section": "colors" },
+      { "name": "The Width-Is-Hierarchy Rule", "body": "Rank is set on the width axis first: 74 / 80 / 92 / 88 / 100. Do not introduce a second family, a display serif or a new weight to signal importance - narrow it.", "section": "typography" },
+      { "name": "The Slate Rule", "body": "The mono face is for slate data and nothing else. It never carries a sentence and it is never worn as a 'technical' costume. If it reads as prose, it is set wrong.", "section": "typography" },
+      { "name": "The No-Kicker Rule", "body": "A scene title carries its own weight. There is no eyebrow, kicker or label above a heading anywhere in this system; the slate line sits beneath or beside the title, never above it as a decorative tag.", "section": "typography" },
+      { "name": "The Re-Framing Gate Rule", "body": "The lit plate changes width, offset and throw per scene. A new scene inherits the gate vocabulary, not a previous scene's exact geometry - but it must sit on the lamp's side of the frame, matching its data-lamp position.", "section": "layout" },
+      { "name": "The Unbroken Strip Rule", "body": "The scene strip never wraps, never collapses into a hamburger, and never drops labels. It scales.", "section": "layout" },
+      { "name": "The Enclosure-Never Rule", "body": "No panels, cards, wells, seams or dividers-as-containers, anywhere. Hairline rules separate rows; they never close a shape around a region. A background fill that is neither the hall nor a lit plate is a card in disguise.", "section": "elevation" },
+      { "name": "The No-Recess Rule", "body": "Nothing is inset. There are no wells and no inner shadows in this world except the quiet control's 1px ring. A field that regains a fill or an inset shadow has become a well and is wrong.", "section": "elevation" },
+      { "name": "The Hover-Is-Light Rule", "body": "Interactive feedback is a change in how much light falls on a thing - a glow, a brightened fill, an ink shift. Never a translateY lift, never a new border appearing on hover.", "section": "elevation" }
     ],
     "dos": [
-      "Do keep the three ground tones in order: Room behind, Console panels on it, Well recesses inside them, every join a 1px Seam.",
-      "Do put a mono readout at the right of every legend strip and at the right of every list row at lg; it holds a value (count, period, state, callsign), never a sentence.",
-      "Do reserve Phosphor Green for live states and the one primary button per view, and Backlit Amber for the single current marker or a transitional state about to resolve.",
-      "Do set every Barlow Condensed string uppercase and tracked, tighter as it gets larger (0.01em display, 0.04em headings, 0.08em labels).",
-      "Do make hover a brightness or colour change (110% / 125% brightness, border to Lamp Dim, text to Phosphor) and press a 1px downward nudge.",
-      "Do render every entrance fully lit and static under `prefers-reduced-motion`, and keep the clock ticking."
+      "Do set prose as dark ink on a lit plate. If a new surface needs a paragraph, it needs a gate.",
+      "Do give every new scene a data-lamp=\"x y throw\" and every lit surface a data-plate, so the falloff is computed from the real lamp instead of faked with a static gradient.",
+      "Do carry rank on the width axis (74 / 80 / 92 / 88 / 100) before reaching for size.",
+      "Do separate rows with a one-edge hairline at 16% ink (.rule-hall in the dark, .rule-plate on a plate).",
+      "Do keep corners square (0 radius); reserve the 999px round form for the 6px live mark.",
+      "Do make hover a change in light - a glow, a brighter fill, an ink shift at 220ms ease.",
+      "Do keep the falloff multiply capped at 0.16 alpha; that value is what keeps Ink Faint legible in a plate's darkest corner.",
+      "Do keep browser surfaces inside the palette: selection in lamp at 85%, caret and accent in Leader Red Inked, scrollbar thumb in lamp at 34% over hall-deep.",
+      "Do keep the scene strip opaque and full-width at every breakpoint; scale it by font size rather than wrapping or collapsing it.",
+      "Do ship content lit on arrival - reduced motion removes the flare and the drift, and the page must remain complete without them."
     ],
     "donts": [
-      "Don't add a light theme, a theme toggle or a `prefers-color-scheme: light` branch; the room is dark-only and declares `color-scheme: dark`.",
-      "Don't use cards, floating containers or hover lifts, and don't add drop shadows beyond the panel-face and well-recess vocabulary; depth is joinery, not stacking.",
-      "Don't colour a heading, an icon at rest, a rule or a static label in Phosphor Green, and don't introduce a second accent beyond amber and fault red.",
-      "Don't set prose in Martian Mono or set Barlow Condensed in sentence case.",
-      "Don't add a metrics slab, big-number counters or superlative headlines; figures live inside the lines of a record.",
-      "Don't author new entrance choreography or scroll-triggered motion beyond PowerOn on a display that earns it; the GO poll is the page's one composed moment.",
-      "Don't use pure black or a stock Tailwind radius (8px and up); the ground is grey-green and the only radii are 3px and 6px."
+      "Don't enclose anything. No panels, cards, wells, seams or dividers-as-containers; a fill that is neither hall nor plate is a card in disguise.",
+      "Don't set light text on a dark ground behind a radial gradient and call it a plate. That is the exact failure this world is defined against.",
+      "Don't introduce a second hue. Every colour must be the hall, the plate, their inks, or the lamp.",
+      "Don't spend the signal red on anything but 'live right now' or 'this failed'.",
+      "Don't give .slot a fill, a full border or an inset shadow; it is a ruled line on the lit ground, not a well.",
+      "Don't lift on hover or interaction. No translateY elevation, no shadow that implies a raised card; the only box-shadows in this system are halation, the key glow, the live bloom and the quiet control's ring.",
+      "Don't put a kicker, eyebrow or label above a heading. Slate sits beneath or beside a title, never above it.",
+      "Don't add a second type family or a display serif; and don't set prose in the mono face.",
+      "Don't raise the plate falloff past 0.16 alpha or darken --ink-faint further - both trade legibility for mood.",
+      "Don't add entrance animations or scroll-triggered reveals. The lamp travels; content does not.",
+      "Don't lay a translucent scrim over a lit plate - it dims the ground the dark ink depends on."
+    ],
+    "divergences": [
+      "The direction contract called for a separate humanist face for prose alongside a heavy condensed grotesk for titles. The build consolidated onto one family, Archivo Variable, worked across its width axis. That consolidation is the shipped system.",
+      "The contract's leader red is #D2412C. The build ships two renditions instead, #E4563E on the hall and #A8301C on a plate, so the signal holds on both grounds. The build wins.",
+      "The contract's focus pull - 'the incoming plate resolves from slightly soft to sharp' - did not ship. There is no blur or filter transition in index.css or light.jsx; the incoming plate is sharp on arrival and only the lamp moves."
     ]
   }
 }

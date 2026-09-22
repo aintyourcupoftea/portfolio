@@ -43,7 +43,12 @@ export function Meme() {
             </div>
 
             {/* What the gate is showing right now. */}
-            <figure className="relative flex min-h-[380px] items-center justify-center bg-ink/[0.06] p-4 md:min-h-[540px] md:p-7 lg:col-span-8">
+            <figure
+              className={cn(
+                'relative flex items-center justify-center bg-ink/[0.06] p-4 md:p-7 lg:col-span-8',
+                shown === null ? 'min-h-[200px] md:min-h-[260px]' : 'min-h-[380px] md:min-h-[540px]'
+              )}
+            >
               {shown !== null && (
                 <img
                   key={shown}

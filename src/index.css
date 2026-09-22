@@ -229,6 +229,10 @@
     isolation: isolate;
     background: rgb(var(--plate));
     color: rgb(var(--ink));
+    box-shadow:
+      0 0 16px 0 rgb(var(--glow) / 0.3),
+      0 0 90px -8px rgb(var(--lamp) / 0.2),
+      0 24px 190px -24px rgb(var(--lamp) / 0.16);
   }
 
   .plate > * {
@@ -272,6 +276,7 @@
   .plate-dim {
     background: rgb(var(--hall-deep));
     color: rgb(var(--lit));
+    box-shadow: 0 0 60px -10px rgb(var(--lamp) / 0.09);
   }
   .plate-dim::before {
     background: radial-gradient(
@@ -410,23 +415,19 @@
     transform: translateY(1px);
   }
 
-  /* A field is a shallow recess cut into the lit plate. */
+  /* A field is the lit ground itself, ruled underneath. Not a well: the world
+     has no recesses, and the light is what tells you where to write. */
   .slot {
     width: 100%;
-    background: rgb(var(--ink) / 0.045);
+    background: transparent;
     color: rgb(var(--ink));
-    box-shadow: inset 0 1px 0 rgb(var(--ink) / 0.18);
     border-bottom: 1px solid rgb(var(--ink) / 0.3);
-    transition:
-      background-color 200ms ease,
-      border-color 200ms ease;
+    transition: border-color 200ms ease;
   }
   .slot::placeholder {
     color: rgb(var(--ink-faint));
   }
   .slot:focus {
-    outline: none;
-    background: rgb(var(--ink) / 0.02);
     border-bottom-color: rgb(var(--signal-ink));
   }
 

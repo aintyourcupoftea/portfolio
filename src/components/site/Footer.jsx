@@ -12,7 +12,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="relative z-[2] border-t rule-hall py-8">
+    <footer className="relative z-[2] border-t rule-hall pb-20 pt-8">
       <Frame className="flex flex-wrap items-center justify-between gap-x-8 gap-y-5">
         <div className="flex flex-col gap-1">
           <span className="t-control text-[15px] text-lit">{profile.name}</span>

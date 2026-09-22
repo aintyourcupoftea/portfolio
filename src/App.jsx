@@ -1,4 +1,4 @@
-import { Nav } from './components/site/Nav'
+import { Nav, SceneStrip } from './components/site/Nav'
 import { Light } from './components/site/light'
 import { Hero } from './components/site/Hero'
 import { Operate } from './components/site/Operate'
@@ -25,6 +25,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <SceneStrip />
     </Light>
   )
 }
