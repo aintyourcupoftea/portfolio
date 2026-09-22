@@ -130,7 +130,7 @@ export const education = {
 }
 
 export const meme = {
-  heading: "Today's top post on r/ProgrammerHumor",
+  heading: "Today's top post, straight from the front page.",
   caption: 'Fetched live by MemeFetchingRedditAPI, a small Python service I wrote.',
   imageUrl: 'https://memefetchingredditapi.onrender.com/',
   repo: 'https://github.com/aintyourcupoftea/MemeFetchingRedditAPI',
