@@ -18,9 +18,9 @@ export default function App() {
         <Metrics />
         <Experience />
         <Work />
+        <Meme />
         <Skills />
         <Credentials />
-        <Meme />
         <Contact />
       </main>
       <Footer />
