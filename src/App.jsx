@@ -1,8 +1,27 @@
-import React from 'react';
-import Portfolio from './HOC/portfolio';
+import { Nav } from './components/site/Nav'
+import { Hero } from './components/site/Hero'
+import { Metrics } from './components/site/Metrics'
+import { Experience } from './components/site/Experience'
+import { Work } from './components/site/Work'
+import { Skills } from './components/site/Skills'
+import { Credentials } from './components/site/Credentials'
+import { Contact } from './components/site/Contact'
+import { Footer } from './components/site/Footer'
 
-function App() {
-  return <Portfolio />;
+export default function App() {
+  return (
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Metrics />
+        <Experience />
+        <Work />
+        <Skills />
+        <Credentials />
+        <Contact />
+      </main>
+      <Footer />
+    </>
+  )
 }
-
-export default App;

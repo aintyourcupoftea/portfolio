@@ -1,97 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Red+Rose:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
-    --font-primary: 'Inter', sans-serif;
-    --font-mono: 'Fira Code', monospace;
+    --bg: 246 246 247;
+    --surface: 255 255 255;
+    --border: 227 228 232;
+    --border-strong: 207 209 214;
+    --fg: 23 24 27;
+    --fg-strong: 16 17 20;
+    --fg-soft: 51 54 60;
+    --muted: 93 97 105;
+    --accent: 4 120 87;
+    --accent-fg: 255 255 255;
+    --tint: 238 243 240;
+    --tint-border: 211 221 216;
+    color-scheme: light;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-    --font-primary: 'Inter', sans-serif;
-    --font-mono: 'Fira Code', monospace;
+    --bg: 15 16 18;
+    --surface: 22 24 28;
+    --border: 38 41 47;
+    --border-strong: 58 62 70;
+    --fg: 236 236 234;
+    --fg-strong: 244 244 242;
+    --fg-soft: 214 216 220;
+    --muted: 164 168 176;
+    --accent: 52 211 153;
+    --accent-fg: 15 16 18;
+    --tint: 26 31 29;
+    --tint-border: 43 53 48;
+    color-scheme: dark;
   }
-}
 
-@layer base {
-  * {
-    @apply border-border;
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-bg text-fg font-sans;
   }
-}
 
-html {
-  scroll-behavior: smooth;
-}
+  ::selection {
+    background: rgb(var(--accent) / 0.3);
+  }
 
-/* Ensure toasts are truly centered horizontally at top/bottom center positions */
-/* Force toast containers to span the viewport and center contents */
-.Toastify__toast-container--top-center,
-.Toastify__toast-container--bottom-center {
-  position: fixed !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100vw !important;
-  transform: none !important;
-  display: flex !important;
-  justify-content: center !important;
-  pointer-events: none; /* allow clicks to pass unless on the toast */
-}
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
 
-.Toastify__toast-container--top-center {
-  top: 0 !important; /* per-toast inline marginTop controls the offset */
-}
-
-.Toastify__toast-container--bottom-center {
-  bottom: 0 !important;
-}
-
-/* Re-enable interactions on actual toast items */
-.Toastify__toast {
-  pointer-events: auto;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }

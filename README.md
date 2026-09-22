@@ -1,8 +1,21 @@
-# React + Vite
+# amit-gavali.web.app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio. React + Vite + Tailwind, deployed to Firebase Hosting on every push to `main`.
 
-Currently, two official plugins are available:
+## Editing content
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Everything on the page (name, roles, projects, skills, links) lives in
+[`src/content/profile.js`](src/content/profile.js). Edit that file; the components only lay it out.
+
+- **Changed jobs?** Update the first entry in `experience`. To hide the employer but keep the work, blank out `company` and `client`.
+- **New resume?** Replace `public/Amit_Gavali_Resume.pdf`.
+- **New photo?** Replace `public/avatar.jpg` (square, 1000px or larger).
+
+## Running locally
+
+```bash
+npm install
+npm run dev
+```
+
+`npm run build` produces `dist/`, which is what Firebase serves.
