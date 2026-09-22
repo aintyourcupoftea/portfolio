@@ -2,60 +2,175 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mission Control. One scheme only: a dark flight-operations room.
+   Tokens are RGB channels so Tailwind can apply alpha: rgb(var(--x) / a). */
 @layer base {
   :root {
-    --bg: 246 246 247;
-    --surface: 255 255 255;
-    --border: 227 228 232;
-    --border-strong: 207 209 214;
-    --fg: 23 24 27;
-    --fg-strong: 16 17 20;
-    --fg-soft: 51 54 60;
-    --muted: 93 97 105;
-    --accent: 4 120 87;
-    --accent-fg: 255 255 255;
-    --tint: 238 243 240;
-    --tint-border: 211 221 216;
-    color-scheme: light;
-  }
-
-  .dark {
-    --bg: 15 16 18;
-    --surface: 22 24 28;
-    --border: 38 41 47;
-    --border-strong: 58 62 70;
-    --fg: 236 236 234;
-    --fg-strong: 244 244 242;
-    --fg-soft: 214 216 220;
-    --muted: 164 168 176;
-    --accent: 52 211 153;
-    --accent-fg: 15 16 18;
-    --tint: 26 31 29;
-    --tint-border: 43 53 48;
+    --room: 14 18 17; /* the room, farthest back */
+    --console: 22 28 26; /* console panel faces */
+    --well: 9 12 11; /* recessed display wells */
+    --seam: 44 54 50; /* panel joinery */
+    --seam-strong: 66 80 74;
+    --lamp: 236 233 222; /* lamp-white ink */
+    --lamp-soft: 190 196 188;
+    --lamp-dim: 132 142 136;
+    --go: 92 224 150; /* phosphor green, only where something is live */
+    --go-ink: 9 12 11;
+    --legend: 233 180 76; /* backlit amber, the single current marker */
+    --fault: 239 106 92;
     color-scheme: dark;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    background: rgb(var(--room));
   }
 
   body {
-    @apply bg-bg text-fg font-sans;
+    @apply bg-room text-lamp font-sans;
+    font-feature-settings: 'ss01', 'tnum';
+  }
+
+  /* In-page anchors land below the sticky console rail */
+  section[id] {
+    scroll-margin-top: 80px;
   }
 
   ::selection {
-    background: rgb(var(--accent) / 0.3);
+    background: rgb(var(--go) / 0.28);
+    color: rgb(var(--lamp));
   }
 
   :focus-visible {
-    outline: 2px solid rgb(var(--accent));
-    outline-offset: 2px;
+    outline: 2px solid rgb(var(--go));
+    outline-offset: 3px;
+  }
+
+  input,
+  textarea {
+    caret-color: rgb(var(--go));
+    accent-color: rgb(var(--go));
+  }
+
+  /* Scrollbar as a thin console track */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--seam-strong)) rgb(var(--room));
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--room));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--seam-strong));
+    border: 3px solid rgb(var(--room));
+    border-radius: 6px;
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* A console panel face: a hairline of light along the top edge, a dark edge beneath */
+  .panel {
+    background: rgb(var(--console));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.045),
+      0 1px 0 rgb(0 0 0 / 0.55),
+      0 18px 40px -28px rgb(0 0 0 / 0.9);
+  }
+
+  /* An indicator lamp: a lit dot with a soft bloom, only beside a live state */
+  .lamp {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: rgb(var(--go));
+    box-shadow: 0 0 6px 1px rgb(var(--go) / 0.55);
+  }
+  .lamp-amber {
+    background: rgb(var(--legend));
+    box-shadow: 0 0 6px 1px rgb(var(--legend) / 0.5);
+  }
+
+  /* A recessed display well: the surface a screen sits in */
+  .well {
+    background: rgb(var(--well));
+    box-shadow:
+      inset 0 1px 0 rgb(0 0 0 / 0.6),
+      inset 0 10px 24px -12px rgb(0 0 0 / 0.9),
+      0 1px 0 rgb(var(--seam) / 0.6);
+  }
+
+  /* Phosphor text: a soft bloom, offset so it reads as light on glass */
+  .phosphor {
+    color: rgb(var(--go));
+    text-shadow: 0 0 12px rgb(var(--go) / 0.45);
+  }
+
+  .legend-amber {
+    color: rgb(var(--legend));
+    text-shadow: 0 0 12px rgb(var(--legend) / 0.4);
+  }
+
+  /* Lamp-on: an overshoot flash that settles. Used only where a row lights. */
+  @keyframes lamp-on {
+    0% {
+      opacity: 0;
+      filter: brightness(0.6);
+    }
+    45% {
+      opacity: 1;
+      filter: brightness(1.8);
+    }
+    100% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+  }
+  .lamp-on {
+    animation: lamp-on 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Flicker-on: a legend that catches twice before it holds */
+  @keyframes flicker-on {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    45% {
+      opacity: 0.35;
+    }
+    60% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .flicker-on {
+    animation: flicker-on 420ms steps(1, end) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lamp-on,
+    .flicker-on {
+      animation: none;
+      opacity: 1;
     }
   }
 }

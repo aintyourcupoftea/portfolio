@@ -1,44 +1,47 @@
 import { experience } from '@/content/profile'
-import { Heading, Reveal, Section } from './primitives'
+import { Panel, Readout } from './primitives'
 
 export function Experience() {
+  const current = experience.find((j) => j.current)
   return (
-    <Section id="experience" className="flex flex-col gap-6 pt-14 md:gap-10 md:pt-24">
-      <Heading>Experience</Heading>
-      <div className="flex flex-col">
+    <Panel id="log" heading="Mission log" readout={current ? `ACTIVE SINCE ${current.period.split(' - ')[0].toUpperCase()}` : undefined} className="pt-6 md:pt-8">
+      <ol className="divide-y divide-seam">
         {experience.map((job) => (
-          <Reveal
-            key={job.period}
-            className="grid gap-4 border-t border-border py-6 pb-7 md:grid-cols-[300px_minmax(0,1fr)] md:gap-16 md:py-8 md:pb-10"
-          >
+          <li key={job.period} className="grid gap-5 px-5 py-7 md:grid-cols-[240px_minmax(0,1fr)] md:gap-10 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-12 md:px-8 md:py-9">
             <div className="flex flex-col gap-2.5">
-              <div className="font-mono text-xs text-accent md:text-[13px]">{job.period}</div>
-              <div className="text-[19px] font-semibold text-fg-strong md:text-xl">{job.title}</div>
+              <Readout className={job.current ? 'legend-amber' : 'text-lamp-dim'}>{job.period.toUpperCase()}</Readout>
+              <h3 className="font-display text-[24px] font-semibold uppercase leading-none tracking-[0.03em] text-lamp md:text-[26px]">
+                {job.title}
+              </h3>
               {(job.company || job.client) && (
-                <div className="text-sm leading-snug text-muted md:text-[15px]">
+                <p className="text-[15px] leading-snug text-lamp-soft">
                   {job.company}
                   {job.company && job.client && <br />}
                   {job.client}
-                </div>
+                </p>
               )}
             </div>
-            <div className="flex flex-col gap-4">
-              <p className="text-[15px] leading-relaxed text-fg-soft md:text-[17px]">{job.summary}</p>
+            <div className="flex flex-col gap-5">
+              <p className="max-w-[68ch] text-[16px] leading-relaxed text-lamp md:text-[17px]">{job.summary}</p>
               {job.highlights.length > 0 && (
-                <ul className="flex flex-col gap-2.5 text-sm leading-normal text-muted md:gap-3 md:text-[15px]">
+                <ul className="flex flex-col gap-2.5 text-[15px] leading-normal text-lamp-soft md:gap-3">
                   {job.highlights.map((h) => (
-                    <li key={h} className="grid grid-cols-[14px_minmax(0,1fr)] gap-x-2.5 md:grid-cols-[16px_minmax(0,1fr)] md:gap-x-3">
-                      <span aria-hidden="true" className="mt-2.5 h-px w-1.5 bg-accent" />
-                      <span>{h}</span>
+                    <li key={h} className="grid grid-cols-[16px_minmax(0,1fr)] gap-x-3">
+                      <span aria-hidden="true" className="mt-[9px] h-1.5 w-1.5 rounded-[1px] bg-lamp-dim" />
+                      <span className="max-w-[70ch]">{h}</span>
                     </li>
                   ))}
                 </ul>
               )}
-              {job.note && <p className="text-[13px] text-muted md:text-sm">{job.note}</p>}
+              {job.note && (
+                <p className="border-t border-seam pt-4 text-[14px] text-lamp-dim">
+                  {job.note}
+                </p>
+              )}
             </div>
-          </Reveal>
+          </li>
         ))}
-      </div>
-    </Section>
+      </ol>
+    </Panel>
   )
 }

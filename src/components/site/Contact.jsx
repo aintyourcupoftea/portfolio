@@ -2,20 +2,20 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { contact, profile } from '@/content/profile'
 import { cn } from '@/lib/utils'
-import { Reveal, Section } from './primitives'
+import { Button, Panel, Readout } from './primitives'
 
 const fieldClass =
-  'w-full rounded border border-border-strong bg-bg px-3.5 text-base text-fg placeholder:text-muted/70 md:text-[15px]'
+  'well w-full rounded border border-seam-strong px-3.5 text-base text-lamp placeholder:text-lamp-dim transition-colors focus:border-go md:text-[15px]'
 
 function Field({ label, id, error, children }) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-sm font-medium text-fg">
+      <label htmlFor={id} className="font-display text-[15px] font-medium uppercase tracking-[0.08em] text-lamp-soft">
         {label}
       </label>
       {children}
       {error && (
-        <p role="alert" className="text-[13px] text-red-600 dark:text-red-400">
+        <p role="alert" className="font-mono text-[11px] tracking-[0.02em] text-fault">
           {error}
         </p>
       )}
@@ -23,6 +23,7 @@ function Field({ label, id, error, children }) {
   )
 }
 
+// CAPCOM: the one channel that talks to the operator.
 export function Contact() {
   const [status, setStatus] = useState('idle') // idle | sending | sent | failed
   const {
@@ -55,39 +56,51 @@ export function Contact() {
   }
 
   const links = [
-    { label: 'Email', text: profile.email, href: `mailto:${profile.email}` },
-    { label: 'LinkedIn', text: profile.linkedin.replace('https://www.', ''), href: profile.linkedin },
-    { label: 'GitHub', text: profile.github.replace('https://', ''), href: profile.github },
+    { label: 'EMAIL', text: profile.email, href: `mailto:${profile.email}` },
+    { label: 'LINKEDIN', text: profile.linkedin.replace('https://www.', ''), href: profile.linkedin },
+    { label: 'GITHUB', text: profile.github.replace('https://', ''), href: profile.github },
   ]
 
-  return (
-    <Section id="contact" className="grid items-start gap-6 pb-14 pt-16 md:grid-cols-11 md:gap-24 md:pb-24 md:pt-28">
-      <Reveal className="flex flex-col gap-5 md:col-span-5 md:gap-6">
-        <h2 className="text-[30px] font-semibold leading-[1.08] tracking-[-0.025em] text-fg-strong md:text-[40px]">
-          {contact.headline}
-        </h2>
-        <p className="text-base leading-normal text-muted md:text-[17px]">{contact.body}</p>
-        <div className="flex flex-col gap-1 pt-1 text-[15px] md:gap-3 md:pt-2">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              target={l.href.startsWith('http') ? '_blank' : undefined}
-              rel="noopener noreferrer"
-              className="flex min-h-11 items-center gap-2.5 text-fg transition-colors hover:text-accent"
-            >
-              <span className="w-16 font-mono text-xs text-muted md:w-[72px]">{l.label}</span>
-              <span className="break-all">{l.text}</span>
-            </a>
-          ))}
-        </div>
-      </Reveal>
+  const channel = status === 'sending' ? 'TRANSMITTING' : status === 'sent' ? 'RECEIVED' : status === 'failed' ? 'FAULT' : 'OPEN'
 
-      <Reveal delay={0.1} className="md:col-span-6">
+  return (
+    <Panel
+      id="capcom"
+      heading="CAPCOM"
+      readout={
+        <>
+          CHANNEL <span className={cn(status === 'failed' ? 'text-fault' : status === 'sending' ? 'legend-amber' : 'phosphor')}>{channel}</span>
+        </>
+      }
+      className="pt-6 md:pt-8"
+    >
+      <div className="grid lg:grid-cols-11">
+        <div className="flex flex-col gap-6 border-b border-seam px-5 py-7 md:px-8 md:py-9 lg:col-span-5 lg:border-b-0 lg:border-r">
+          <h3 className="max-w-[16ch] font-display text-[34px] font-semibold uppercase leading-[0.95] tracking-[0.02em] text-lamp md:text-[44px]">
+            {contact.headline}
+          </h3>
+          <p className="max-w-[44ch] text-[16px] leading-relaxed text-lamp-soft md:text-[17px]">{contact.body}</p>
+          <ul className="flex flex-col divide-y divide-seam border-y border-seam">
+            {links.map((l) => (
+              <li key={l.label}>
+                <a
+                  href={l.href}
+                  target={l.href.startsWith('http') ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  className="group flex min-h-12 items-center gap-4 py-2 text-[15px] text-lamp transition-colors hover:text-go"
+                >
+                  <Readout className="w-[76px] shrink-0 text-lamp-dim">{l.label}</Readout>
+                  <span className="break-all">{l.text}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-5 md:gap-5 md:p-8"
+          className="flex flex-col gap-5 px-5 py-7 md:px-8 md:py-9 lg:col-span-6"
         >
           <Field label="Name" id="name" error={errors.name?.message}>
             <input
@@ -125,19 +138,15 @@ export function Contact() {
               {...register('message', { required: 'Message is required' })}
             />
           </Field>
-          <button
-            type="submit"
-            disabled={status === 'sending'}
-            className="h-12 rounded bg-accent text-[15px] font-semibold text-accent-fg transition-transform hover:bg-accent/90 active:translate-y-px disabled:opacity-60"
-          >
-            {status === 'sending' ? 'Sending' : 'Send message'}
-          </button>
-          <p role="status" aria-live="polite" className="min-h-5 text-sm text-muted">
-            {status === 'sent' && 'Thanks, your message is on its way. I usually reply within a day.'}
-            {status === 'failed' && `Something went wrong. Email me directly at ${profile.email}.`}
+          <Button type="submit" disabled={status === 'sending'} className="mt-1">
+            {status === 'sending' ? 'Transmitting' : 'Send message'}
+          </Button>
+          <p role="status" aria-live="polite" className="min-h-5 text-sm text-lamp-soft">
+            {status === 'sent' && 'Received. Thanks, I usually reply within a day.'}
+            {status === 'failed' && `Delivery failed. Email me directly at ${profile.email}.`}
           </p>
         </form>
-      </Reveal>
-    </Section>
+      </div>
+    </Panel>
   )
 }

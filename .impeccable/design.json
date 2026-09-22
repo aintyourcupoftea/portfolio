@@ -1,0 +1,590 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-22T16:30:00+05:30",
+  "title": "Design System: Amit Gavali Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "room": {
+        "role": "neutral",
+        "displayName": "Room",
+        "canonical": "rgb(14 18 17)",
+        "cssVar": "--room",
+        "channels": "14 18 17",
+        "hex": "#0E1211",
+        "purpose": "The page ground, the sticky rail at 90% with backdrop blur, the icon-button face, the scrollbar track.",
+        "tonalRamp": [
+          "#0A0B0B",
+          "#232625",
+          "#3F4342",
+          "#5D6261",
+          "#7E8482",
+          "#A1A6A5",
+          "#C6CAC9",
+          "#ECEFEE"
+        ]
+      },
+      "console": {
+        "role": "neutral",
+        "displayName": "Console",
+        "canonical": "rgb(22 28 26)",
+        "cssVar": "--console",
+        "channels": "22 28 26",
+        "hex": "#161C1A",
+        "purpose": "The face of every section panel, the outline button and the hero lede plate.",
+        "tonalRamp": [
+          "#0A0C0B",
+          "#222625",
+          "#3E4341",
+          "#5C6361",
+          "#7D8482",
+          "#9FA7A4",
+          "#C4CBC8",
+          "#EBF0EE"
+        ]
+      },
+      "well": {
+        "role": "neutral",
+        "displayName": "Well",
+        "canonical": "rgb(9 12 11)",
+        "cssVar": "--well",
+        "channels": "9 12 11",
+        "hex": "#090C0B",
+        "purpose": "Recessed displays: the wall board, the mission clock, the operator plate, the downlink monitor, every text field.",
+        "tonalRamp": [
+          "#0A0B0B",
+          "#232625",
+          "#404342",
+          "#5E6261",
+          "#7F8382",
+          "#A2A6A5",
+          "#C6CAC9",
+          "#ECEFEE"
+        ]
+      },
+      "seam": {
+        "role": "neutral",
+        "displayName": "Seam",
+        "canonical": "rgb(44 54 50)",
+        "cssVar": "--seam",
+        "channels": "44 54 50",
+        "hex": "#2C3632",
+        "purpose": "All panel borders, dividers between rows and grid cells, the rail rule.",
+        "tonalRamp": [
+          "#090C0B",
+          "#212724",
+          "#3C4441",
+          "#596460",
+          "#7A8581",
+          "#9CA8A3",
+          "#C2CCC8",
+          "#E9F1ED"
+        ]
+      },
+      "seam-strong": {
+        "role": "neutral",
+        "displayName": "Seam Strong",
+        "canonical": "rgb(66 80 74)",
+        "cssVar": "--seam-strong",
+        "channels": "66 80 74",
+        "hex": "#42504A",
+        "purpose": "The heavier stroke on controls: outline buttons, text fields, the scrollbar thumb.",
+        "tonalRamp": [
+          "#080C0A",
+          "#1F2724",
+          "#394540",
+          "#57655F",
+          "#778680",
+          "#9AA9A2",
+          "#BFCDC7",
+          "#E7F1ED"
+        ]
+      },
+      "lamp": {
+        "role": "neutral",
+        "displayName": "Lamp White",
+        "canonical": "rgb(236 233 222)",
+        "cssVar": "--lamp",
+        "channels": "236 233 222",
+        "hex": "#ECE9DE",
+        "purpose": "Primary ink: headings, the display name, row titles, control text.",
+        "tonalRamp": [
+          "#0C0B08",
+          "#262520",
+          "#44423A",
+          "#646158",
+          "#858278",
+          "#A8A59B",
+          "#CCC9C0",
+          "#F0EEE8"
+        ]
+      },
+      "lamp-soft": {
+        "role": "neutral",
+        "displayName": "Lamp Soft",
+        "canonical": "rgb(190 196 188)",
+        "cssVar": "--lamp-soft",
+        "channels": "190 196 188",
+        "hex": "#BEC4BC",
+        "purpose": "Secondary ink: descriptive prose, nav links, labels.",
+        "tonalRamp": [
+          "#0A0C0A",
+          "#232622",
+          "#3F433E",
+          "#5E635C",
+          "#7F847D",
+          "#A1A79F",
+          "#C6CBC4",
+          "#ECF0EB"
+        ]
+      },
+      "lamp-dim": {
+        "role": "neutral",
+        "displayName": "Lamp Dim",
+        "canonical": "rgb(132 142 136)",
+        "cssVar": "--lamp-dim",
+        "channels": "132 142 136",
+        "hex": "#848E88",
+        "purpose": "Tertiary ink: readouts at rest, tool lists, tags, notes, placeholders.",
+        "tonalRamp": [
+          "#090C0A",
+          "#212623",
+          "#3D4440",
+          "#5A645E",
+          "#7B857F",
+          "#9EA8A2",
+          "#C3CCC6",
+          "#EAF0EC"
+        ]
+      },
+      "go": {
+        "role": "primary",
+        "displayName": "Phosphor Green",
+        "canonical": "rgb(92 224 150)",
+        "cssVar": "--go",
+        "channels": "92 224 150",
+        "hex": "#5CE096",
+        "purpose": "The live signal: GO rows, the ticking clock, LOCKED and OPEN states, STAFFED lamps, focus, caret, selection, the one primary button.",
+        "tonalRamp": [
+          "#001202",
+          "#00320D",
+          "#00551F",
+          "#007937",
+          "#009D58",
+          "#36C179",
+          "#7CE2A5",
+          "#BBFFD4"
+        ]
+      },
+      "go-ink": {
+        "role": "primary",
+        "displayName": "Go Ink",
+        "canonical": "rgb(9 12 11)",
+        "cssVar": "--go-ink",
+        "channels": "9 12 11",
+        "hex": "#090C0B",
+        "purpose": "Text on a phosphor button; byte-identical to Well.",
+        "tonalRamp": [
+          "#0A0B0B",
+          "#232625",
+          "#404342",
+          "#5E6261",
+          "#7F8382",
+          "#A2A6A5",
+          "#C6CAC9",
+          "#ECEFEE"
+        ]
+      },
+      "legend": {
+        "role": "secondary",
+        "displayName": "Backlit Amber",
+        "canonical": "rgb(233 180 76)",
+        "cssVar": "--legend",
+        "channels": "233 180 76",
+        "hex": "#E9B44C",
+        "purpose": "The single current marker (ON CONSOLE, the active period) and transitional ACQUIRING / SENDING states.",
+        "tonalRamp": [
+          "#160700",
+          "#391E00",
+          "#603800",
+          "#875600",
+          "#AA7800",
+          "#CF9B2E",
+          "#EEC271",
+          "#FFEAB1"
+        ]
+      },
+      "fault": {
+        "role": "tertiary",
+        "displayName": "Fault Red",
+        "canonical": "rgb(239 106 92)",
+        "cssVar": "--fault",
+        "channels": "239 106 92",
+        "hex": "#EF6A5C",
+        "purpose": "Form validation errors, NO SIGNAL, FAULT. Nothing else.",
+        "tonalRamp": [
+          "#200000",
+          "#4C0202",
+          "#7D0F0D",
+          "#AC2B23",
+          "#D45145",
+          "#FC7667",
+          "#FFA596",
+          "#FFD5C9"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The operator's name over the portrait. Used once.",
+        "responsive": {
+          "base": "clamp(3.5rem, 13vw, 5.25rem)",
+          "lg": "clamp(3.75rem, 5.4vw, 5.5rem)"
+        },
+        "transform": "uppercase"
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Panel headings in the legend strip. CAPCOM hook runs 44px / 34px; downlink and credential titles 30px / 26px.",
+        "responsive": {
+          "base": "26px",
+          "md": "32px"
+        },
+        "transform": "uppercase"
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Row titles inside a panel: console discipline, flight record, mission-log role (26px / 24px). Systems-board groups at 19px.",
+        "responsive": {
+          "base": "22px",
+          "md": "24px"
+        },
+        "transform": "uppercase"
+      },
+      "legend": {
+        "displayName": "Legend",
+        "purpose": "The role line under the display name; wall-board system names at 19px / 17px with 0.01em tracking.",
+        "responsive": {
+          "base": "22px",
+          "md": "24px"
+        },
+        "transform": "uppercase"
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Mission-log summary, hero lede, contact body; 58 to 68ch measure.",
+        "responsive": {
+          "base": "16px",
+          "md": "17px"
+        }
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Console briefs, record descriptions, skill lists, highlights (15px, line-height 1.5); 62 to 70ch. Notes step to 14px / 13px.",
+        "responsive": {
+          "base": "15px",
+          "md": "16px"
+        }
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Button text; the rail callsign at the same weight with 0.08em tracking.",
+        "transform": "uppercase"
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Nav links, form labels, text links (0.06em), footer links (14px), open mobile menu (18px).",
+        "transform": "uppercase"
+      },
+      "readout": {
+        "displayName": "Readout",
+        "purpose": "Every value in a legend strip or right-hand column: counts, periods, the clock, GO and ON CONSOLE (11px, 500, 0.08em), SIGNAL and CHANNEL states, form errors. Never a sentence.",
+        "responsive": {
+          "base": "11px",
+          "md": "12px"
+        },
+        "features": "'ss01', 'tnum'"
+      },
+      "readout-small": {
+        "displayName": "Readout Small",
+        "purpose": "Tool lists under a console brief, tags under a record, the wall-board domain column, the location beside the callsign."
+      }
+    },
+    "shadows": [
+      {
+        "name": "panel-face",
+        "value": "inset 0 1px 0 rgb(255 255 255 / 0.045), 0 1px 0 rgb(0 0 0 / 0.55), 0 18px 40px -28px rgb(0 0 0 / 0.9)",
+        "purpose": "Every .panel: a hairline of light on the top edge, a dark edge beneath, a low drop that only reads at the bottom."
+      },
+      {
+        "name": "well-recess",
+        "value": "inset 0 1px 0 rgb(0 0 0 / 0.6), inset 0 10px 24px -12px rgb(0 0 0 / 0.9), 0 1px 0 rgb(44 54 50 / 0.6)",
+        "purpose": "Every .well: an inset top shadow so a display sits below the console surface."
+      },
+      {
+        "name": "lamp-bloom",
+        "value": "0 0 6px 1px rgb(92 224 150 / 0.55)",
+        "purpose": "The 7px indicator lamp only."
+      },
+      {
+        "name": "lamp-bloom-amber",
+        "value": "0 0 6px 1px rgb(233 180 76 / 0.5)",
+        "purpose": "The amber indicator lamp only."
+      },
+      {
+        "name": "phosphor-bloom",
+        "value": "text-shadow: 0 0 12px rgb(92 224 150 / 0.45)",
+        "purpose": "Live phosphor text legends (.phosphor)."
+      },
+      {
+        "name": "legend-bloom",
+        "value": "text-shadow: 0 0 12px rgb(233 180 76 / 0.4)",
+        "purpose": "Amber text legends (.legend-amber)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only authored easing: Tailwind ease-out override, Framer ease array, lamp-on."
+      },
+      {
+        "name": "lamp-on",
+        "value": "lamp-on 520ms cubic-bezier(0.16, 1, 0.3, 1) both (opacity 0 to 1, brightness 0.6 to 1.8 to 1)",
+        "purpose": "A wall-board row lighting during the GO poll."
+      },
+      {
+        "name": "flicker-on",
+        "value": "flicker-on 420ms steps(1, end) both (opacity 0, 1, 0.35, 1, 0.6, 1)",
+        "purpose": "A GO / ON CONSOLE legend catching twice before it holds."
+      },
+      {
+        "name": "go-poll",
+        "value": "start 700ms, step 150ms per row",
+        "purpose": "The one composed moment: rows light in sequence on load."
+      },
+      {
+        "name": "hero-enter",
+        "value": "opacity 0 to 1, y 14px to 0, 0.8s ease-out, delays 0.05s to 0.4s",
+        "purpose": "Hero blocks fading up on load."
+      },
+      {
+        "name": "power-on",
+        "value": "opacity 0 to 1, brightness 0.5 to 1.6 to 1, 0.7s ease-out, times [0, 0.4, 1], once at 30% in view",
+        "purpose": "Only the consoles list and the downlink monitor."
+      },
+      {
+        "name": "downlink-swap",
+        "value": "opacity 0 to 1, brightness 1.6 to 1, 0.5s ease-out; exit opacity 0",
+        "purpose": "Crossfade when a new meme lands."
+      },
+      {
+        "name": "control",
+        "value": "filter, background-color, border-color 200ms ease-out; active translateY(1px)",
+        "purpose": "Every button and link: hover brightens, press nudges 1px."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none; opacity: 1; scroll-behavior: auto; Framer initial=false",
+        "purpose": "Everything renders lit and static; the clock still ticks."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      },
+      {
+        "name": "site",
+        "value": "1360px"
+      }
+    ],
+    "fonts": [
+      {
+        "family": "Barlow Condensed",
+        "weights": [
+          500,
+          600
+        ],
+        "source": "@fontsource/barlow-condensed"
+      },
+      {
+        "family": "Barlow",
+        "weights": [
+          400,
+          500
+        ],
+        "source": "@fontsource/barlow"
+      },
+      {
+        "family": "Martian Mono Variable",
+        "weights": "variable",
+        "source": "@fontsource-variable/martian-mono"
+      }
+    ],
+    "scheme": {
+      "colorScheme": "dark",
+      "lightTheme": false
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one lit key per view: START THE SEQUENCE, ANOTHER ONE, SEND MESSAGE. Phosphor face, Go Ink engraving; hover brightens, press nudges 1px.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8\"/><path d=\"M21 3v5h-5\"/><path d=\"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16\"/><path d=\"M8 16H3v5\"/></svg>Another one</button>",
+      "css": ".ds-btn-primary { display: inline-flex; height: 48px; align-items: center; justify-content: center; gap: 10px; border-radius: 3px; padding: 0 20px; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 17px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1; text-decoration: none; cursor: pointer; transition: filter 200ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), border-color 200ms cubic-bezier(0.16,1,0.3,1); background: #5CE096; color: #090C0B; border: none; } .ds-btn-primary:hover { filter: brightness(1.1); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:disabled { opacity: 0.6; filter: none; cursor: default; } .ds-btn-primary:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "The secondary action (DOWNLOAD RESUME): a console-faced key with a Seam Strong border that brightens and lifts its border colour on hover, never its elevation.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\"/></svg>Download resume</a>",
+      "css": ".ds-btn-outline { display: inline-flex; height: 48px; align-items: center; justify-content: center; gap: 10px; border-radius: 3px; padding: 0 20px; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 17px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1; text-decoration: none; cursor: pointer; transition: filter 200ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), border-color 200ms cubic-bezier(0.16,1,0.3,1); background: #161C1A; color: #ECE9DE; border: 1px solid #42504A; } .ds-btn-outline:hover { border-color: #848E88; filter: brightness(1.25); } .ds-btn-outline:active { transform: translateY(1px); } .ds-btn-outline:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "The 44px menu toggle on the console rail below lg: Seam border, Lamp Dim glyph that turns Lamp White on hover.",
+      "html": "<button class=\"ds-btn-icon\" type=\"button\" aria-label=\"Open menu\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><line x1=\"4\" x2=\"20\" y1=\"12\" y2=\"12\"/><line x1=\"4\" x2=\"20\" y1=\"6\" y2=\"6\"/><line x1=\"4\" x2=\"20\" y1=\"18\" y2=\"18\"/></svg></button>",
+      "css": ".ds-btn-icon { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 3px; border: 1px solid #2C3632; background: #0E1211; color: #848E88; cursor: pointer; transition: color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-icon:hover { color: #ECE9DE; } .ds-btn-icon:active { transform: translateY(1px); } .ds-btn-icon:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "An outbound link as a tracked label with an arrow-up-right glyph; Lamp Soft at rest, Phosphor on hover.",
+      "html": "<a class=\"ds-text-link\" href=\"#\">View credential<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a>",
+      "css": ".ds-text-link { display: inline-flex; min-height: 44px; align-items: center; gap: 6px; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 15px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #BEC4BC; text-decoration: none; transition: color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-text-link:hover { color: #5CE096; } .ds-text-link:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A CAPCOM form field: a recessed well with a Seam Strong border, a tracked label above, Phosphor border and caret on focus, a mono Fault Red error line beneath.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-email\">Email</label><input class=\"ds-input\" id=\"ds-email\" type=\"email\" placeholder=\"you@company.com\" aria-invalid=\"true\" /><p class=\"ds-field-error\" role=\"alert\">Enter a valid email address</p></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; } .ds-field-label { font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 15px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #BEC4BC; } .ds-input { width: 100%; height: 48px; padding: 0 14px; border-radius: 3px; border: 1px solid #42504A; background: #090C0B; color: #ECE9DE; font-family: Barlow, system-ui, sans-serif; font-size: 15px; caret-color: #5CE096; accent-color: #5CE096; box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.6), inset 0 10px 24px -12px rgb(0 0 0 / 0.9), 0 1px 0 rgb(44 54 50 / 0.6); transition: border-color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-input::placeholder { color: #848E88; } .ds-input:focus { outline: none; border-color: #5CE096; } .ds-field-error { margin: 0; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.02em; color: #EF6A5C; }"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "The console face every section sits on: Console ground, 1px Seam border, 6px radius, top hairline and dark under-edge; the legend strip carries the heading left and a mono readout right.",
+      "html": "<section class=\"ds-panel\"><header class=\"ds-panel-strip\"><h2 class=\"ds-panel-heading\">Flight records</h2><span class=\"ds-readout\">6 RECORDS</span></header><div class=\"ds-panel-body\"><p class=\"ds-panel-prose\">Storage-governance service for GCP Filestore that enforces quotas and surfaces orphaned data; reclaimed 3 TB of capacity on the clearing platform.</p></div></section>",
+      "css": ".ds-panel { background: #161C1A; border: 1px solid #2C3632; border-radius: 6px; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.045), 0 1px 0 rgb(0 0 0 / 0.55), 0 18px 40px -28px rgb(0 0 0 / 0.9); } .ds-panel-strip { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 24px; padding: 20px 32px; border-bottom: 1px solid #2C3632; } .ds-panel-heading { margin: 0; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 32px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; color: #ECE9DE; } .ds-panel-body { padding: 28px 32px; } .ds-panel-prose { margin: 0; max-width: 62ch; font-family: Barlow, system-ui, sans-serif; font-size: 16px; line-height: 1.625; color: #BEC4BC; } .ds-readout { white-space: nowrap; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.02em; color: #848E88; font-feature-settings: 'ss01', 'tnum'; } .ds-readout-soft { color: #BEC4BC; } .ds-phosphor { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); } .ds-legend-amber { color: #E9B44C; text-shadow: 0 0 12px rgb(233 180 76 / 0.4); }"
+    },
+    {
+      "name": "Wall Board Row",
+      "kind": "custom",
+      "refersTo": "wallboard-row",
+      "description": "A SYSTEMS POLL row inside the well: domain, system, and a phosphor GO legend with its lamp; the one current row answers ON CONSOLE in amber. Rows lamp on 150ms apart on load.",
+      "html": "<ol class=\"ds-well ds-board\"><li class=\"ds-board-row ds-lamp-on\"><span class=\"ds-board-domain\">Containers</span><span class=\"ds-board-system\">Kubernetes, Red Hat OpenShift</span><span class=\"ds-board-legend ds-phosphor ds-flicker-on\"><span class=\"ds-lamp\"></span>GO</span></li><li class=\"ds-board-row ds-lamp-on\"><span class=\"ds-board-domain\">Deutsche Börse Group, via TCS</span><span class=\"ds-board-system ds-board-current\">C7-SCS securities clearing platform</span><span class=\"ds-board-legend ds-legend-amber ds-flicker-on\"><span class=\"ds-lamp ds-lamp-amber\"></span>ON CONSOLE</span></li><li class=\"ds-board-row ds-board-unlit\"><span class=\"ds-board-domain\">Security</span><span class=\"ds-board-system\">IAM, PKI, RHEL 9 hardening</span><span class=\"ds-board-legend\">····</span></li></ol>",
+      "css": ".ds-well { background: #090C0B; border: 1px solid #2C3632; border-radius: 6px; box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.6), inset 0 10px 24px -12px rgb(0 0 0 / 0.9), 0 1px 0 rgb(44 54 50 / 0.6); } .ds-board { list-style: none; margin: 0; padding: 0; } .ds-board-row { display: grid; grid-template-columns: 168px minmax(0,1fr) auto; align-items: center; column-gap: 16px; padding: 15px 20px; border-top: 1px solid rgb(44 54 50 / 0.7); } .ds-board-row:first-child { border-top: none; } .ds-board-unlit { opacity: 0.25; } .ds-board-domain { font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.02em; color: #848E88; } .ds-board-system { font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 19px; font-weight: 500; line-height: 1.25; letter-spacing: 0.01em; color: #BEC4BC; } .ds-board-current { color: #ECE9DE; } .ds-board-legend { display: inline-flex; align-items: center; gap: 8px; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: #848E88; } .ds-phosphor { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); } .ds-legend-amber { color: #E9B44C; text-shadow: 0 0 12px rgb(233 180 76 / 0.4); } .ds-lamp { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #5CE096; box-shadow: 0 0 6px 1px rgb(92 224 150 / 0.55); } .ds-lamp-amber { background: #E9B44C; box-shadow: 0 0 6px 1px rgb(233 180 76 / 0.5); } @keyframes ds-lamp-on { 0% { opacity: 0; filter: brightness(0.6); } 45% { opacity: 1; filter: brightness(1.8); } 100% { opacity: 1; filter: brightness(1); } } .ds-lamp-on { animation: ds-lamp-on 520ms cubic-bezier(0.16,1,0.3,1) both; } .ds-lamp-on:nth-child(2) { animation-delay: 150ms; } @keyframes ds-flicker-on { 0% { opacity: 0; } 30% { opacity: 1; } 45% { opacity: 0.35; } 60% { opacity: 1; } 75% { opacity: 0.6; } 100% { opacity: 1; } } .ds-flicker-on { animation: ds-flicker-on 420ms steps(1, end) both; } @media (prefers-reduced-motion: reduce) { .ds-lamp-on, .ds-flicker-on { animation: none; opacity: 1; } }"
+    },
+    {
+      "name": "Mission Clock",
+      "kind": "custom",
+      "refersTo": "mission-clock",
+      "description": "The rail and footer readout: two zones (IST, CET) in a small well, zone labels Lamp Dim, digits Phosphor with bloom and tabular so they never jitter. Ticks every second, including under reduced motion.",
+      "html": "<div class=\"ds-clock\"><span class=\"ds-clock-zone\"><span class=\"ds-clock-label\">IST</span><time class=\"ds-clock-time\">16:01:04</time></span><span class=\"ds-clock-zone\"><span class=\"ds-clock-label\">CET</span><time class=\"ds-clock-time\">12:31:04</time></span></div>",
+      "css": ".ds-clock { display: inline-flex; align-items: center; gap: 20px; padding: 6px 12px; border-radius: 3px; border: 1px solid #2C3632; background: #090C0B; box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.6), inset 0 10px 24px -12px rgb(0 0 0 / 0.9), 0 1px 0 rgb(44 54 50 / 0.6); font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.02em; } .ds-clock-zone { display: flex; align-items: baseline; gap: 6px; } .ds-clock-label { color: #848E88; } .ds-clock-time { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Record Row",
+      "kind": "custom",
+      "refersTo": "record-row",
+      "description": "The ruled row every list panel uses (Consoles, Mission log, Flight records): title left, prose and a mono tool list in the middle, a stacked right-hand readout column. Client work carries no link.",
+      "html": "<ol class=\"ds-records\"><li class=\"ds-record\"><h3 class=\"ds-record-title\">Spacewarden</h3><div class=\"ds-record-body\"><p class=\"ds-record-prose\">Storage-governance service for GCP Filestore that enforces quotas and surfaces orphaned data.</p><p class=\"ds-record-tools\">GCP Filestore, Go, Python</p></div><div class=\"ds-record-side\"><span class=\"ds-readout ds-readout-soft\">DEUTSCHE BÖRSE · VIA TCS</span><a class=\"ds-text-link\" href=\"#\">Standalone Go scanner on GitHub<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a></div></li><li class=\"ds-record\"><h3 class=\"ds-record-title\">VPA right-sizing</h3><div class=\"ds-record-body\"><p class=\"ds-record-prose\">Vertical Pod Autoscaler initiative across every C7-SCS environment.</p><p class=\"ds-record-tools\">Kubernetes, Bash</p></div><div class=\"ds-record-side\"><span class=\"ds-readout ds-readout-soft\">DEUTSCHE BÖRSE · VIA TCS</span><span class=\"ds-readout\">CLIENT WORK · NO PUBLIC CODE</span></div></li></ol>",
+      "css": ".ds-records { list-style: none; margin: 0; padding: 0; background: #161C1A; } .ds-record { display: grid; grid-template-columns: 300px minmax(0,1fr) 260px; column-gap: 40px; row-gap: 12px; padding: 28px 32px; border-top: 1px solid #2C3632; } .ds-record:first-child { border-top: none; } .ds-record-title { margin: 0; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 24px; font-weight: 600; line-height: 1; text-transform: uppercase; letter-spacing: 0.03em; color: #ECE9DE; } .ds-record-body { display: flex; flex-direction: column; gap: 12px; } .ds-record-prose { margin: 0; max-width: 62ch; font-family: Barlow, system-ui, sans-serif; font-size: 16px; line-height: 1.625; color: #BEC4BC; } .ds-record-tools { margin: 0; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 10.5px; line-height: 1.625; letter-spacing: 0.02em; color: #848E88; } .ds-record-side { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; } .ds-readout { white-space: nowrap; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.02em; color: #848E88; font-feature-settings: 'ss01', 'tnum'; } .ds-readout-soft { color: #BEC4BC; } .ds-phosphor { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); } .ds-legend-amber { color: #E9B44C; text-shadow: 0 0 12px rgb(233 180 76 / 0.4); } .ds-text-link { display: inline-flex; align-items: center; gap: 6px; font-family: 'Barlow Condensed', Barlow, system-ui, sans-serif; font-size: 15px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #BEC4BC; text-decoration: none; white-space: nowrap; transition: color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-text-link:hover { color: #5CE096; } .ds-text-link:focus-visible { outline: 2px solid #5CE096; outline-offset: 3px; }"
+    },
+    {
+      "name": "Indicator Lamp",
+      "kind": "chip",
+      "refersTo": "lamp",
+      "description": "A 7px lit dot with bloom beside a live legend (STAFFED, GO); the amber variant marks the one current item (ON CONSOLE). Always inline, always aria-hidden.",
+      "html": "<span class=\"ds-legend ds-readout\"><span class=\"ds-lamp\" aria-hidden=\"true\"></span>STAFFED</span> <span class=\"ds-legend ds-legend-amber\"><span class=\"ds-lamp ds-lamp-amber\" aria-hidden=\"true\"></span>ON CONSOLE</span>",
+      "css": ".ds-legend { display: inline-flex; align-items: center; gap: 8px; margin-right: 24px; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; } .ds-lamp { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #5CE096; box-shadow: 0 0 6px 1px rgb(92 224 150 / 0.55); } .ds-lamp-amber { background: #E9B44C; box-shadow: 0 0 6px 1px rgb(233 180 76 / 0.5); } .ds-readout { white-space: nowrap; font-family: 'Martian Mono Variable', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.02em; color: #848E88; font-feature-settings: 'ss01', 'tnum'; } .ds-readout-soft { color: #BEC4BC; } .ds-phosphor { color: #5CE096; text-shadow: 0 0 12px rgb(92 224 150 / 0.45); } .ds-legend-amber { color: #E9B44C; text-shadow: 0 0 12px rgb(233 180 76 / 0.4); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Mission Control",
+    "overview": "The site is a dark flight-operations room. The operator stands in the foreground; the platform he keeps up is the wall board behind him, and each system he runs answers GO in turn. A control room says competence without a superlative: every discipline has a console, every console has a callsign, every row has a readout. The world refuses the category defaults it replaced (a centred name over a glow, skill chips, project cards, a big-number metrics slab) and the retired white resume page.\n\nThe ground is grey-green in three depths, never pure black: the room farthest back, console panel faces on it, recessed display wells sunk into those. Ink is warm lamp white in three steps. Light is scarce and meaningful: one phosphor green is the live signal and appears only where something is actually running or GO; one backlit amber marks the single current item, ON CONSOLE; one fault red is for errors and lost signal. Density is high but ruled: sections are panels, panels hold ruled rows, rows end in a right-hand mono readout column.\n\nStructure is panel joinery rather than cards. Every surface meets its neighbour at a 1px seam; panel faces carry a hairline of light on their top edge and a dark edge beneath; wells carry an inset top shadow so a screen reads as set into the console. Motion is lamp-on: the wall board rows light in sequence on load, a legend catches twice before it holds, and the two panels that earn an entrance power on with a brightness overshoot. Everything else is lit on arrival.",
+    "keyCharacteristics": [
+      "Dark-only: one scheme, `color-scheme: dark`, no light theme and no toggle.",
+      "Three-depth grey-green ground (room, console, well) with 1px seams; no cards, no floating surfaces.",
+      "Phosphor green appears only on live states; amber appears only on the one current marker.",
+      "Three typefaces with strict jobs: Barlow Condensed tracked caps for display and controls, Barlow for prose, Martian Mono for every readout.",
+      "One authored motion moment (the GO poll) plus two PowerOn entrances; hover brightens, never lifts.",
+      "The person leads the first viewport; the work follows as ruled records, never as a metrics slab."
+    ],
+    "rules": [
+      {
+        "name": "The Live-Only Phosphor Rule",
+        "body": "Phosphor green means something is running right now. It lights a GO row, a ticking clock, a LOCKED signal, an OPEN channel, a STAFFED lamp, a focused field, or the one primary action; it never colours a heading, an icon at rest, a decorative rule or a static label (a text link and its arrow may turn phosphor together on hover).",
+        "section": "colors"
+      },
+      {
+        "name": "The One Amber Rule",
+        "body": "Amber is the current marker. Exactly one thing on the board is ON CONSOLE, and amber appears there, on the active mission-log period and on transitional states (ACQUIRING, SENDING) that are about to resolve to phosphor. It is never a second accent.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dark-Only Rule",
+        "body": "There is one scheme. The ground is grey-green (never pure black) and `color-scheme: dark` is declared; no `prefers-color-scheme: light` branch exists and none should be added.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readouts Are Never Sentences Rule",
+        "body": "Martian Mono carries values: a count, a timestamp, a callsign, a period, a state word, a comma-separated tool list. If it has a verb, it is prose and is set in Barlow. The one mono line that approaches a sentence (the certification name on the hero plate) is a credential title, not copy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Engraved Caps Rule",
+        "body": "Barlow Condensed is never set in sentence case. Every use is uppercase with tracking between 0.01em (display) and 0.08em (labels), tightening as the size grows.",
+        "section": "typography"
+      },
+      {
+        "name": "The Panel Joinery Rule",
+        "body": "Surfaces are joined, not stacked. A panel sits on the room with a seam and a top hairline; a well sits inside a panel with an inset shadow. There are no cards, no floating containers and no hover lift anywhere.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Authored Motion Rule",
+        "body": "The page has one composed moment: the GO poll, where wall-board rows lamp on 150ms apart starting 700ms after load (a 520ms opacity and brightness overshoot on `cubic-bezier(0.16, 1, 0.3, 1)`) and each legend flickers on (420ms, stepped). The hero blocks fade up 14px over 0.8s on the same ease, staggered 0.05s to 0.4s. Only two blocks power on when scrolled into view (the consoles list and the downlink monitor: 0.7s, brightness 0.5 to 1.6 to 1, once, at 30% visibility). Control transitions are 200ms brightness, background or border changes. Under `prefers-reduced-motion` every entrance renders fully lit and static and the clock still ticks.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the three ground tones in order: Room behind, Console panels on it, Well recesses inside them, every join a 1px Seam.",
+      "Do put a mono readout at the right of every legend strip and at the right of every list row at lg; it holds a value (count, period, state, callsign), never a sentence.",
+      "Do reserve Phosphor Green for live states and the one primary button per view, and Backlit Amber for the single current marker or a transitional state about to resolve.",
+      "Do set every Barlow Condensed string uppercase and tracked, tighter as it gets larger (0.01em display, 0.04em headings, 0.08em labels).",
+      "Do make hover a brightness or colour change (110% / 125% brightness, border to Lamp Dim, text to Phosphor) and press a 1px downward nudge.",
+      "Do render every entrance fully lit and static under `prefers-reduced-motion`, and keep the clock ticking."
+    ],
+    "donts": [
+      "Don't add a light theme, a theme toggle or a `prefers-color-scheme: light` branch; the room is dark-only and declares `color-scheme: dark`.",
+      "Don't use cards, floating containers or hover lifts, and don't add drop shadows beyond the panel-face and well-recess vocabulary; depth is joinery, not stacking.",
+      "Don't colour a heading, an icon at rest, a rule or a static label in Phosphor Green, and don't introduce a second accent beyond amber and fault red.",
+      "Don't set prose in Martian Mono or set Barlow Condensed in sentence case.",
+      "Don't add a metrics slab, big-number counters or superlative headlines; figures live inside the lines of a record.",
+      "Don't author new entrance choreography or scroll-triggered motion beyond PowerOn on a display that earns it; the GO poll is the page's one composed moment.",
+      "Don't use pure black or a stock Tailwind radius (8px and up); the ground is grey-green and the only radii are 3px and 6px."
+    ]
+  }
+}

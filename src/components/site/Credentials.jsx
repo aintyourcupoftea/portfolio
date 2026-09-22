@@ -1,36 +1,30 @@
-import { ArrowUpRight } from 'lucide-react'
 import { certification, education } from '@/content/profile'
-import { Reveal, Section } from './primitives'
+import { Panel, Readout, TextLink } from './primitives'
 
 export function Credentials() {
   return (
-    <Section id="credentials" className="grid gap-7 pt-14 md:grid-cols-2 md:gap-16 md:pt-24">
-      <Reveal className="flex flex-col gap-3 border-t border-border pt-6 md:gap-4 md:pt-8">
-        <div className="text-[13px] text-muted md:text-sm">Certification</div>
-        <h3 className="text-[19px] font-semibold leading-tight text-fg-strong md:text-[22px]">{certification.name}</h3>
-        <div className="font-mono text-xs text-muted md:text-[13px]">
-          {certification.issuer}, {certification.date}
+    <Panel id="credentials" heading="Certification and education" readout={`CREDLY · ${certification.date.toUpperCase()}`} className="pt-6 md:pt-8">
+      <div className="grid md:grid-cols-2">
+        <div className="flex flex-col gap-3 border-b border-seam px-5 py-6 md:border-b-0 md:border-r md:px-8 md:py-8">
+          <h3 className="max-w-[26ch] font-display text-[26px] font-semibold uppercase leading-[0.95] tracking-[0.03em] text-lamp md:text-[30px]">
+            {certification.name}
+          </h3>
+          <p className="text-[15px] text-lamp-soft">
+            {certification.issuer}, {certification.date}. Verifiable on Credly.
+          </p>
+          <Readout className="text-lamp-dim">CREDENTIAL · VERIFIABLE ON CREDLY</Readout>
+          <TextLink href={certification.link} target="_blank" rel="noopener noreferrer" className="mt-1">
+            View credential
+          </TextLink>
         </div>
-        <a
-          href={certification.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-1 inline-flex h-11 w-full items-center justify-center gap-2 rounded border border-border-strong px-4 text-sm font-medium text-fg transition-colors hover:bg-surface md:mt-2 md:w-fit"
-        >
-          View credential on Credly
-          <ArrowUpRight size={14} strokeWidth={2} />
-        </a>
-      </Reveal>
-      <Reveal delay={0.08} className="flex flex-col gap-3 border-t border-border pt-6 md:gap-4 md:pt-8">
-        <div className="text-[13px] text-muted md:text-sm">Education</div>
-        <h3 className="text-[19px] font-semibold leading-tight text-fg-strong md:text-[22px]">
-          {education.degree}
-          <br className="hidden md:block" />
-          <span className="md:hidden">, </span>
-          {education.school}
-        </h3>
-        <div className="font-mono text-xs text-muted md:text-[13px]">{education.detail}</div>
-      </Reveal>
-    </Section>
+        <div className="flex flex-col gap-3 px-5 py-6 md:px-8 md:py-8">
+          <h3 className="max-w-[26ch] font-display text-[26px] font-semibold uppercase leading-[0.95] tracking-[0.03em] text-lamp md:text-[30px]">
+            {education.degree}
+          </h3>
+          <p className="text-[15px] text-lamp-soft">{education.school}</p>
+          <Readout>{education.detail.toUpperCase()}</Readout>
+        </div>
+      </div>
+    </Panel>
   )
 }
