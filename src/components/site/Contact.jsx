@@ -35,13 +35,18 @@ export function Contact() {
   const onSubmit = async (data) => {
     setStatus('sending')
     try {
-      // Apps Script only accepts an opaque no-cors POST; a resolved fetch means it was delivered.
-      await fetch(profile.contactEndpoint, {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: profile.web3formsKey,
+          subject: `Portfolio message from ${data.name}`,
+          from_name: data.name,
+          ...data,
+        }),
       })
+      const json = await res.json()
+      if (!res.ok || !json.success) throw new Error(json.message || 'Delivery failed')
       setStatus('sent')
       reset()
     } catch {
@@ -109,6 +114,7 @@ export function Contact() {
               })}
             />
           </Field>
+          <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} aria-hidden="true" {...register('botcheck')} />
           <Field label="Message" id="message" error={errors.message?.message}>
             <textarea
               id="message"

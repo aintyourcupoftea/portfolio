@@ -10,9 +10,9 @@ export const profile = {
   resumeUrl: '/Amit_Gavali_Resume.pdf',
   avatar: '/avatar.jpg',
   siteUrl: 'https://amit-gavali.web.app',
-  // Contact form endpoint (Google Apps Script). Keep the no-cors POST shape.
-  contactEndpoint:
-    'https://script.google.com/macros/s/AKfycbz7iSFTg3qM9fHYrDfa_DrEx8KIl5sv2kL8eFyU4SPI9AB7pnyn4By25x4n3ubcleyFug/exec',
+  // Contact form delivery via Web3Forms (https://web3forms.com). Get a free
+  // access key by entering your email there; it is a public key, safe to commit.
+  web3formsKey: '0324f2d6-5b5d-436a-810c-43e73a70b576',
 }
 
 export const hero = {
