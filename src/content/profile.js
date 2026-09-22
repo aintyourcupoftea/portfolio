@@ -129,6 +129,13 @@ export const education = {
   detail: 'Graduated 2024, CGPA 8.47',
 }
 
+export const meme = {
+  heading: "Today's top post on r/ProgrammerHumor",
+  caption: 'Fetched live by MemeFetchingRedditAPI, a small Python service I wrote.',
+  imageUrl: 'https://memefetchingredditapi.onrender.com/',
+  repo: 'https://github.com/aintyourcupoftea/MemeFetchingRedditAPI',
+}
+
 export const contact = {
   headline: 'Hiring for cloud infrastructure or SRE?',
   body: 'Send a note here, or reach me directly. Based in Pune, India, and open to remote and hybrid roles.',

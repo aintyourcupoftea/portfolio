@@ -5,6 +5,7 @@ import { Experience } from './components/site/Experience'
 import { Work } from './components/site/Work'
 import { Skills } from './components/site/Skills'
 import { Credentials } from './components/site/Credentials'
+import { Meme } from './components/site/Meme'
 import { Contact } from './components/site/Contact'
 import { Footer } from './components/site/Footer'
 
@@ -19,6 +20,7 @@ export default function App() {
         <Work />
         <Skills />
         <Credentials />
+        <Meme />
         <Contact />
       </main>
       <Footer />
